@@ -23,7 +23,7 @@ echo  "${BOLD_GREEN}"[+] "${RESET}""${CYAN}"Creating directory to hold all Pytho
 mkdir -p "${HOME}"/virtualenvs
 echo "${YELLOW}"[*] "${RESET}""${CYAN}"Downloading pysetenv"${PURPLE}"
 
-curl -# https://raw.githubusercontent.com/kunnoh/python_env_setup/master/py_setup.sh -o ${HOME}/.py_setup.sh
+curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/install.sh?token=AEZZGQ6E3ATE7TFYHQJIBOS7N5KSG -o ${HOME}/.py_setup.sh
 
 if [ -e "${HOME}/.bashrc" ];
 then
