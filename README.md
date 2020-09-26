@@ -11,9 +11,6 @@
 </p>
 <ul>
     <li>Create a new virtual environment</li>
-    <li>
-        Create a new virtual environment using custom Python path using -p or --python.
-    </li>
     <li>Delete a virtual environment</li>
     <li>List existing virtual environments</li>
 </ul>
