@@ -18,7 +18,7 @@
 <h4>INSTALLATION</h4>
 
 <code>
-    curl https://raw.githubusercontent.com/kunnoh/python_env_setup/master/install.sh | sh -
+    curl https://raw.githubusercontent.com/connessionetech/python-installer/master/install.sh?token=AEZZGQZO75RUD2R2GVZRSQK7N53PE | sh -
 </code>
 
 <h4>USAGE</h4>
