@@ -79,7 +79,7 @@ function _pysetenv_delete()
 # Lists all virtual environments if ran with -l|--list flag
 function _pysetenv_list()
 {
-    echo -e "${YELLOW}""[*] List of virtual environments you have under ${PYSETENV_VIRTUAL_DIR_PATH}"
+    echo -e "${BOLD_YELLOW}""[*] "${CYAN}"List of virtual environments you have under ${PYSETENV_VIRTUAL_DIR_PATH}""${RESET}"
     for v in $(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )
     do
         echo ${v}"${RESET}"
