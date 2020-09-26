@@ -13,6 +13,7 @@
     <li>Create a new virtual environment</li>
     <li>Delete a virtual environment</li>
     <li>List existing virtual environments</li>
+    <li>Load existing python3 project</li>
 </ul>
 <h4>INSTALLATION</h4>
 
@@ -23,12 +24,12 @@
 <h4>USAGE</h4>
 <ul>
     <li>The command used is <strong>pysetenv</strong></li>
-    <h4>example</h4>
     <ul>
-        <li><strong>pysetenv -h | pysetenv --help</strong> to show pysetenv usage</li>
-        <li><strong>pysetenv -l | pysetenv --list</strong> to list existing virtual environments</li>
+        <li><strong>pysetenv -h name| pysetenv --help name</strong> to show pysetenv usage</li>
+        <li><strong>pysetenv -l name| pysetenv --list name</strong> to list existing virtual environments</li>
+        <li><strong>pysetenv -n name| pysetenv --new name</strong> to create new virtual environment</li>
+        <li><strong>pysetenv -d name| pysetenv --delete name</strong> to delete a virtual environment</li>
     </ul>
-</ul>
 
 <h4>CONFIGURATION</h4>
 <p>Configurables are</p>
