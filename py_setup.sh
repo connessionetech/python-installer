@@ -84,7 +84,7 @@ function _pysetenv_list()
     echo -e "${BOLD_YELLOW}"[*] "${CYAN}"List of virtual environments you have under ${PYSETENV_VIRTUAL_DIR_PATH}"${BLUE}"
     for v in $(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )
     do
-        echo -e "${BOLD_YELLOW}"${v}"${RESET}"
+        echo -e ${BOLD_YELLOW} ${v} ${RESET}
     done
 }
 
