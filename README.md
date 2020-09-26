@@ -33,7 +33,7 @@
 <h4>CONFIGURATION</h4>
 <p>Configurables are</p>
 <ul>
-    <li><strong>PYSETENV_DIR_PATH</strong>  This is the root Path for virtual environments</li>
+    <li><strong>PYSETENV_VIRTUAL_DIR_PATH</strong>  This is the root Path for virtual environments</li>
     <li><strong>PYSETENV_PYTHON_VERSION</strong>  This the python version to use. The default is python3</li>
     <li><strong>PYSETENV_PYTHON_PATH</strong> This is the python installation folder in the system</li>
 </ul>
