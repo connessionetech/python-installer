@@ -1,4 +1,4 @@
-# Python3 Project & Virtual Environment Setup
+# Python installer and virtual environment setup script
 
 <p>
     This is a script used to setup and manage python3 projects & virtual environments
