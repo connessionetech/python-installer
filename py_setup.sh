@@ -48,7 +48,7 @@ function _pysetenv_create()
             virtualenv -p ${PYSETENV_PYTHON_PATH}${PYSETENV_VIRTUAL_DIR_PATH}${1}
         fi
 
-        echo -e "${CYAN}"[*] Activate python virtual environment using this command: pysetenv ${1}
+        echo -e "${CYAN}"[*] Activate python virtual environment using this command: pysetenv ${1}"${RESET}"
     fi
 }
 
