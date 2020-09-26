@@ -23,7 +23,7 @@ echo  "${BOLD_GREEN}"[+] "${RESET}""${CYAN}"Creating directory to hold all Pytho
 mkdir -p "${HOME}"/virtualenvs
 echo "${YELLOW}"[*] "${RESET}""${CYAN}"Downloading pysetenv"${PURPLE}"
 
-curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/install.sh?token=AEZZGQ6E3ATE7TFYHQJIBOS7N5KSG -o ${HOME}/.py_setup.sh
+curl -# https://raw.githubusercontent.com/kunnoh/python_env_setup/master/py_setup.sh -o ${HOME}/.py_setup.sh
 
 if [ -e "${HOME}/.bashrc" ];
 then
@@ -41,4 +41,4 @@ echo "${YELLOW}"[*] "${CYAN}"Type: "${BOLD_GREEN}" 'source ~/.bashrc' "${CYAN}"O
 
 # Usage
 echo "${YELLOW}"*********************************************************
-echo "${GREEN}"Usage: "${BOLD_GREEN}"pysetenv VIRTUAL_ENVIRONMENT_NAME"${YELLOW}"to activate the virtual environment"${RESET}"
+echo "${GREEN}"Usage: "${BOLD_GREEN}"pysetenv VIRTUAL_ENVIRONMENT_NAME "${CYAN}"to activate the virtual environment"${RESET}"
