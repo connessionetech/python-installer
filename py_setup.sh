@@ -127,7 +127,6 @@ pysetenv()
                 fi
                 ;;
         esac
-    fi
     elif [ $# -le 5 ];
     then
         case "${2}" in
