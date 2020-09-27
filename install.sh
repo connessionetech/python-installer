@@ -7,14 +7,15 @@ BLUE="\e[0;34m"
 PURPLE='\033[0;35m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
+BOLD_YELLOW='\033[1;33m'
 RESET="\033[0m"
 
 echo ${YELLOW}"*********************************************************"
-echo  ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${BOLD_GREEN}
+echo  ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
 
 if hash python3;
 then
-    echo ${BOLD_YELLOW}"[*] ${GREEN}" $(python3 -V) ${CYAN}"Found is present on the system"
+    echo ${BOLD_YELLOW}"[*] ${BOLD_GREEN}" $(python3 -V) ${CYAN}"Found on the system"
 
 else
     echo ${BOLD_YELLOW}"[!] Warning! ${CYAN} python3 not found on the system..."
@@ -46,28 +47,28 @@ if [ -e "${HOME}/.zshrc" ];
 then
     echo "${BOLD_GREEN}"[+] "${CYAN}"Adding "${GREEN}"~/.zshrc"${RESET}"
     echo "source ~/.py_setup.sh" >> ${HOME}/.zshrc
-    source ${HOME}/.zshrc
+    echo source ${HOME}/.zshrc
 
 
 elif [ -e "${HOME}/.bashrc" ];
 then
     echo "${BOLD_GREEN}"[+] "${CYAN}"Adding "${GREEN}"~/.bash_profile"${RESET}"
     echo "source ~/.py_setup.sh" >> ${HOME}/.bashrc
-    source ${HOME}/.bashrc
+    echo source ${HOME}/.bashrc
 
 
 elif [ -e "${HOME}/.bash_profile" ];
 then
     echo "${BOLD_GREEN}"[+] "${CYAN}"Adding "${GREEN}"~/.bash_profile"${RESET}"
     echo "source ~/.py_setup.sh" >> ${HOME}/.bash_profile
-    source ${HOME}/.bashrc
+    echo source ${HOME}/.bashrc
 fi
 
 # Installation complete
-echo ${YELLOW}"[*] ${CYAN} Installation Completed Successfully!"
-echo ${YELLOW}"[*] ${CYAN} Type: ${BOLD_GREEN} pysetenv ${CYAN} to use pysetenv"
+echo ${YELLOW}"[*] ${CYAN}Installation Completed Successfully!"
+echo ${YELLOW}"[*] ${CYAN}Type: ${BOLD_GREEN} pysetenv ${CYAN}to use pysetenv"
 
 # Usage
-echo ${GREEN} "Usage: "${BOLD_GREEN} "pysetenv --new VIRTUAL_ENVIRONMENT_NAME "${CYAN}" to create new virtual environment"
-echo ${GREEN} "Usage: "${BOLD_GREEN} "pysetenv VIRTUAL_ENVIRONMENT_NAME ${CYAN} to activate the new virtual environment"
-echo ${YELLOW}"*********************************************************"${RESET}
+echo ${GREEN} "Usage: ${BOLD_GREEN}pysetenv --new VIRTUAL_ENVIRONMENT_NAME ${CYAN}to create new virtual environment"
+echo ${GREEN} "Usage: ${BOLD_GREEN}pysetenv VIRTUAL_ENVIRONMENT_NAME ${CYAN}to activate the new virtual environment"
+echo ${YELLOW}"     ***************************************************    "${RESET}
