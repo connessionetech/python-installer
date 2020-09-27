@@ -14,7 +14,7 @@ echo  ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the sy
 
 if hash python3;
 then
-    echo ${BOLD_YELLOW}"[*] ${GREEN}"$(python3 -V)"${CYAN}Found is present on the system"
+    echo ${BOLD_YELLOW}"[*] ${GREEN}" $(python3 -V) ${CYAN}"Found is present on the system"
 
 else
     echo ${BOLD_YELLOW}"[!] Warning! ${CYAN} python3 not found on the system..."
