@@ -13,6 +13,19 @@ RESET="\033[0m"
 echo ""
 echo ""
 echo ${YELLOW}"***********************************************************"${RESET}
+
+if [ -e "/etc/*-release" ];
+then
+    # Get Os details
+    OS_NAME=$(cat /etc/*-release | grep -w NAME | cut -d= -f2 | tr -d '"')
+    OS_VERSION=$(cat /etc/*-release | grep -w VERSION | cut -d= -f2 | tr -d '"')
+    echo ${BOLD_YELLOW}"[*] ${GREEN}Found:${BOLD_GREEN}" ${OS_NAME} ${GREEN}"Version: "${BOLD_GREEN}${OS_VERSION}
+else
+    echo ${BOLD_RED}"THIS IS NOT A GNU/LINUX DISTRO"
+    echo ${YELLOW}"Exiting ! ! !"${RESET}
+    exit 1
+fi
+
 echo  ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
 
 if hash python3;
