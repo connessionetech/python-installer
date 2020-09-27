@@ -15,7 +15,7 @@ echo ""
 echo ""
 echo -e ${YELLOW}"***********************************************************"${RESET}
 
-if [ -f /etc/*-release ];
+if [ -f /etc/os-release ];
 then
     # Get Os details
     OS_NAME=$(cat /etc/*-release | grep -w NAME | cut -d= -f2 | tr -d '"')
