@@ -103,6 +103,7 @@ _pysetenv_custom_path()
         fi
         PYSETENV_PYTHON_PATH=${1}
         _pysetenv_create $2
+    fi
 }
 
 # Main function
