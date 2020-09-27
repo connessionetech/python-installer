@@ -50,21 +50,20 @@ if [ -e "${HOME}/.zshrc" ];
 then
     echo "${BOLD_GREEN}"[+] "${CYAN}"Adding "${GREEN}"~/.zshrc"${RESET}"
     echo "source ~/.py_setup.sh" >> ${HOME}/.zshrc
-    echo source ${HOME}/.zshrc
+    source ${HOME}/.zshrc
 
 
 elif [ -e "${HOME}/.bashrc" ];
 then
     echo "${BOLD_GREEN}"[+] "${CYAN}"Adding "${GREEN}"~/.bash_profile"${RESET}"
     echo "source ~/.py_setup.sh" >> ${HOME}/.bashrc
-    echo source ${HOME}/.bashrc
-
+    source ${HOME}/.bashrc
 
 elif [ -e "${HOME}/.bash_profile" ];
 then
     echo "${BOLD_GREEN}"[+] "${CYAN}"Adding "${GREEN}"~/.bash_profile"${RESET}"
     echo "source ~/.py_setup.sh" >> ${HOME}/.bash_profile
-    echo source ${HOME}/.bashrc
+    source ${HOME}/.bashrc
 fi
 
 # Installation complete
