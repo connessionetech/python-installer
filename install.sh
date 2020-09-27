@@ -10,7 +10,10 @@ YELLOW='\033[0;33m'
 BOLD_YELLOW='\033[1;33m'
 RESET="\033[0m"
 
-echo ${YELLOW}"*********************************************************"
+echo ""
+echo ""
+echo ""
+echo ${YELLOW}"     ***************************************************    "${RESET}
 echo  ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
 
 if hash python3;
@@ -72,3 +75,6 @@ echo ${YELLOW}"[*] ${CYAN}Type: ${BOLD_GREEN} pysetenv ${CYAN}to use pysetenv"
 echo ${GREEN} "Usage: ${BOLD_GREEN}pysetenv --new VIRTUAL_ENVIRONMENT_NAME ${CYAN}to create new virtual environment"
 echo ${GREEN} "Usage: ${BOLD_GREEN}pysetenv VIRTUAL_ENVIRONMENT_NAME ${CYAN}to activate the new virtual environment"
 echo ${YELLOW}"     ***************************************************    "${RESET}
+echo ""
+echo ""
+echo ""
