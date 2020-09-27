@@ -22,10 +22,9 @@ ver=$(python -V 2>&1 | sed 's/.* \([0-9]\).\([0-9]\).*/\1\2/')
 
 if [ "$ver" -lt "30" ];
 then
+    echo ${BOLD_YELLOW}"[*] ${GREEN}"python -V "is present on the system"
     echo ${BOLD_RED}"[!] ${RED}python3 not found"
-    echo ${BOLD_GREEN}"[+] ${RED}Installing python3"
-    echo ${BOLD_YELLOW}"[*] ${GREEN}"
-    exit 1
+    echo ${BOLD_GREEN}"[+] ${GREEN}Installing python3"
 fi
 
 # if [ -e "$(python3 -V)" =~ "Python 3" ];
