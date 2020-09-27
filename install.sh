@@ -12,7 +12,7 @@ RESET="\033[0m"
 echo "${YELLOW}"*********************************************************
 echo  "${YELLOW}"[*] "${CYAN}"Checking python version installed currently on the system..."${BOLD_GREEN}"
 
-if ! hash python;
+if [ ! hash python ];
 then
     echo ${BOLD_YELLOW}"[!] Warning! ${YELLOW}python not found on the system..."
     echo ${BOLD_GREEN}"[+] ${GREEN}Installing python3 on the system..."
