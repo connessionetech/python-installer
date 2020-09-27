@@ -20,8 +20,8 @@ then
     echo ${YELLOW}"[*]${BOLD_GREEN}" $(python3 -V) ${CYAN}"Found on the system"
 
 else
-    echo ${BOLD_YELLOW}"[!] Warning! ${CYAN} python3 not found on the system..."
-    echo ${GREEN}"[+] ${CYAN}Installing python3 on the system..."
+    echo ${YELLOW}"[!] Warning! ${CYAN} python3 not found on the system..."
+    echo ${BOLD_GREEN}"[+] ${CYAN}Installing python3 on the system..."
 
 fi
 
@@ -30,10 +30,10 @@ ver=$(python3 -V 2>&1 | sed 's/.* \([0-9]\).\([0-9]\).*/\1\2/')
 if [ "$ver" -lt "30" ];
 then
     echo ${BOLD_RED}"[!] ${RED}python3 not found"
-    echo ${GREEN}"[+] ${CYAN}Installing python3"
+    echo ${BOLDGREEN}"[+] ${CYAN}Installing python3"
 fi
 
-echo  ${GREEN}"[+] ${CYAN}Creating directory to hold all Python virtual environments"${RESET}
+echo  ${BOLD_GREEN}"[+] ${CYAN}Creating directory to hold all Python virtual environments"${RESET}
 mkdir -p "${HOME}"/virtualenvs
 echo ${YELLOW}"[*] ${CYAN}Downloading pysetenv"${PURPLE}
 
