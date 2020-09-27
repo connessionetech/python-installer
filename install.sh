@@ -18,11 +18,11 @@ echo  ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the sy
 
 if hash python3;
 then
-    echo ${BOLD_YELLOW}"[*] ${BOLD_GREEN}" $(python3 -V) ${CYAN}"Found on the system"
+    echo ${YELLOW}"[*]${BOLD_GREEN}" $(python3 -V) ${CYAN}"Found on the system"
 
 else
     echo ${BOLD_YELLOW}"[!] Warning! ${CYAN} python3 not found on the system..."
-    echo ${BOLD_GREEN}"[+] ${GREEN}Installing python3 on the system..."
+    echo ${GREEN}"[+] ${CYAN}Installing python3 on the system..."
 
 fi
 
@@ -31,7 +31,7 @@ ver=$(python3 -V 2>&1 | sed 's/.* \([0-9]\).\([0-9]\).*/\1\2/')
 if [ "$ver" -lt "30" ];
 then
     echo ${BOLD_RED}"[!] ${RED}python3 not found"
-    echo ${BOLD_GREEN}"[+] ${GREEN}Installing python3"
+    echo ${GREEN}"[+] ${CYAN}Installing python3"
 fi
 
 # if [ -e "$(python3 -V)" =~ "Python 3" ];
@@ -40,28 +40,28 @@ fi
 #     echo "${BOLD_GREEN}"[+] Installing python3
 # fi
 
-echo  "${BOLD_GREEN}"[+] "${RESET}""${CYAN}"Creating directory to hold all Python virtual environments"${RESET}"
+echo  ${GREEN}"[+] ${CYAN}Creating directory to hold all Python virtual environments"${RESET}
 mkdir -p "${HOME}"/virtualenvs
-echo "${YELLOW}"[*] "${RESET}""${CYAN}"Downloading pysetenv"${PURPLE}"
+echo ${YELLOW}"[*] ${CYAN}Downloading pysetenv"${PURPLE}
 
 curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/py_setup.sh -o ${HOME}/.py_setup.sh
 
 if [ -e "${HOME}/.zshrc" ];
 then
-    echo "${BOLD_GREEN}"[+] "${CYAN}"Adding "${GREEN}"~/.zshrc"${RESET}"
+    echo ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.zshrc"${RESET}
     echo "source ~/.py_setup.sh" >> ${HOME}/.zshrc
     source ${HOME}/.zshrc
 
 
 elif [ -e "${HOME}/.bashrc" ];
 then
-    echo "${BOLD_GREEN}"[+] "${CYAN}"Adding "${GREEN}"~/.bash_profile"${RESET}"
+    echo ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bash_profile"${RESET}
     echo "source ~/.py_setup.sh" >> ${HOME}/.bashrc
     source ${HOME}/.bashrc
 
 elif [ -e "${HOME}/.bash_profile" ];
 then
-    echo "${BOLD_GREEN}"[+] "${CYAN}"Adding "${GREEN}"~/.bash_profile"${RESET}"
+    echo ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bash_profile"${RESET}
     echo "source ~/.py_setup.sh" >> ${HOME}/.bash_profile
     source ${HOME}/.bashrc
 fi
