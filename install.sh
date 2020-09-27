@@ -12,8 +12,7 @@ RESET="\033[0m"
 
 echo ""
 echo ""
-echo ""
-echo ${YELLOW}"     ***************************************************    "${RESET}
+echo ${YELLOW}"***********************************************************"${RESET}
 echo  ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
 
 if hash python3;
@@ -33,12 +32,6 @@ then
     echo ${BOLD_RED}"[!] ${RED}python3 not found"
     echo ${GREEN}"[+] ${CYAN}Installing python3"
 fi
-
-# if [ -e "$(python3 -V)" =~ "Python 3" ];
-# then
-#     echo "${RED}"[!] python3 not found
-#     echo "${BOLD_GREEN}"[+] Installing python3
-# fi
 
 echo  ${GREEN}"[+] ${CYAN}Creating directory to hold all Python virtual environments"${RESET}
 mkdir -p "${HOME}"/virtualenvs
@@ -73,7 +66,6 @@ echo ${YELLOW}"[*] ${CYAN}Type: ${BOLD_GREEN} pysetenv ${CYAN}to use pysetenv"
 # Usage
 echo ${GREEN} "Usage: ${BOLD_GREEN}pysetenv --new VIRTUAL_ENVIRONMENT_NAME ${CYAN}to create new virtual environment"
 echo ${GREEN} "Usage: ${BOLD_GREEN}pysetenv VIRTUAL_ENVIRONMENT_NAME ${CYAN}to activate the new virtual environment"
-echo ${YELLOW}"     ***************************************************    "${RESET}
-echo ""
+echo ${YELLOW}"***********************************************************"${RESET}
 echo ""
 echo ""
