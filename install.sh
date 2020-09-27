@@ -3,6 +3,7 @@
 CYAN='\033[0;36m'
 BOLD_GREEN="\033[1;32m"
 RED="\e[0;31m"
+BOLD_RED='\033[1;31m'
 BLUE="\e[0;34m"
 PURPLE='\033[0;35m'
 GREEN='\033[0;32m'
