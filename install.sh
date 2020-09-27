@@ -40,5 +40,5 @@ echo "${YELLOW}"[*] "${CYAN}"Installation Completed Successfully!
 echo "${YELLOW}"[*] "${CYAN}"Type: "${BOLD_GREEN}" 'source ~/.bashrc' "${CYAN}"Or open new terminal and start using "${BOLD_GREEN}"pysetenv
 
 # Usage
-echo "${GREEN}"Usage: "${BOLD_GREEN}"pysetenv VIRTUAL_ENVIRONMENT_NAME "${CYAN}"to activate the virtual environment"${RESET}"
-echo "${YELLOW}"*********************************************************
+echo "${GREEN}"Usage: "${BOLD_GREEN}"pysetenv VIRTUAL_ENVIRONMENT_NAME "${CYAN}"to activate the virtual environment
+echo "${YELLOW}"*********************************************************"${RESET}"
