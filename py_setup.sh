@@ -17,7 +17,7 @@ PYSETENV_VIRTUAL_DIR_PATH="$HOME/virtualenvs/"
 PYSETENV_PYTHON_VERSION=3
 PYSETENV_PYTHON_PATH=$(which python${PYSETENV_PYTHON_VERSION})
 
-function _pysetenv_help()
+_pysetenv_help()
 {
     # Echo usage message
     echo -e "${YELLOW}"Usage: pysetenv [OPTIONS] [NAME]
@@ -29,13 +29,13 @@ function _pysetenv_help()
     echo -n, --new NAME              Create a new Python Virtual Environment.
     echo -d, --delete NAME           Delete existing Python Virtual Environment.
     echo -e -p, --python PATH        Python binary path.
-    echo -l, --load                  Load project to the activated virtual environment"${RESET}"
+    echo -o, --open                  Load project to the activated virtual environment"${RESET}"
     echo -e "${BOLD_YELLOW}"Load existing project:
-    echo -e "${BLUE}"-l, "--load /path/to/project -e NAME Load existing project to""${RESET}"
+    echo -e "${BLUE}"-o, "--open /path/to/project -e NAME Load existing project to""${RESET}"
 }
 
 # Creates new virtual environment if ran with -n | --new flag
-function _pysetenv_create()
+_pysetenv_create()
 {
     if [ -z ${1} ];
     then
@@ -57,7 +57,7 @@ function _pysetenv_create()
 
 
  # Deletes existing virtual environment if ran with -d|--delete flag
-function _pysetenv_delete()
+_pysetenv_delete()
 {
     if [ -z ${1} ];
     then
@@ -80,18 +80,33 @@ function _pysetenv_delete()
 
 
 # Lists all virtual environments if ran with -l|--list flag
-function _pysetenv_list()
+_pysetenv_list()
 {
     echo -e "${BOLD_YELLOW}"[*] "${CYAN}"List of virtual environments you have under ${PYSETENV_VIRTUAL_DIR_PATH}"${BLUE}"
     for v in $(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )"${RESET}"
     do
-        echo -e ${BOLD_YELLOW} ${v} ${RESET}
+        echo -e ${BOLD_YELLOW}"-" ${YELLOW}${v} ${RESET}
     done
 }
 
 
+# Create custom python path
+_pysetenv_custom_path()
+{
+    if [ -f "${1}" ];
+    then
+        if ["`expr $1 : '.*python\([2,3]\)'`" = "3"];
+        then
+            PYSETENV_PYTHON_PATH=3
+        else
+            PYSETENV_PYTHON_PATH=2
+        fi
+        PYSETENV_PYTHON_PATH=${1}
+        _pysetenv_create $2
+}
+
 # Main function
-function pysetenv()
+pysetenv()
 {
     if [ $# -eq 0 ]; # If no argument show help
     then
@@ -110,6 +125,13 @@ function pysetenv()
                     _pysetenv_help
                 fi
                 ;;
+        esac
+    fi
+    elif [ $# -le 5 ];
+    then
+        case "${2}" in
+            -p|--python) _pysetenv_custom_path ${3} ${4};;
+            *) _pysetenv_help;;
         esac
     fi
 }
