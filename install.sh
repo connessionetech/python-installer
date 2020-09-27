@@ -11,11 +11,11 @@ YELLOW='\033[0;33m'
 BOLD_YELLOW='\033[1;33m'
 RESET="\033[0m"
 
-echo -e ""
-echo -e ""
+echo ""
+echo ""
 echo -e ${YELLOW}"***********************************************************"${RESET}
 
-if [ -f "/etc/*-release" ];
+if [ -f /etc/*-release ];
 then
     # Get Os details
     OS_NAME=$(cat /etc/*-release | grep -w NAME | cut -d= -f2 | tr -d '"')
@@ -81,5 +81,5 @@ echo -e ${YELLOW}"[*] ${CYAN}Type: ${BOLD_GREEN} pysetenv ${CYAN}to use pysetenv
 echo -e ${GREEN} "Usage: ${BOLD_GREEN}pysetenv --new VIRTUAL_ENVIRONMENT_NAME ${CYAN}to create new virtual environment"
 echo -e ${GREEN} "Usage: ${BOLD_GREEN}pysetenv VIRTUAL_ENVIRONMENT_NAME ${CYAN}to activate the new virtual environment"
 echo -e ${YELLOW}"***********************************************************"${RESET}
-echo -e ""
-echo -e ""
+echo ""
+echo ""
