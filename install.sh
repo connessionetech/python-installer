@@ -16,15 +16,17 @@ if [ ! hash python ];
 then
     echo ${BOLD_YELLOW}"[!] Warning! ${YELLOW}python not found on the system..."
     echo ${BOLD_GREEN}"[+] ${GREEN}Installing python3 on the system..."
+    exit 1
 fi
 
 ver=$(python -V 2>&1 | sed 's/.* \([0-9]\).\([0-9]\).*/\1\2/')
 
 if [ "$ver" -lt "30" ];
 then
-    echo ${BOLD_YELLOW}"[*] ${GREEN}"python -V "is present on the system"
+    echo ${BOLD_YELLOW}"[*] ${GREEN}"$(python -V) "is present on the system"
     echo ${BOLD_RED}"[!] ${RED}python3 not found"
     echo ${BOLD_GREEN}"[+] ${GREEN}Installing python3"
+    exit 1
 fi
 
 # if [ -e "$(python3 -V)" =~ "Python 3" ];
