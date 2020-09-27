@@ -3,6 +3,7 @@
 CYAN='\033[0;36m'
 BOLD_GREEN="\033[1;32m"
 RED="\e[0;31m"
+BOLD_RED='\033[1;31m'
 BLUE="\e[0;34m"
 PURPLE='\033[0;35m'
 GREEN='\033[0;32m'
@@ -68,7 +69,7 @@ _pysetenv_delete()
     else
         if [ -d ${PYSETENV_VIRTUAL_DIR_PATH}${1} ];
         then
-            read -p "[?] Confirm you want to delete ${1} virtual environment (Y/N)" yes_no
+            read -p ""{BOLD_}"[?] Confirm you want to delete ${1} virtual environment ("${BOLD_GREEN}"Y/"${BOLD_RED}"N)""${CYAN}" yes_no
             case $yes_no in
                 Y|y) rm -rvf ${PYSETENV_VIRTUAL_DIR_PATH}${1};;
                 N|n) echo "[*] Aborting environment deletion";;
@@ -84,7 +85,7 @@ _pysetenv_delete()
 # Lists all virtual environments if ran with -l|--list flag
 _pysetenv_list()
 {
-    echo -e "${BOLD_YELLOW}"[*] "${CYAN}"List of virtual environments you have under ${PYSETENV_VIRTUAL_DIR_PATH}"${BLUE}"
+    echo -e ${BOLD_YELLOW}"[*] "${CYAN}"List of virtual environments you have under"${PYSETENV_VIRTUAL_DIR_PATH}${BLUE}
     for v in $(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )"${RESET}"
     do
         echo -e ${BOLD_YELLOW}"-" ${YELLOW}${v} ${RESET}
@@ -124,7 +125,7 @@ pysetenv()
                then
                    source ${PYSETENV_VIRTUAL_DIR_PATH}${1}/bin/activate
                 else
-                    echo -e "${RED}"[!] ERROR!! virtual environment with name ${1} does not exist
+                    echo -e ${BOLD_RED}"[!] ERROR!!" ${RED}"virtual environment with name ${1} does not exist"
                     _pysetenv_help
                 fi
                 ;;
