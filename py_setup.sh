@@ -24,6 +24,8 @@ _pysetenv_help()
     echo -e "${BOLD_YELLOW}"EXAMPLE:
     echo -e "${BOLD_GREEN}"pysetenv -n foo       "${CYAN}"Create virtual environment with name foo
     echo -e "${BOLD_GREEN}"pysetenv foo          "${CYAN}"Activate foo virtual env.
+    echo -e "${BOLD_GREEN}"pysetenv bar          "${CYAN}"Switch to bar virtual env.
+    echo -e "${BOLD_GREEN}"deactivate            "${CYAN}"Deactivate current active virtual env.
     echo -e "${BOLD_YELLOW}"Optional Arguments:"${BLUE}"
     echo -l, --list                  List all virtual environments.
     echo -n, --new NAME              Create a new Python Virtual Environment.
