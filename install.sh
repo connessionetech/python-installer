@@ -9,15 +9,15 @@ GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 RESET="\033[0m"
 
-echo "${YELLOW}"*********************************************************
-echo  "${YELLOW}"[*] "${CYAN}"Checking python version installed currently on the system..."${BOLD_GREEN}"
+echo ${YELLOW}"*********************************************************"
+echo  ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${BOLD_GREEN}
 
 if hash python3;
 then
-    echo ${BOLD_YELLOW}"[*] "${GREEN}${python3 -V}${YELLOW}" is present on the system"
+    echo ${BOLD_YELLOW}"[*] ${GREEN}"$(python3 -V)"${CYAN}Found is present on the system"
 
 else
-    echo ${BOLD_YELLOW}"[!] Warning! ${YELLOW} python3 not found on the system..."
+    echo ${BOLD_YELLOW}"[!] Warning! ${CYAN} python3 not found on the system..."
     echo ${BOLD_GREEN}"[+] ${GREEN}Installing python3 on the system..."
 
 fi
@@ -28,7 +28,6 @@ if [ "$ver" -lt "30" ];
 then
     echo ${BOLD_RED}"[!] ${RED}python3 not found"
     echo ${BOLD_GREEN}"[+] ${GREEN}Installing python3"
-    exit 1
 fi
 
 # if [ -e "$(python3 -V)" =~ "Python 3" ];
