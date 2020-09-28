@@ -48,7 +48,7 @@ then
     fi
 
     # Add ubuntu PPA
-    if [ ${OS_NAME} == *Ubuntu* ];
+    if ${OS_NAME} == *Ubuntu* ;
     then
         add-apt-repository ppa:fkrull/deadsnakes
         apt-get update
