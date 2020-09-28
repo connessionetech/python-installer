@@ -40,7 +40,7 @@ then
     fi
 
     # Add debian PPA
-    if [ ${OS_NAME} == *debian* ];
+    if ${OS_NAME} == *debian* ;
     then
         add-apt-repository ppa:deadsnakes/ppa
         apt-get update
