@@ -40,7 +40,7 @@ then
     fi
 
     # Add debian PPA
-    if ${OS_NAME} == *debian* ;
+    if [[ ${OS_NAME} == *"debian"* ]] ;
     then
         add-apt-repository ppa:deadsnakes/ppa
         apt-get update
@@ -48,7 +48,7 @@ then
     fi
 
     # Add ubuntu PPA
-    if ${OS_NAME} == *Ubuntu* ;
+    if [[ ${OS_NAME} == *"Ubuntu"* ]];
     then
         add-apt-repository ppa:fkrull/deadsnakes
         apt-get update
