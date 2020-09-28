@@ -95,13 +95,11 @@ if [ -e "${HOME}/.zshrc" ];
 then
     echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.zshrc"${RESET}
     echo "source ~/.py_setup.sh" >> ${HOME}/.zshrc
-    source ${HOME}/.zshrc
 
 elif [ -e "${HOME}/.bashrc" ];
 then
     echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bash_profile"${RESET}
     echo -e "source ~/.py_setup.sh" >> ${HOME}/.bashrc
-    source ${HOME}/.bashrc
 
 elif [ -e "${HOME}/.bash_profile" ];
 then
