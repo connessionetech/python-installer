@@ -1,4 +1,4 @@
-# #!/bin/bash
+#!/bin/bash
 
 CYAN='\033[0;36m'
 BOLD_GREEN="\033[1;32m"
@@ -34,20 +34,19 @@ then
     fi
 
     # Add Python on Debian
-    if [[ ${OS_NAME} == *Kali* ]] ;
+    if [[ "${OS_NAME}" == *"Kali"* ]] ;
     then
         add-apt-repository ppa:deadsnakes/ppa
         apt-get update
         apt-get install python${PYSETENV_PYTHON_VERSION}
     fi
-
     # Add Python PPA on Ubuntu
-    if [[ ${OS_NAME} == *Ubuntu* ]];
-    then
+    if [[ "$OS_NAME" == *"Ubuntu"* ]];
+    then     
         add-apt-repository ppa:fkrull/deadsnakes
         apt-get update
         apt-get install python${PYSETENV_PYTHON_VERSION}
-        exit
+        apt-get autoremove -y
     fi
 else
     # Add Python on CentOS
