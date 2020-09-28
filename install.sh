@@ -34,7 +34,7 @@ then
     fi
 
     # Add Python on Debian
-    if [ -e ${OS_NAME} == *"Debian"* ] ;
+    if [ "${OS_NAME}" == *"Debian"* ] ;
     then
         add-apt-repository ppa:deadsnakes/ppa
         apt-get update
@@ -42,7 +42,7 @@ then
     fi
 
     # Add Python PPA on Ubuntu
-    if [ -e ${OS_NAME} == *"Ubuntu"* ];
+    if [ "${OS_NAME}" == *"Ubuntu"* ];
     then
         add-apt-repository ppa:fkrull/deadsnakes
         apt-get update
