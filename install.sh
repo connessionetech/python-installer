@@ -1,4 +1,4 @@
-# #!/usr/bin/env bash
+# #!/bin/bash
 
 CYAN='\033[0;36m'
 BOLD_GREEN="\033[1;32m"
