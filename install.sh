@@ -104,7 +104,7 @@ else
     exit 1
 fi
 
-if hash pysetenv;
+if [ -f ~/.py_set_env ];
 then
     echo -e ${BOLD_GREEN} "pysetenv already installed"
     exit 1
