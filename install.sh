@@ -32,14 +32,33 @@ then
     # Add Python on RedHat 7
     if [[ "$OS_NAME" == *"Red Hat"* ]];
     then
-        read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
-        yum install gcc
-        cd /opt
-        wget https://www.python.org/ftp/python/${PYSETENV_PYTHON_VERSION}/Python-${PYSETENV_PYTHON_VERSION}.tgz
-        tar xzf Python-${PYSETENV_PYTHON_VERSION}.tgz
-        cd Python-${PYSETENV_PYTHON_VERSION}
-        ./configure
-        make altinstall
+        # check if python is already installed
+        if hash python${PYSETENV_PYTHON_VERSION};
+        then
+            echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
+            echo -e ${YELLOW}"[*] " ${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"
+        else
+            read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
+            case $y_n in
+                Y|y)
+                    yum install gcc
+                    cd /opt
+                    wget https://www.python.org/ftp/python/${PYSETENV_PYTHON_VERSION}/Python-${PYSETENV_PYTHON_VERSION}.tgz
+                    tar xzf Python-${PYSETENV_PYTHON_VERSION}.tgz
+                    cd Python-${PYSETENV_PYTHON_VERSION}
+                    ./configure
+                    make altinstall ;;
+
+                N|n)
+                    echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
+                    exit 1;;
+
+                *)
+                    echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
+                    exit 1;;
+
+            esac
+        fi
     fi
 
     # Add Python on Debian
@@ -65,9 +84,11 @@ then
                     apt-get update
                     apt-get install python${PYSETENV_PYTHON_VERSION}
                     apt-get autoremove -y ;;
-                N|n) echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
+                N|n) 
+                    echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
                     exit 1;;
-                *) echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
+                *) 
+                    echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
                     exit 1;;
             esac
         fi
