@@ -26,6 +26,7 @@ then
     DISTRO=$(cat /etc/os-release | grep -w ID_LIKE | cut -d= -f2 | tr -d '=')
 
     echo -e ${YELLOW}"[*] ${GREEN}Found:${BOLD_GREEN}" ${OS_NAME} ${GREEN}"Version: "${BOLD_GREEN}${OS_VERSION}
+    echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
 
     # Add Python on RedHat 7
     if [ "$OS_NAME" == *"Red Hat"* ];
@@ -64,8 +65,6 @@ else
     echo -e ${YELLOW}"Exiting ! ! !"${RESET}
     exit 1
 fi
-
-echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
 
 # _install_py()
 # {
