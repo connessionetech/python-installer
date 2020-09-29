@@ -57,6 +57,7 @@ then
             echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
             echo -e ${YELLOW}"[*] " ${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"
         else
+            read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)"y_n
             add-apt-repository ppa:fkrull/deadsnakes
             apt-get update
             apt-get install python${PYSETENV_PYTHON_VERSION}
