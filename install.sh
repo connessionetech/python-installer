@@ -61,26 +61,25 @@ else
     then
         echo Adding Python PPA
     fi
-    echo -e ${BOLD_RED}"THIS IS NOT A GNU/LINUX DISTRO"
     echo -e ${YELLOW}"Exiting ! ! !"${RESET}
     exit 1
 fi
 
 echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
 
-_install_py()
-{
-    if hash python${PYSETENV_PYTHON_VERSION};
-    then
-        echo -e ${YELLOW}"[*]${BOLD_GREEN}" $(python${PYSETENV_PYTHON_VERSION} -V) ${CYAN}"Found on the system"
+# _install_py()
+# {
+#     if hash python${PYSETENV_PYTHON_VERSION};
+#     then
+#         echo -e ${YELLOW}"[*]${BOLD_GREEN}" $(python${PYSETENV_PYTHON_VERSION} -V) ${CYAN}"Found on the system"
 
-    else
-        echo -e ${YELLOW}"[!] Warning! ${CYAN} python${PYSETENV_PYTHON_VERSION} not found on the system..."
-        read -p "[+] Install Python${PYSETENV_PYTHON_VERSION} on the system... (Y/N)" yes_no
-        exit 1
+#     else
+#         echo -e ${YELLOW}"[!] Warning! ${CYAN} python${PYSETENV_PYTHON_VERSION} not found on the system..."
+#         read -p "[+] Install Python${PYSETENV_PYTHON_VERSION} on the system... (Y/N)" yes_no
+#         exit 1
 
-    fi
-}
+#     fi
+# }
 
 # ver=$(python3 -V 2>&1 | sed 's/.* \([0-9]\).\([0-9]\).*/\1\2/')
 
