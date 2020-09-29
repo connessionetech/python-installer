@@ -53,7 +53,7 @@ then
         if hash python${PYSETENV_PYTHON_VERSION};
         then
             echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
-            echo -e ${YELLOW}"[*] " ${BOLD_GREEN}Found $(python -V)${RESET}
+            echo -e ${YELLOW}"[*] " ${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"
         else
             add-apt-repository ppa:fkrull/deadsnakes
             apt-get update
@@ -98,6 +98,7 @@ mkdir -p "${HOME}"/virtualenvs
 echo -e ${YELLOW}"[*] ${CYAN}Downloading pysetenv"${PURPLE}
 
 curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/py_setup.sh -o ${HOME}/.py_setup.sh
+curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/config.ini -o ${HOME}/.config.ini
 
 if [ -e "${HOME}/.zshrc" ];
 then
