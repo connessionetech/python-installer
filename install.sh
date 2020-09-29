@@ -75,7 +75,7 @@ then
         if hash python${PYSETENV_PYTHON_VERSION};
         then
             echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
-            echo -e ${YELLOW}"[*] " ${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"${RESET}
+            echo -e ${YELLOW}"[*] "${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"${RESET}
         
         else
             read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
