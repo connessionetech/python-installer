@@ -57,11 +57,16 @@ then
             echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
             echo -e ${YELLOW}"[*] " ${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"
         else
-            read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)"y_n
-            add-apt-repository ppa:fkrull/deadsnakes
-            apt-get update
-            apt-get install python${PYSETENV_PYTHON_VERSION}
-            apt-get autoremove -y
+            read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
+            case $y_n in
+                Y|y 
+                    add-apt-repository ppa:fkrull/deadsnakes
+                    apt-get update
+                    apt-get install python${PYSETENV_PYTHON_VERSION}
+                    apt-get autoremove -y ;;
+                N|n echo "[!] Aborting";;
+                *) echo "[*] Enter either Y|y for yes or N|n for no"
+            esac
         fi
     fi
 else
