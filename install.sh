@@ -43,7 +43,7 @@ then
                 Y|y)
                     yum install gcc
                     cd /opt
-                    wget https://www.python.org/ftp/python/${PYSETENV_PYTHON_VERSION}/Python-${PYSETENV_PYTHON_VERSION}.tgz
+                    curl -# https://www.python.org/ftp/python/${PYSETENV_PYTHON_VERSION}/Python-${PYSETENV_PYTHON_VERSION}.tgz
                     tar xzf Python-${PYSETENV_PYTHON_VERSION}.tgz
                     cd Python-${PYSETENV_PYTHON_VERSION}
                     ./configure
