@@ -106,9 +106,8 @@ fi
 
 if [ -f ~/.py_setup.sh ];
 then
-    echo -e ${BOLD_GREEN}"     pysetenv already installed"${RESET}
+    echo -e ${YELLOW}"[*] "${BOLD_GREEN}"pysetenv already installed"
     echo -e ${YELLOW}"***********************************************************"${RESET}
-
     exit 1
 fi
 
