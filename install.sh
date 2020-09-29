@@ -50,7 +50,7 @@ then
     # Add Python PPA on Ubuntu
     if [[ "$OS_NAME" == *"Ubuntu"* ]];
     then     
-        if [ hash python${PYSETENV_PYTHON_VERSION}];
+        if [ hash python${PYSETENV_PYTHON_VERSION} ];
         then
             echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
             echo -e ${YELLOW}"[*] " ${BOLD_GREEN}Found $(python -V)${RESET}
