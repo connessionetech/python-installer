@@ -26,19 +26,26 @@ then
     DISTRO=$(cat /etc/os-release | grep -w ID_LIKE | cut -d= -f2 | tr -d '=')
 
     echo -e ${YELLOW}"[*] ${GREEN}Found:${BOLD_GREEN}" ${OS_NAME} ${GREEN}"Version: "${BOLD_GREEN}${OS_VERSION}
-    
+
     # Add Python on RedHat 7
-    if [  ];
+    if [ "$OS_NAME" == *"Red Hat"* ];
     then
-        echo Adding Python PPA
+        yum install gcc
+        cd /opt
+        wget https://www.python.org/ftp/python/${PYSETENV_PYTHON_VERSION}/Python-${PYSETENV_PYTHON_VERSION}.tgz
+        tar xzf Python-${PYSETENV_PYTHON_VERSION}.tgz
+        cd Python-${PYSETENV_PYTHON_VERSION}
+        ./configure
+        make altinstall
     fi
 
     # Add Python on Debian
-    if [[ "${OS_NAME}" == *"Kali"* ]] ;
+    if [[ "${OS_NAME}" == *"Debian"* ]] ;
     then
         add-apt-repository ppa:deadsnakes/ppa
         apt-get update
         apt-get install python${PYSETENV_PYTHON_VERSION}
+        apt-get autoremove -y
     fi
     # Add Python PPA on Ubuntu
     if [[ "$OS_NAME" == *"Ubuntu"* ]];
@@ -75,13 +82,13 @@ _install_py()
     fi
 }
 
-ver=$(python3 -V 2>&1 | sed 's/.* \([0-9]\).\([0-9]\).*/\1\2/')
+# ver=$(python3 -V 2>&1 | sed 's/.* \([0-9]\).\([0-9]\).*/\1\2/')
 
-if [ "$ver" -lt "35" ];
-then
-    echo -e ${BOLD_RED}"[!] ${RED}python3 not found"
-    echo -e ${BOLD_GREEN}"[+] ${CYAN}Installing python3"
-fi
+# if [ "$ver" -lt "35" ];
+# then
+#     echo -e ${BOLD_RED}"[!] ${RED}python3 not found"
+#     echo -e ${BOLD_GREEN}"[+] ${CYAN}Installing python3"
+# fi
 
 echo -e ${BOLD_GREEN}"[+] ${CYAN}Creating directory to hold all Python virtual environments"${RESET}
 mkdir -p "${HOME}"/virtualenvs
