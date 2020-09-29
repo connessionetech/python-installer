@@ -64,7 +64,8 @@ then
                     apt-get update
                     apt-get install python${PYSETENV_PYTHON_VERSION}
                     apt-get autoremove -y ;;
-                N|n) echo "[!] Aborting";;
+                N|n) echo "[!] Aborting"
+                    exit 1;;
                 *) echo "[*] Enter either Y|y for yes or N|n for no"
             esac
         fi
