@@ -75,7 +75,8 @@ then
         if hash python${PYSETENV_PYTHON_VERSION};
         then
             echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
-            echo -e ${YELLOW}"[*] " ${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"
+            echo -e ${YELLOW}"[*] " ${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"${RESET}
+        
         else
             read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
             case $y_n in
@@ -103,27 +104,11 @@ else
     exit 1
 fi
 
-# _install_py()
-# {
-#     if hash python${PYSETENV_PYTHON_VERSION};
-#     then
-#         echo -e ${YELLOW}"[*]${BOLD_GREEN}" $(python${PYSETENV_PYTHON_VERSION} -V) ${CYAN}"Found on the system"
-
-#     else
-#         echo -e ${YELLOW}"[!] Warning! ${CYAN} python${PYSETENV_PYTHON_VERSION} not found on the system..."
-#         read -p "[+] Install Python${PYSETENV_PYTHON_VERSION} on the system... (Y/N)" yes_no
-#         exit 1
-
-#     fi
-# }
-
-# ver=$(python3 -V 2>&1 | sed 's/.* \([0-9]\).\([0-9]\).*/\1\2/')
-
-# if [ "$ver" -lt "35" ];
-# then
-#     echo -e ${BOLD_RED}"[!] ${RED}python3 not found"
-#     echo -e ${BOLD_GREEN}"[+] ${CYAN}Installing python3"
-# fi
+if hash pysetenv;
+then
+    echo -e ${BOLD_GREEN} "pysetenv already installed"
+    exit 1
+fi
 
 echo -e ${YELLOW}"[+] ${CYAN}Creating directory to hold all Python virtual environments"${RESET}
 mkdir -p "${HOME}"/virtualenvs
