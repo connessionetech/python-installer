@@ -30,8 +30,9 @@ then
     echo -e ${YELLOW}"[*] ${GREEN}Python Version On Config.ini:${BOLD_GREEN}" ${PYSETENV_PYTHON_VERSION}${RESET}
 
     # Add Python on RedHat 7
-    if [ "$OS_NAME" == *"Red Hat"* ];
+    if [[ "$OS_NAME" == *"Red Hat"* ]];
     then
+        read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
         yum install gcc
         cd /opt
         wget https://www.python.org/ftp/python/${PYSETENV_PYTHON_VERSION}/Python-${PYSETENV_PYTHON_VERSION}.tgz
@@ -103,7 +104,7 @@ fi
 #     echo -e ${BOLD_GREEN}"[+] ${CYAN}Installing python3"
 # fi
 
-echo -e ${BOLD_GREEN}"[+] ${CYAN}Creating directory to hold all Python virtual environments"${RESET}
+echo -e ${YELLOW}"[+] ${CYAN}Creating directory to hold all Python virtual environments"${RESET}
 mkdir -p "${HOME}"/virtualenvs
 echo -e ${YELLOW}"[*] ${CYAN}Downloading pysetenv"${PURPLE}
 
