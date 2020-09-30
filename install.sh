@@ -41,8 +41,7 @@ then
             read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
             case $y_n in
                 Y|y)
-                    sudo subscription-manager repos --enable rhel-7-server-optional-rpms \
-                    --enable rhel-server-rhscl-7-rpms
+                    sudo subscription-manager repos --enable rhel-7-server-optional-rpms --enable rhel-server-rhscl-7-rpms
                     yum -y install @development
                     yum -y install rh-python36
                     yum -y install rh-python36-numpy \
