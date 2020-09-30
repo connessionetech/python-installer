@@ -44,12 +44,12 @@ then
                     su -
                     subscription-manager repos --enable rhel-7-server-optional-rpms --enable rhel-server-rhscl-7-rpms
                     yum -y install @development
-                    yum -y install rh-python36
-                    yum -y install rh-python36-numpy \
-                    rh-python36-scipy \ 
-                    rh-python36-python-tools \
-                    rh-python36-python-six
-                    scl enable rh-python36 bash
+                    yum -y install rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")
+                    yum -y install rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")-numpy \
+                    rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")-scipy \ 
+                    rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")-python-tools \
+                    rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")-python-six
+                    scl enable rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n") bash
                      ;;
 
                 N|n)
