@@ -101,10 +101,37 @@ else
     # Add Python on CentOS
     if [ -f /etc/centos-release ];
     then
-        echo Adding Python PPA
+        if hash python${PYSETENV_PYTHON_VERSION};
+        then
+            echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
+            echo -e ${YELLOW}"[*] " ${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"
+        else
+            read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
+            case $y_n in
+                Y|y)
+                    su -
+                    subscription-manager repos --enable rhel-7-server-optional-rpms --enable rhel-server-rhscl-7-rpms
+                    yum -y install @development
+                    yum -y install rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")
+                    yum -y install rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")-numpy \
+                    rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")-scipy \ 
+                    rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")-python-tools \
+                    rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")-python-six
+                    scl enable rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n") bash
+                     ;;
+
+                N|n)
+                    echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
+                    exit 1;;
+
+                *)
+                    echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
+                    exit 1;;
+
+            esac
+        fi
     fi
     echo -e ${YELLOW}"Exiting ! ! !"${RESET}
-    exit 1
 fi
 
 if [ -f ~/.py_setup.sh ];
