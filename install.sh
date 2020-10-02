@@ -41,15 +41,14 @@ then
             read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
             case $y_n in
                 Y|y)
-                    su -
-                    subscription-manager repos --enable rhel-7-server-optional-rpms --enable rhel-server-rhscl-7-rpms
-                    yum -y install @development
-                    yum -y install rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")
-                    yum -y install rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")-numpy \
-                    rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")-scipy \ 
-                    rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")-python-tools \
-                    rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")-python-six
-                    scl enable rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n") bash
+                    sudo subscription-manager repos --enable rhel-7-server-optional-rpms --enable rhel-server-rhscl-7-rpms
+                    sudo yum -y install @development
+                    sudo yum -y install rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")
+                    sudo yum -y install rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")-numpy \
+                    sudo rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")-scipy \ 
+                    sudo rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")-python-tools \
+                    sudo rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")-python-six
+                    sudo scl enable rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n") bash
                      ;;
 
                 N|n)
@@ -110,7 +109,6 @@ else
             case $y_n in
                 Y|y)
                     echo "Installing python on cent os"
-                    su -
                     subscription-manager repos --enable rhel-7-server-optional-rpms --enable rhel-server-rhscl-7-rpms
                     yum -y install @development
                     yum -y install rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")
