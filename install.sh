@@ -99,7 +99,7 @@ then
     fi
 else
     # Add Python on CentOS
-    if [  ];
+    if [ -f /etc/centos-release ];
     then
         echo Adding Python PPA
     fi
