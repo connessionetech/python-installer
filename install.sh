@@ -109,7 +109,7 @@ else
             read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
             case $y_n in
                 Y|y)
-                    "Installing python on cent os"
+                    echo "Installing python on cent os"
                     su -
                     subscription-manager repos --enable rhel-7-server-optional-rpms --enable rhel-server-rhscl-7-rpms
                     yum -y install @development
