@@ -43,20 +43,42 @@ then
                 Y|y)
                     yum install gcc openssl-devel bzip2-devel sqlite-devel
                     cd /usr/src
+                    case $PYSETENV_PYTHON_VERSION in
+                        "3.1")
+                            echo python 3.1
+                        
+                        "3.2")
+                            echo python 3.2
+
+                        "3.3")
+                            echo python 3.3
+                        
+                        "3.4")
+                            echo python 3.4
+                        
+                        "3.5")
+                            echo python 3.5
+
+                        "3.6")
+                            echo python 3.6
+
+                        "3.7")
+                            echo python 3.7
+                        
+                        "3.8")
+                            echo python 3.8
+                        
+                        "3.9")
+                            echo python 3.9
+                    esac
+                    exit 1
                     sudo curl -o python.tgz https://www.python.org/ftp/python/3.6.10/Python-3.6.10.tgz
+                    3.1.5, 3.2.6, 3.3.7, 3.4.9, 3.5.9, 3.6.9, 3.7.9, 3.8.6, 3.9.0
                     tar xzf python.tgz
                     cd Python-3.6.10
                     sudo ./configure --enable-optimizations
                     sudo make altinstall
                     sudo rm /usr/src/python.tgz
-                    # sudo subscription-manager repos --enable rhel-7-server-optional-rpms --enable rhel-server-rhscl-7-rpms
-                    # sudo yum -y install @development
-                    # sudo yum -y install rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")
-                    # sudo yum -y install rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")-numpy \
-                    # sudo rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")-scipy \ 
-                    # sudo rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")-python-tools \
-                    # sudo rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n")-python-six
-                    # sudo scl enable rh-python$(echo ${PYSETENV_PYTHON_VERSION} | tr "." "\n") bash
                      ;;
 
                 N|n)
