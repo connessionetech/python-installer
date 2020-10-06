@@ -78,7 +78,7 @@ then
                     sudo ./configure --enable-optimizations
                     sudo make altinstall
                     sudo rm /usr/src/python.tgz
-                    sudo rm -rf /usr/src/Python-3* -y
+                    sudo rm -rf /usr/src/Python-3*
                      ;;
 
                 N|n)
@@ -182,7 +182,7 @@ then
                 sudo ./configure --enable-optimizations
                 sudo make altinstall
                 sudo rm /usr/src/python.tgz
-                sudo rm -rf /usr/src/Python-3* -y
+                sudo rm -rf /usr/src/Python-3*
                     ;;
 
             N|n)
