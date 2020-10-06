@@ -46,30 +46,32 @@ then
                     case $PYSETENV_PYTHON_VERSION in
                         "3.1")
                             echo python 3.1
-                        
+                            ;;
                         "3.2")
                             echo python 3.2
-
+                            ;;
                         "3.3")
                             echo python 3.3
-                        
+                            ;;
                         "3.4")
                             echo python 3.4
-                        
+                            ;;
                         "3.5")
                             echo python 3.5
-
+                            ;;
                         "3.6")
                             echo python 3.6
-
+                            ;;
                         "3.7")
                             echo python 3.7
-                        
+                            ;;
                         "3.8")
                             echo python 3.8
-                        
+                            ;;
                         "3.9")
                             echo python 3.9
+                            ;;
+                        *) echo python version not found
                     esac
                     exit 1
                     sudo curl -o python.tgz https://www.python.org/ftp/python/3.6.10/Python-3.6.10.tgz
