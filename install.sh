@@ -18,17 +18,16 @@ echo -e ${YELLOW}"***********************************************************"${
 # Load config.ini file
 . ./config.ini
 
-# Get Os details
-OS_NAME=$(cat /etc/os-release | grep -w NAME | cut -d= -f2 | tr -d '"')
-OS_VERSION=$(cat /etc/os-release | grep -w VERSION_ID | cut -d= -f2 | tr -d '"')
-DISTRO=$(cat /etc/os-release | grep -w ID_LIKE | cut -d= -f2 | tr -d '=')
-
-echo -e ${YELLOW}"[*] ${GREEN}Operating System:${BOLD_GREEN}" ${OS_NAME} ${GREEN}"Version: "${BOLD_GREEN}${OS_VERSION}${RESET}
-echo -e ${YELLOW}"[*] ${GREEN}Path to virtual environment directory:${BOLD_GREEN}" ${PYSETENV_VIRTUAL_DIR_PATH}${RESET}
-echo -e ${YELLOW}"[*] ${GREEN}Python Version On Config.ini:${BOLD_GREEN}" ${PYSETENV_PYTHON_VERSION}${RESET}
-
 if [ -f /etc/os-release ];
 then
+    # Get Os details
+    OS_NAME=$(cat /etc/os-release | grep -w NAME | cut -d= -f2 | tr -d '"')
+    OS_VERSION=$(cat /etc/os-release | grep -w VERSION_ID | cut -d= -f2 | tr -d '"')
+    DISTRO=$(cat /etc/os-release | grep -w ID_LIKE | cut -d= -f2 | tr -d '=')
+
+    echo -e ${YELLOW}"[*] ${GREEN}Operating System:${BOLD_GREEN}" ${OS_NAME} ${GREEN}"Version: "${BOLD_GREEN}${OS_VERSION}${RESET}
+    echo -e ${YELLOW}"[*] ${GREEN}Path to virtual environment directory:${BOLD_GREEN}" ${PYSETENV_VIRTUAL_DIR_PATH}${RESET}
+    echo -e ${YELLOW}"[*] ${GREEN}Python Version On Config.ini:${BOLD_GREEN}" ${PYSETENV_PYTHON_VERSION}${RESET}
 
     # Add Python on RedHat 7
     if [[ "$OS_NAME" == *"Red Hat"* ]];
@@ -127,10 +126,17 @@ then
             esac
         fi
     fi
-else
+elif [ -f /etc/centos-release ];
     # Add Python on CentOS
-    if [ -f /etc/centos-release ];
     then
+        # Get Os details
+        OS_NAME=$(cat /etc/system-release | cut -d ' ' -f1)
+        OS_VERSION=$(cat /etc/system-release | cut -d ' ' f2)
+
+        echo -e ${YELLOW}"[*] ${GREEN}Operating System:${BOLD_GREEN}" ${OS_NAME} ${GREEN}"Version: "${BOLD_GREEN}${OS_VERSION}${RESET}
+        echo -e ${YELLOW}"[*] ${GREEN}Path to virtual environment directory:${BOLD_GREEN}" ${PYSETENV_VIRTUAL_DIR_PATH}${RESET}
+        echo -e ${YELLOW}"[*] ${GREEN}Python Version On Config.ini:${BOLD_GREEN}" ${PYSETENV_PYTHON_VERSION}${RESET}
+
         if hash python${PYSETENV_PYTHON_VERSION};
         then
             echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
@@ -190,7 +196,9 @@ else
             esac
         fi
     fi
+else
     echo -e ${YELLOW}"Exiting ! ! !"${RESET}
+    exit 1
 fi
 
 if [ -f ~/.py_setup.sh ];
