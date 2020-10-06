@@ -75,7 +75,6 @@ then
                     esac
                     tar xzf python.tgz
                     cd Python-3*
-                    exit 1
                     sudo ./configure --enable-optimizations
                     sudo make altinstall
                     sudo rm /usr/src/python.tgz
