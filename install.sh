@@ -131,7 +131,7 @@ elif [ -f /etc/centos-release ];
     then
         # Get Os details
         OS_NAME=$(cat /etc/system-release | cut -d ' ' -f1)
-        OS_VERSION=$(cat /etc/system-release | cut -d ' ' -f2)
+        OS_VERSION=$(cat /etc/system-release | cut -d ' ' -f3)
 
         echo -e ${YELLOW}"[*] ${GREEN}Operating System:${BOLD_GREEN}" ${OS_NAME} ${GREEN}"Version: "${BOLD_GREEN}${OS_VERSION}${RESET}
         echo -e ${YELLOW}"[*] ${GREEN}Path to virtual environment directory:${BOLD_GREEN}" ${PYSETENV_VIRTUAL_DIR_PATH}${RESET}
