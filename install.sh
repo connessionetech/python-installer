@@ -78,7 +78,7 @@ then
                     sudo ./configure --enable-optimizations
                     sudo make altinstall
                     sudo rm /usr/src/python.tgz
-                    sudo rm /usr/src/Python-3*
+                    sudo rm -rf /usr/src/Python-3* -y
                      ;;
 
                 N|n)
@@ -126,75 +126,74 @@ then
             esac
         fi
     fi
-elif [ -f /etc/centos-release ];
+elif [ -f /etc/system-release ];
     # Add Python on CentOS
+then
+    # Get Os details
+    OS_NAME=$(cat /etc/system-release | cut -d ' ' -f1)
+    OS_VERSION=$(cat /etc/system-release | cut -d ' ' -f3)
+
+    echo -e ${YELLOW}"[*] ${GREEN}Operating System:${BOLD_GREEN}" ${OS_NAME} ${GREEN}"Version: "${BOLD_GREEN}${OS_VERSION}${RESET}
+    echo -e ${YELLOW}"[*] ${GREEN}Path to virtual environment directory:${BOLD_GREEN}" ${PYSETENV_VIRTUAL_DIR_PATH}${RESET}
+    echo -e ${YELLOW}"[*] ${GREEN}Python Version On Config.ini:${BOLD_GREEN}" ${PYSETENV_PYTHON_VERSION}${RESET}
+
+    if hash python${PYSETENV_PYTHON_VERSION};
     then
-        # Get Os details
-        OS_NAME=$(cat /etc/system-release | cut -d ' ' -f1)
-        OS_VERSION=$(cat /etc/system-release | cut -d ' ' -f3)
+        echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
+        echo -e ${YELLOW}"[*] " ${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"
+    else
+        read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
+        case $y_n in
+            Y|y)
+                yum install gcc openssl-devel bzip2-devel sqlite-devel -y
+                cd /usr/src
+                case $PYSETENV_PYTHON_VERSION in
+                    "3.1")
+                        sudo curl -o python.tgz https://www.python.org/ftp/python/3.1.5/Python-3.1.5.tgz
+                        ;;
+                    "3.2")
+                        sudo curl -o python.tgz https://www.python.org/ftp/python/3.2.6/Python-3.2.6.tgz
+                        ;;
+                    "3.3")
+                        sudo curl -o python.tgz https://www.python.org/ftp/python/3.3.7/Python-3.3.7.tgz
+                        ;;
+                    "3.4")
+                        sudo curl -o python.tgz https://www.python.org/ftp/python/3.4.9/Python-3.4.9.tgz
+                        ;;
+                    "3.5")
+                        sudo curl -o python.tgz https://www.python.org/ftp/python/3.5.9/Python-3.5.9.tgz
+                        ;;
+                    "3.6")
+                        sudo curl -o python.tgz https://www.python.org/ftp/python/3.6.9/Python-3.6.9.tgz
+                        ;;
+                    "3.7")
+                        sudo curl -o python.tgz https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tgz
+                        ;;
+                    "3.8")
+                        sudo curl -o python.tgz https://www.python.org/ftp/python/3.8.6/Python-3.8.6.tgz
+                        ;;
+                    "3.9")
+                        sudo curl -o python.tgz https://www.python.org/ftp/python/3.9.0/Python-3.9.0.tgz
+                        ;;
+                    *) echo python version not found
+                esac
+                tar xzf python.tgz
+                cd Python-3*
+                sudo ./configure --enable-optimizations
+                sudo make altinstall
+                sudo rm /usr/src/python.tgz
+                sudo rm -rf /usr/src/Python-3* -y
+                    ;;
 
-        echo -e ${YELLOW}"[*] ${GREEN}Operating System:${BOLD_GREEN}" ${OS_NAME} ${GREEN}"Version: "${BOLD_GREEN}${OS_VERSION}${RESET}
-        echo -e ${YELLOW}"[*] ${GREEN}Path to virtual environment directory:${BOLD_GREEN}" ${PYSETENV_VIRTUAL_DIR_PATH}${RESET}
-        echo -e ${YELLOW}"[*] ${GREEN}Python Version On Config.ini:${BOLD_GREEN}" ${PYSETENV_PYTHON_VERSION}${RESET}
+            N|n)
+                echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
+                exit 1;;
 
-        if hash python${PYSETENV_PYTHON_VERSION};
-        then
-            echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
-            echo -e ${YELLOW}"[*] " ${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"
-        else
-            read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
-            case $y_n in
-                Y|y)
-                    yum install gcc openssl-devel bzip2-devel sqlite-devel -y
-                    cd /usr/src
-                    case $PYSETENV_PYTHON_VERSION in
-                        "3.1")
-                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.1.5/Python-3.1.5.tgz
-                            ;;
-                        "3.2")
-                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.2.6/Python-3.2.6.tgz
-                            ;;
-                        "3.3")
-                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.3.7/Python-3.3.7.tgz
-                            ;;
-                        "3.4")
-                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.4.9/Python-3.4.9.tgz
-                            ;;
-                        "3.5")
-                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.5.9/Python-3.5.9.tgz
-                            ;;
-                        "3.6")
-                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.6.9/Python-3.6.9.tgz
-                            ;;
-                        "3.7")
-                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tgz
-                            ;;
-                        "3.8")
-                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.8.6/Python-3.8.6.tgz
-                            ;;
-                        "3.9")
-                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.9.0/Python-3.9.0.tgz
-                            ;;
-                        *) echo python version not found
-                    esac
-                    tar xzf python.tgz
-                    cd Python-3*
-                    sudo ./configure --enable-optimizations
-                    sudo make altinstall
-                    sudo rm /usr/src/python.tgz
-                    sudo rm /usr/src/Python-3*
-                     ;;
+            *)
+                echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
+                exit 1;;
 
-                N|n)
-                    echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
-                    exit 1;;
-
-                *)
-                    echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
-                    exit 1;;
-
-            esac
-        fi
+        esac
     fi
 else
     echo -e ${YELLOW}"Exiting ! ! !"${RESET}
