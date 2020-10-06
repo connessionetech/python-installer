@@ -41,43 +41,41 @@ then
             read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
             case $y_n in
                 Y|y)
-                    yum install gcc openssl-devel bzip2-devel sqlite-devel
+                    yum install gcc openssl-devel bzip2-devel sqlite-devel -y
                     cd /usr/src
                     case $PYSETENV_PYTHON_VERSION in
                         "3.1")
-                            echo python 3.1
+                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.1.5/Python-3.1.5.tgz
                             ;;
                         "3.2")
-                            echo python 3.2
+                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.2.6/Python-3.2.6.tgz
                             ;;
                         "3.3")
-                            echo python 3.3
+                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.3.7/Python-3.3.7.tgz
                             ;;
                         "3.4")
-                            echo python 3.4
+                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.4.9/Python-3.4.9.tgz
                             ;;
                         "3.5")
-                            echo python 3.5
+                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.5.9/Python-3.5.9.tgz
                             ;;
                         "3.6")
-                            echo python 3.6
+                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.6.9/Python-3.6.9.tgz
                             ;;
                         "3.7")
-                            echo python 3.7
+                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tgz
                             ;;
                         "3.8")
-                            echo python 3.8
+                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.8.6/Python-3.8.6.tgz
                             ;;
                         "3.9")
-                            echo python 3.9
+                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.9.0/Python-3.9.0.tgz
                             ;;
                         *) echo python version not found
                     esac
-                    exit 1
-                    sudo curl -o python.tgz https://www.python.org/ftp/python/3.6.10/Python-3.6.10.tgz
-                    3.1.5, 3.2.6, 3.3.7, 3.4.9, 3.5.9, 3.6.9, 3.7.9, 3.8.6, 3.9.0
                     tar xzf python.tgz
-                    cd Python-3.6.10
+                    cd Python-3*
+                    exit 1
                     sudo ./configure --enable-optimizations
                     sudo make altinstall
                     sudo rm /usr/src/python.tgz
