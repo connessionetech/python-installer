@@ -221,7 +221,7 @@ then
 
 elif [ -e "${HOME}/.bashrc" ];
 then
-    echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bash_profile"${RESET}
+    echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bashrc"${RESET}
     echo -e "source ~/.py_setup.sh" >> ${HOME}/.bashrc
 
 elif [ -e "${HOME}/.bash_profile" ];
