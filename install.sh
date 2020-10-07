@@ -209,7 +209,7 @@ then
 fi
 
 echo -e ${YELLOW}"[+] ${CYAN}Creating directory to hold all Python virtual environments"${RESET}
-sudo mkdir -p $HOME/virtualenvs
+mkdir -p $HOME/virtualenvs
 echo -e ${YELLOW}"[*] ${CYAN}Downloading pysetenv"${PURPLE}
 
 curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/py_setup.sh -o ${HOME}/.py_setup.sh
