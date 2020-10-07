@@ -179,8 +179,8 @@ then
                 esac
                 tar xzf python.tgz
                 cd Python-3*
-                sudo ./configure --enable-optimizations
-                sudo make altinstall
+                # sudo ./configure --enable-optimizations
+                # sudo make altinstall
                 sudo rm /usr/src/python.tgz
                 sudo rm -rf /usr/src/Python-3*
                     ;;
