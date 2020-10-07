@@ -181,8 +181,8 @@ then
                 cd Python-3*
                 # sudo ./configure --enable-optimizations
                 # sudo make altinstall
-                sudo rm /usr/src/python.tgz
-                sudo rm -rf /usr/src/Python-3*
+                rm /usr/src/python.tgz
+                rm -rf /usr/src/Python-3*
                 cd ~
                     ;;
 
@@ -209,11 +209,11 @@ then
 fi
 
 echo -e ${YELLOW}"[+] ${CYAN}Creating directory to hold all Python virtual environments"${RESET}
-sudo mkdir -p ${HOME}/virtualenvs
+sudo mkdir -p $HOME/virtualenvs
 echo -e ${YELLOW}"[*] ${CYAN}Downloading pysetenv"${PURPLE}
 
-sudo curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/py_setup.sh -o ${HOME}/.py_setup.sh
-sudo curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/config.ini -o ${HOME}/.config.ini
+curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/py_setup.sh -o ${HOME}/.py_setup.sh
+curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/config.ini -o ${HOME}/.config.ini
 
 if [ -e "${HOME}/.zshrc" ];
 then
@@ -223,7 +223,7 @@ then
 elif [ -e "${HOME}/.bashrc" ];
 then
     echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bashrc"${RESET}
-    sudo echo -e "source ~/.py_setup.sh" >> ${HOME}/.bashrc
+    echo -e "source ~/.py_setup.sh" >> ${HOME}/.bashrc
 
 elif [ -e "${HOME}/.bash_profile" ];
 then
