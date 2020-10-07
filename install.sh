@@ -164,7 +164,7 @@ then
                         curl -o python.tgz https://www.python.org/ftp/python/3.5.9/Python-3.5.9.tgz
                         ;;
                     "3.6")
-                        curl -o python.tgz https://www.python.org/ftp/python/3.6.9/Python-3.6.9.tgz
+                        sudo curl -o python.tgz https://www.python.org/ftp/python/3.6.9/Python-3.6.9.tgz
                         ;;
                     "3.7")
                         curl -o python.tgz https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tgz
