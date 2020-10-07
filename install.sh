@@ -183,6 +183,7 @@ then
                 # sudo make altinstall
                 sudo rm /usr/src/python.tgz
                 sudo rm -rf /usr/src/Python-3*
+                cd ~
                     ;;
 
             N|n)
