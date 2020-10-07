@@ -177,10 +177,10 @@ then
                         ;;
                     *) echo python version not found
                 esac
-                tar xzf python.tgz
+                sudo tar xzf python.tgz
                 cd Python-3*
-                sudo ./configure --enable-optimizations
-                sudo make altinstall
+                ./configure --enable-optimizations
+                make altinstall
                 rm /usr/src/python.tgz
                 rm -rf /usr/src/Python-3*
                 cd ~
