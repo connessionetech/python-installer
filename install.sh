@@ -186,6 +186,7 @@ then
                 export PATH=/usr/local/bin/python${PYSETENV_PYTHON_VERSION}:$PATH
                 cd ~
                 pip${PYSETENV_PYTHON_VERSION} install virtualenv --user
+                ln virtualenv /usr/local/bin/virtualenv
                     ;;
 
             N|n)
