@@ -44,3 +44,15 @@
 <h4>Deactivate</h4>
 <p>Type this on terminal to deactivate virtual environment</p>
 <code>deactivate</code>
+
+
+## Supported platforms
+
+| OS  | Python Versions  | Comment/note  |   |   |
+|---|---|---|---|---|
+| Ubuntu 18.x  | 3.6,3.7 |   |   |   |
+| Ubuntu 16.x  | 3.6  |   |   |   |
+| CentOs 6.x |   |   |   |   |
+| CentOs 6.7 |   |   |   |   |
+| Amazon linux |   |   |   |   |
+| Red Hat 7.x |   |   |   |   |
