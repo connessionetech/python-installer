@@ -145,7 +145,7 @@ then
         read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
         case $y_n in
             Y|y)
-                yum install gcc openssl-devel bzip2-devel sqlite-devel -y
+                sudo yum install gcc openssl-devel bzip2-devel sqlite-devel -y
                 cd /usr/src
                 case $PYSETENV_PYTHON_VERSION in
                     "3.1")
