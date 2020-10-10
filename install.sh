@@ -231,7 +231,7 @@ then
     sudo echo -e "source ~/.py_setup.sh" >> ${HOME}/.bash_profile
 fi
 
-# Installation complete
+# installation complete
 echo -e ${YELLOW}"[*] ${CYAN}Installation Completed Successfully!"
 
 # Usage Info
