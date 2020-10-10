@@ -184,7 +184,7 @@ then
                 sudo rm /usr/src/python.tgz
                 sudo rm -rf /usr/src/Python-3*
                 cd ~
-                sudo pip${PYSETENV_PYTHON_VERSION} install virtualenv
+                pip${PYSETENV_PYTHON_VERSION} install virtualenv
                     ;;
 
             N|n)
