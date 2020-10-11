@@ -96,12 +96,31 @@ then
     fi
 
     # Add Python on Debian
-    if [[ "${OS_NAME}" == *"Debian"* ]] ;
+    if [[ "${OS_NAME}" == *"Kali"* ]] ;
     then
-        add-apt-repository ppa:deadsnakes/ppa
-        apt-get update
-        apt-get install python${PYSETENV_PYTHON_VERSION}
-        apt-get autoremove -y
+        
+    fi
+    if hash python${PYSETENV_PYTHON_VERSION};
+    then
+        echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
+        echo -e ${YELLOW}"[*] "${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"${RESET}
+    
+    else
+        read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
+        case $y_n in
+            Y|y) 
+                add-apt-repository ppa:deadsnakes/ppa
+                apt-get update
+                apt-get install python${PYSETENV_PYTHON_VERSION}
+                apt-get autoremove -y
+                ;;
+            N|n) 
+                echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
+                exit ;;
+            *) 
+                echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
+                exit ;;
+        esac
     fi
     # Add Python PPA on Ubuntu
     if [[ "$OS_NAME" == *"Ubuntu"* ]];
