@@ -41,16 +41,12 @@ _pysetenv_create()
         echo -e "${RED}"[!] ERROR!! Please pass virtual environment name!
         _pysetenv_help
     else
-        echo -e "${BOLD_GREEN}"[+] "${GREEN}"Adding new virtual environment: $1"${RESET}"
+        echo -e "${BOLD_GREEN}[*] ${GREEN}Python version: ${BOLD_GREEN}${PYSETENV_PYTHON_VERSION}"
+        echo -e "${BOLD_GREEN}[+] ${GREEN}Adding new virtual environment: $1 ${RESET}"
 
-        if [ ${PYSETENV_PYTHON_VERSION} -eq 3 ];
-        then
-            ${PYSETENV_PYTHON_PATH} -m venv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
-        else
-            virtualenv -p ${PYSETENV_PYTHON_PATH}${PYSETENV_VIRTUAL_DIR_PATH}${1}
-        fi
+        python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
 
-        echo -e "${CYAN}"[*] Activate python virtual environment using this command: pysetenv ${1}"${RESET}"
+        echo -e "${BOLD_GREEN}[*] ${GREEN}Activate python virtual environment using this command: ${BOLD_GREEN}pysetenv ${1}${RESET}"
     fi
 }
 
