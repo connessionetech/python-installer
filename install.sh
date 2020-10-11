@@ -219,6 +219,7 @@ then
                     sudo rm -rf /usr/src/Python-3*
                     cd ~
                     pip${PYSETENV_PYTHON_VERSION} install virtualenv
+                    ;;
                 N|n) 
                     echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
                     exit ;;
