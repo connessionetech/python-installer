@@ -44,9 +44,25 @@ _pysetenv_create()
         echo -e "${BOLD_GREEN}[*] ${GREEN}Python version: ${BOLD_GREEN}${PYSETENV_PYTHON_VERSION}"
         echo -e "${BOLD_GREEN}[+] ${GREEN}Adding new virtual environment: $1 ${RESET}"
 
-        python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
-
-        echo -e "${BOLD_GREEN}[*] ${GREEN}Activate python virtual environment using this command: ${BOLD_GREEN}pysetenv ${1}${RESET}"
+        if [ -d $PYSETENV_VIRTUAL_DIR_PATH/$1 ];
+        # ovewrite virtual environment if it exist
+        then
+            read -p "${BOLD_YELLOW}[?] Overwrite ${1} virtual environment (${BOLD_GREEN}Y${YELLOW}/${BOLD_RED}N)${CYAN}" yes_no
+            case $yes_no in
+                Y|y) 
+                    python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
+                    echo -e "${BOLD_GREEN}[*] ${GREEN}Activate python virtual environment using this command: ${BOLD_GREEN}pysetenv ${1}${RESET}"
+                    ;;
+                N|n) echo "${BOLD_GREEN}[-] ${GREEN}Aborting environment deletion";;
+                *) echo -e "${BOLD_GREEN}[?] ${GREEN}Enter either ${BOLD_GREEN}Y/y ${GREEN}for yes or ${BOLD_RED}N/n ${GREEN} for no"${RESET}
+                    exit 1;;
+            esac
+        else
+            # create virtual environment if it does not exist
+            python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
+            echo -e "${BOLD_GREEN}[*] ${GREEN}Activate python virtual environment using this command: ${BOLD_GREEN}pysetenv ${1}${RESET}"
+        fi
+        
     fi
 }
 
@@ -61,11 +77,12 @@ _pysetenv_delete()
     else
         if [ -d ${PYSETENV_VIRTUAL_DIR_PATH}${1} ];
         then
-            read -p {BOLD_}"[?] Confirm you want to delete ${1} virtual environment ("${BOLD_GREEN}"Y/"${BOLD_RED}"N)""${CYAN}" yes_no
+            read -p "${BOLD_YELLOW}[?] Confirm you want to delete ${1} virtual environment (${BOLD_GREEN}Y${YELLOW}/${BOLD_RED}N)${CYAN}" yes_no
             case $yes_no in
                 Y|y) rm -rvf ${PYSETENV_VIRTUAL_DIR_PATH}${1};;
-                N|n) echo "[*] Aborting environment deletion";;
-                *) echo "[*] enter either Y/y for yes or N/n"
+                N|n) echo "${BOLD_GREEN}[-] ${GREEN}Aborting environment deletion";;
+                *) echo -e "${BOLD_GREEN}[?] ${GREEN}Enter either ${BOLD_GREEN}Y/y ${GREEN}for yes or ${BOLD_RED}N/n ${GREEN} for no"${RESET}
+                    exit 1;;
             esac
         else
             echo "${RED}"[!] ERROR!! No virtual environment exists byt he name: ${1}"${RESET}"
@@ -82,23 +99,6 @@ _pysetenv_list()
     do
         echo -e ${BOLD_YELLOW}"-" ${YELLOW}${v} ${RESET}
     done
-}
-
-
-# Create custom python path
-_pysetenv_custom_path()
-{
-    if [ -f "${1}" ];
-    then
-        if ["`expr $1 : '.*python\([2,3]\)'`" = "3"];
-        then
-            PYSETENV_PYTHON_PATH=3
-        else
-            PYSETENV_PYTHON_PATH=2
-        fi
-        PYSETENV_PYTHON_PATH=${1}
-        _pysetenv_create $2
-    fi
 }
 
 # Main function

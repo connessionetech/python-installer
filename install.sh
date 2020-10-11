@@ -33,64 +33,66 @@ then
     if [[ "$OS_NAME" == *"Red Hat"* ]];
     then
         # check if python is already installed
-        if hash python${PYSETENV_PYTHON_VERSION};
-        then
-            echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
-            echo -e ${YELLOW}"[*] " ${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"
-        else
-            read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
-            case $y_n in
-                Y|y)
-                    yum install gcc openssl-devel bzip2-devel sqlite-devel -y
-                    cd /usr/src
-                    case $PYSETENV_PYTHON_VERSION in
-                        "3.1")
-                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.1.5/Python-3.1.5.tgz
-                            ;;
-                        "3.2")
-                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.2.6/Python-3.2.6.tgz
-                            ;;
-                        "3.3")
-                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.3.7/Python-3.3.7.tgz
-                            ;;
-                        "3.4")
-                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.4.9/Python-3.4.9.tgz
-                            ;;
-                        "3.5")
-                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.5.9/Python-3.5.9.tgz
-                            ;;
-                        "3.6")
-                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.6.9/Python-3.6.9.tgz
-                            ;;
-                        "3.7")
-                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tgz
-                            ;;
-                        "3.8")
-                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.8.6/Python-3.8.6.tgz
-                            ;;
-                        "3.9")
-                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.9.0/Python-3.9.0.tgz
-                            ;;
-                        *) echo python version not found
-                    esac
-                    tar xzf python.tgz
-                    cd Python-3*
-                    sudo ./configure --enable-optimizations
-                    sudo make altinstall
-                    sudo rm /usr/src/python.tgz
-                    sudo rm -rf /usr/src/Python-3*
-                     ;;
+    if hash python${PYSETENV_PYTHON_VERSION} ;
+    then
+        echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
+        echo -e ${YELLOW}"[*] " ${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"
+    else
+        read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
+        case $y_n in
+            Y|y)
+                sudo yum install gcc openssl-devel bzip2-devel sqlite-devel -y
+                cd /usr/src
+                case $PYSETENV_PYTHON_VERSION in
+                    "3.1")
+                        curl -o python.tgz https://www.python.org/ftp/python/3.1.5/Python-3.1.5.tgz
+                        ;;
+                    "3.2")
+                        curl -o python.tgz https://www.python.org/ftp/python/3.2.6/Python-3.2.6.tgz
+                        ;;
+                    "3.3")
+                        curl -o python.tgz https://www.python.org/ftp/python/3.3.7/Python-3.3.7.tgz
+                        ;;
+                    "3.4")
+                        curl -o python.tgz https://www.python.org/ftp/python/3.4.9/Python-3.4.9.tgz
+                        ;;
+                    "3.5")
+                        curl -o python.tgz https://www.python.org/ftp/python/3.5.9/Python-3.5.9.tgz
+                        ;;
+                    "3.6")
+                        sudo curl -o python.tgz https://www.python.org/ftp/python/3.6.9/Python-3.6.9.tgz
+                        ;;
+                    "3.7")
+                        curl -o python.tgz https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tgz
+                        ;;
+                    "3.8")
+                        curl -o python.tgz https://www.python.org/ftp/python/3.8.6/Python-3.8.6.tgz
+                        ;;
+                    "3.9")
+                        curl -o python.tgz https://www.python.org/ftp/python/3.9.0/Python-3.9.0.tgz
+                        ;;
+                    *) echo python version not found
+                esac
+                sudo tar xzf python.tgz
+                cd Python-3*
+                sudo ./configure --enable-optimizations
+                sudo make altinstall
+                sudo rm /usr/src/python.tgz
+                sudo rm -rf /usr/src/Python-3*
+                cd ~
+                pip${PYSETENV_PYTHON_VERSION} install virtualenv --user
+                    ;;
 
-                N|n)
-                    echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
-                    exit 1;;
+            N|n)
+                echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
+                exit 1;;
 
-                *)
-                    echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
-                    exit 1;;
+            *)
+                echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
+                exit 1;;
 
-            esac
-        fi
+        esac
+    fi
     fi
 
     # Add Python on Debian
@@ -137,7 +139,7 @@ then
     echo -e ${YELLOW}"[*] ${GREEN}Path to virtual environment directory:${BOLD_GREEN}" ${PYSETENV_VIRTUAL_DIR_PATH}${RESET}
     echo -e ${YELLOW}"[*] ${GREEN}Python Version On Config.ini:${BOLD_GREEN}" ${PYSETENV_PYTHON_VERSION}${RESET}
 
-    if hash python${PYSETENV_PYTHON_VERSION};
+    if hash python${PYSETENV_PYTHON_VERSION} ;
     then
         echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
         echo -e ${YELLOW}"[*] " ${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"
@@ -183,10 +185,8 @@ then
                 sudo make altinstall
                 sudo rm /usr/src/python.tgz
                 sudo rm -rf /usr/src/Python-3*
-                export PATH=/usr/local/bin/python${PYSETENV_PYTHON_VERSION}:$PATH
                 cd ~
                 pip${PYSETENV_PYTHON_VERSION} install virtualenv --user
-                ln virtualenv /usr/local/bin/virtualenv
                     ;;
 
             N|n)
@@ -206,9 +206,11 @@ fi
 
 if [ -f ${HOME}/.py_setup.sh ];
 then
-    echo -e ${YELLOW}"[*] "${BOLD_GREEN}"pysetenv already installed"
-    echo -e ${YELLOW}"***********************************************************"${RESET}
-    exit 1
+    # echo -e ${YELLOW}"[*] "${BOLD_GREEN}"pysetenv already installed"
+    # echo -e ${YELLOW}"***********************************************************"${RESET}
+    # exit 1
+    sudo rm -rf ${HOME}/.py_setup.sh
+    sudo rm -rf ${HOME}/.config.ini
 fi
 
 echo -e ${YELLOW}"[+] ${CYAN}Creating directory to hold all Python virtual environments"${RESET}
@@ -222,25 +224,29 @@ if [ -e "${HOME}/.zshrc" ];
 then
     echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.zshrc"${RESET}
     echo "source ~/.py_setup.sh" >> ${HOME}/.zshrc
+    . ${HOME}/.zshrc
 
 elif [ -e "${HOME}/.bashrc" ];
 then
     echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bashrc"${RESET}
     echo -e "source ~/.py_setup.sh" >> ${HOME}/.bashrc
+    . ${HOME}/.bashrc
 
 elif [ -e "${HOME}/.bash_profile" ];
 then
     echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bash_profile"${RESET}
     sudo echo -e "source ~/.py_setup.sh" >> ${HOME}/.bash_profile
+    . ${HOME}/.bash_profile
+
 fi
 
 # installation complete
 echo -e ${YELLOW}"[*] ${CYAN}Installation Completed Successfully!"
 
 # Usage Info
-echo -e ${GREEN} "Type: ${BOLD_GREEN}source ~/.bashrc ${CYAN}to activate pysetenv or open a new terminal and start using pysetenv"
-echo -e ${GREEN} "Usage: ${BOLD_GREEN}pysetenv --new VIRTUAL_ENVIRONMENT_NAME ${CYAN}to create new virtual environment"
-echo -e ${GREEN} "Usage: ${BOLD_GREEN}pysetenv VIRTUAL_ENVIRONMENT_NAME ${CYAN}to activate the new virtual environment"
-echo -e ${YELLOW}"***********************************************************"${RESET}
+# echo -e "${GREEN} Type: ${BOLD_GREEN}source ~/.bashrc ${CYAN}to activate pysetenv or open a new terminal and start using pysetenv"
+echo -e "${GREEN} Usage: ${BOLD_GREEN}pysetenv --new VIRTUAL_ENVIRONMENT_NAME ${CYAN}to create new virtual environment"
+echo -e "${GREEN} Usage: ${BOLD_GREEN}pysetenv VIRTUAL_ENVIRONMENT_NAME ${CYAN}to activate the new virtual environment"
+echo -e "${YELLOW}***********************************************************${RESET}"
 echo ""
 echo ""
