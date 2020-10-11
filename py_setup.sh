@@ -47,8 +47,9 @@ _pysetenv_create()
         if [ -d $PYSETENV_VIRTUAL_DIR_PATH/$1 ];
         # ovewrite virtual environment if it exist
         then
-            echo -e "${YELLOW}"
+            echo -e ${YELLOW}
             read -p "[?] Overwrite ${1} virtual environment (Y / N)" yes_no
+            echo -e $YELLOW
             case $yes_no in
                 Y|y) 
                     python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
