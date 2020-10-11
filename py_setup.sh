@@ -49,15 +49,16 @@ _pysetenv_create()
         then
             echo -e ${YELLOW}
             read -p "[?] Overwrite ${1} virtual environment (Y / N)" yes_no
-            echo -e $YELLOW
+            echo -e ${YELLOW}
             case $yes_no in
                 Y|y) 
                     python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
                     echo -e "${BOLD_GREEN}[*] ${GREEN}Activate python virtual environment using this command: ${BOLD_GREEN}pysetenv ${1}${RESET}"
                     ;;
-                N|n) echo "${BOLD_GREEN}[-] ${GREEN}Aborting environment creation!!";;
+                N|n) echo -e "${BOLD_GREEN}[-] ${GREEN}Aborting environment creation!!"
+                    exit 1 ;;
                 *) echo -e "${BOLD_GREEN}[?] ${GREEN}Enter either ${BOLD_GREEN}Y/y ${GREEN}for yes or ${BOLD_RED}N/n ${GREEN} for no"${RESET}
-                    exit 1;;
+                    exit 1 ;;
             esac
         else
             # create virtual environment if it does not exist
