@@ -104,12 +104,14 @@ then
             echo -e ${YELLOW}"[*] "${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"${RESET}
         
         else
+            echo -e ${YELLOW}
             read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
+            echo -e ${RESET}
             case $y_n in
                 Y|y) 
-                    add-apt-repository ppa:deadsnakes/ppa
+                    add-apt-repository ppa:deadsnakes/ppa -y
                     apt-get update
-                    apt-get install python${PYSETENV_PYTHON_VERSION}
+                    apt-get install python${PYSETENV_PYTHON_VERSION} -y
                     apt-get autoremove -y
                     ;;
                 N|n) 
