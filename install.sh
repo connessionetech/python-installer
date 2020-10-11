@@ -109,10 +109,10 @@ then
             echo -e ${RESET}
             case $y_n in
                 Y|y) 
-                    sudo apt update && sudo apt upgrade
-                    sudo apt-get install wget build-essential checkinstall
+                    sudo apt update && sudo apt upgrade -y
+                    sudo apt-get install wget build-essential checkinstall -y
                     sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev \
-                        libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev
+                        libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev -y
                     cd /usr/src
                     case $PYSETENV_PYTHON_VERSION in
                         "3.1")
@@ -176,10 +176,10 @@ then
             read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
             case $y_n in
                 Y|y) 
-                    sudo apt update && sudo apt upgrade
-                    sudo apt-get install wget build-essential checkinstall
+                    sudo apt update && sudo apt upgrade -y
+                    sudo apt-get install wget build-essential checkinstall -y
                     sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev \
-                        libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev
+                        libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev -y
                     cd /usr/src
                     case $PYSETENV_PYTHON_VERSION in
                         "3.1")
