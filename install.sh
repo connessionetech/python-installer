@@ -85,11 +85,11 @@ then
 
             N|n)
                 echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
-                exit 1;;
+                exit ;;
 
             *)
                 echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
-                exit 1;;
+                exit ;;
 
         esac
     fi
@@ -121,10 +121,10 @@ then
                     apt-get autoremove -y ;;
                 N|n) 
                     echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
-                    exit 1;;
+                    exit ;;
                 *) 
                     echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
-                    exit 1;;
+                    exit ;;
             esac
         fi
     fi
@@ -191,17 +191,17 @@ then
 
             N|n)
                 echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
-                exit 1;;
+                exit ;;
 
             *)
                 echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
-                exit 1;;
+                exit ;;
 
         esac
     fi
 else
     echo -e ${YELLOW}"Exiting ! ! !"${RESET}
-    exit 1
+    exit
 fi
 
 if [ -f ${HOME}/.py_setup.sh ];

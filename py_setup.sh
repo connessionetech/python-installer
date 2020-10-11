@@ -56,9 +56,9 @@ _pysetenv_create()
                     echo -e "${BOLD_GREEN}[*] ${GREEN}Activate python virtual environment using this command: ${BOLD_GREEN}pysetenv ${1}${RESET}"
                     ;;
                 N|n) echo -e "${BOLD_GREEN}[-] ${GREEN}Aborting environment creation!!"
-                    exit 1 ;;
+                    exit ;;
                 *) echo -e "${BOLD_GREEN}[?] ${GREEN}Enter either ${BOLD_GREEN}Y/y ${GREEN}for yes or ${BOLD_RED}N/n ${GREEN} for no"${RESET}
-                    exit 1 ;;
+                    exit ;;
             esac
         else
             # create virtual environment if it does not exist
@@ -86,7 +86,7 @@ _pysetenv_delete()
                 Y|y) rm -rvf ${PYSETENV_VIRTUAL_DIR_PATH}${1};;
                 N|n) echo "${BOLD_GREEN}[-] ${GREEN}Aborting environment deletion";;
                 *) echo -e "${BOLD_GREEN}[?] ${GREEN}Enter either ${BOLD_GREEN}Y/y ${GREEN}for yes or ${BOLD_RED}N/n ${GREEN} for no"${RESET}
-                    exit 1 ;;
+                    exit ;;
             esac
         else
             echo "${RED}"[!] ERROR!! No virtual environment exists byt he name: ${1}"${RESET}"
