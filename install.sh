@@ -224,19 +224,16 @@ if [ -e "${HOME}/.zshrc" ];
 then
     echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.zshrc"${RESET}
     echo "source ~/.py_setup.sh" >> ${HOME}/.zshrc
-    . ${HOME}/.zshrc
 
 elif [ -e "${HOME}/.bashrc" ];
 then
     echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bashrc"${RESET}
     echo -e "source ~/.py_setup.sh" >> ${HOME}/.bashrc
-    . ${HOME}/.bashrc
 
 elif [ -e "${HOME}/.bash_profile" ];
 then
     echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bash_profile"${RESET}
     sudo echo -e "source ~/.py_setup.sh" >> ${HOME}/.bash_profile
-    . ${HOME}/.bash_profile
 
 fi
 
@@ -244,7 +241,7 @@ fi
 echo -e ${YELLOW}"[*] ${CYAN}Installation Completed Successfully!"
 
 # Usage Info
-# echo -e "${GREEN} Type: ${BOLD_GREEN}source ~/.bashrc ${CYAN}to activate pysetenv or open a new terminal and start using pysetenv"
+echo -e "${GREEN} Type: ${BOLD_GREEN}source ~/.bashrc ${CYAN}to activate pysetenv or open a new terminal and start using pysetenv"
 echo -e "${GREEN} Usage: ${BOLD_GREEN}pysetenv --new VIRTUAL_ENVIRONMENT_NAME ${CYAN}to create new virtual environment"
 echo -e "${GREEN} Usage: ${BOLD_GREEN}pysetenv VIRTUAL_ENVIRONMENT_NAME ${CYAN}to activate the new virtual environment"
 echo -e "${YELLOW}***********************************************************${RESET}"

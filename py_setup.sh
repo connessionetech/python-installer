@@ -47,13 +47,14 @@ _pysetenv_create()
         if [ -d $PYSETENV_VIRTUAL_DIR_PATH/$1 ];
         # ovewrite virtual environment if it exist
         then
-            read -p "${BOLD_YELLOW}[?] Overwrite ${1} virtual environment (${BOLD_GREEN}Y${YELLOW}/${BOLD_RED}N)${CYAN}" yes_no
+            echo -e "${YELLOW}"
+            read -p "[?] Overwrite ${1} virtual environment (Y / N)" yes_no
             case $yes_no in
                 Y|y) 
                     python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
                     echo -e "${BOLD_GREEN}[*] ${GREEN}Activate python virtual environment using this command: ${BOLD_GREEN}pysetenv ${1}${RESET}"
                     ;;
-                N|n) echo "${BOLD_GREEN}[-] ${GREEN}Aborting environment deletion";;
+                N|n) echo "${BOLD_GREEN}[-] ${GREEN}Aborting environment creation!!";;
                 *) echo -e "${BOLD_GREEN}[?] ${GREEN}Enter either ${BOLD_GREEN}Y/y ${GREEN}for yes or ${BOLD_RED}N/n ${GREEN} for no"${RESET}
                     exit 1;;
             esac
@@ -77,7 +78,8 @@ _pysetenv_delete()
     else
         if [ -d ${PYSETENV_VIRTUAL_DIR_PATH}${1} ];
         then
-            read -p "${BOLD_YELLOW}[?] Confirm you want to delete ${1} virtual environment (${BOLD_GREEN}Y${YELLOW}/${BOLD_RED}N)${CYAN}" yes_no
+            echo -e "${YELLOW}"
+            read -p "[?] Confirm you want to delete ${1} virtual environment (Y / N)" yes_no
             case $yes_no in
                 Y|y) rm -rvf ${PYSETENV_VIRTUAL_DIR_PATH}${1};;
                 N|n) echo "${BOLD_GREEN}[-] ${GREEN}Aborting environment deletion";;
