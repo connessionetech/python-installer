@@ -109,10 +109,49 @@ then
             echo -e ${RESET}
             case $y_n in
                 Y|y) 
-                    add-apt-repository ppa:deadsnakes/ppa -y
-                    apt-get update
-                    apt-get install python${PYSETENV_PYTHON_VERSION} -y
-                    apt-get autoremove -y
+                    sudo apt update && sudo apt upgrade
+                    sudo apt-get install wget build-essential checkinstall
+                    sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev \
+                        libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev
+                    cd /usr/src
+                    case $PYSETENV_PYTHON_VERSION in
+                        "3.1")
+                            curl -o python.tgz https://www.python.org/ftp/python/3.1.5/Python-3.1.5.tgz
+                            ;;
+                        "3.2")
+                            curl -o python.tgz https://www.python.org/ftp/python/3.2.6/Python-3.2.6.tgz
+                            ;;
+                        "3.3")
+                            curl -o python.tgz https://www.python.org/ftp/python/3.3.7/Python-3.3.7.tgz
+                            ;;
+                        "3.4")
+                            curl -o python.tgz https://www.python.org/ftp/python/3.4.9/Python-3.4.9.tgz
+                            ;;
+                        "3.5")
+                            curl -o python.tgz https://www.python.org/ftp/python/3.5.9/Python-3.5.9.tgz
+                            ;;
+                        "3.6")
+                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.6.9/Python-3.6.9.tgz
+                            ;;
+                        "3.7")
+                            curl -o python.tgz https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tgz
+                            ;;
+                        "3.8")
+                            curl -o python.tgz https://www.python.org/ftp/python/3.8.6/Python-3.8.6.tgz
+                            ;;
+                        "3.9")
+                            curl -o python.tgz https://www.python.org/ftp/python/3.9.0/Python-3.9.0.tgz
+                            ;;
+                        *) echo python version not found
+                    esac
+                    sudo tar xzf python.tgz
+                    cd Python-3*
+                    sudo ./configure --enable-optimizations
+                    sudo make altinstall
+                    sudo rm /usr/src/python.tgz
+                    sudo rm -rf /usr/src/Python-3*
+                    cd ~
+                    pip${PYSETENV_PYTHON_VERSION} install virtualenv
                     ;;
                 N|n) 
                     echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
@@ -137,10 +176,49 @@ then
             read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
             case $y_n in
                 Y|y) 
-                    add-apt-repository ppa:fkrull/deadsnakes
-                    apt-get update
-                    apt-get install python${PYSETENV_PYTHON_VERSION}
-                    apt-get autoremove -y ;;
+                    sudo apt update && sudo apt upgrade
+                    sudo apt-get install wget build-essential checkinstall
+                    sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev \
+                        libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev
+                    cd /usr/src
+                    case $PYSETENV_PYTHON_VERSION in
+                        "3.1")
+                            curl -o python.tgz https://www.python.org/ftp/python/3.1.5/Python-3.1.5.tgz
+                            ;;
+                        "3.2")
+                            curl -o python.tgz https://www.python.org/ftp/python/3.2.6/Python-3.2.6.tgz
+                            ;;
+                        "3.3")
+                            curl -o python.tgz https://www.python.org/ftp/python/3.3.7/Python-3.3.7.tgz
+                            ;;
+                        "3.4")
+                            curl -o python.tgz https://www.python.org/ftp/python/3.4.9/Python-3.4.9.tgz
+                            ;;
+                        "3.5")
+                            curl -o python.tgz https://www.python.org/ftp/python/3.5.9/Python-3.5.9.tgz
+                            ;;
+                        "3.6")
+                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.6.9/Python-3.6.9.tgz
+                            ;;
+                        "3.7")
+                            curl -o python.tgz https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tgz
+                            ;;
+                        "3.8")
+                            curl -o python.tgz https://www.python.org/ftp/python/3.8.6/Python-3.8.6.tgz
+                            ;;
+                        "3.9")
+                            curl -o python.tgz https://www.python.org/ftp/python/3.9.0/Python-3.9.0.tgz
+                            ;;
+                        *) echo python version not found
+                    esac
+                    sudo tar xzf python.tgz
+                    cd Python-3*
+                    sudo ./configure --enable-optimizations
+                    sudo make altinstall
+                    sudo rm /usr/src/python.tgz
+                    sudo rm -rf /usr/src/Python-3*
+                    cd ~
+                    pip${PYSETENV_PYTHON_VERSION} install virtualenv
                 N|n) 
                     echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
                     exit ;;
