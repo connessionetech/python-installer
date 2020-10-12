@@ -52,7 +52,7 @@
 |---|---|---|---|---|
 | Ubuntu 18.x  | 3.6,3.7 |   |   |   |
 | Ubuntu 16.x  | 3.6  |   |   |   |
-| CentOs 6.x |   |   |   |   |
+| CentOs 6.x | 3.6 |   |   |   |
 | CentOs 6.7 |   |   |   |   |
 | Amazon linux |   |   |   |   |
 | Red Hat 7.x |   |   |   |   |
