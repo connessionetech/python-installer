@@ -4,7 +4,7 @@
     This is a script used to setup and manage python3 projects & virtual environments
 </p>
 <p>
-    Works on popular linux OS Debian, Ubuntu, Redhat, CentOs, Fedora, Kali
+    Works on popular linux OS Debian, Ubuntu, Redhat, CentOs, Fedora
 </p>
 <p>
     It provides the following features:
