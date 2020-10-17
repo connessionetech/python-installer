@@ -152,6 +152,9 @@ then
                     sudo rm /usr/src/python.tgz
                     sudo rm -rf /usr/src/Python-3*
                     cd ~
+                    echo "PYSETENV_VIRTUAL_DIR_PATH=~/virtualenvs/" > ~/.config.ini 
+                    echo "PYSETENV_PYTHON_VERSION=${PYSETENV_PYTHON_VERSION}" >> ~/.config.ini 
+                    echo "PYSETENV_PYTHON_PATH=$(which python${PYSETENV_PYTHON_VERSION})" >> ~/.config.ini 
                     pip${PYSETENV_PYTHON_VERSION} install virtualenv
                     ;;
                 N|n) 
