@@ -55,4 +55,4 @@
 | CentOs 6.x | 3.6 |   |   |   |
 | CentOs 6.7 |   |   |   |   |
 | Amazon linux |   |   |   |   |
-| Red Hat 7.x | 3.6, 3.7, 3.8 |   |   |   |
+| Red Hat 7.x | 3.6, 3.7, 3.8, 3.9.0 |   |   |   |
