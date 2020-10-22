@@ -96,7 +96,7 @@ then
     fi
 
     # Add Python on Debian
-    if [[ "${OS_NAME}" == *"debian"* ]] ;
+    if [[ "${OS_NAME}" == *"Debian"* ]] ;
     then
         if hash python${PYSETENV_PYTHON_VERSION};
         then
