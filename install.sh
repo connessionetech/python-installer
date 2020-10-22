@@ -153,7 +153,7 @@ then
                     sudo rm /usr/src/python.tgz
                     sudo rm -rf /usr/src/Python-3*
                     cd ~
-                    sudo pip${PYSETENV_PYTHON_VERSION} install virtualenv --user
+                    sudo python${PYSETENV_PYTHON_VERSION} -m pip${PYSETENV_PYTHON_VERSION} install virtualenv --user
                         ;;
                 N|n) 
                     echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
