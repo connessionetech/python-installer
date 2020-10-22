@@ -112,34 +112,6 @@ then
                     sudo apt-get install -y make build-essential libssl-dev zlib1g  dev
                     sudo apt-get install -y libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm
                     sudo apt-get install -y libncurses5-dev  libncursesw5-dev xz-utils tk-dev
-                    
-                N|n) 
-                    echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
-                    exit 1;;
-                *) 
-                    echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
-                    exit 1;;
-            esac
-        fi 
-    fi
-    
-
-    # Add Python PPA on Ubuntu
-    if [[ "$OS_NAME" == *"Ubuntu"* ]];
-    then     
-        if hash python${PYSETENV_PYTHON_VERSION};
-        then
-            echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
-            echo -e ${YELLOW}"[*] "${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"${RESET}
-        
-        else
-            read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
-            case $y_n in
-                Y|y) 
-                    sudo add-apt-repository ppa:fkrull/deadsnakes -y
-                    sudo apt-get update
-                    sudo apt-get install -y python${PYSETENV_PYTHON_VERSION}
-                    sudo apt-get autoremove -y
                     case $PYSETENV_PYTHON_VERSION in
                         "3.1")
                             sudo curl -o python.tgz https://www.python.org/ftp/python/3.1.5/Python-3.1.5.tgz
@@ -170,7 +142,34 @@ then
                             ;;
                         *) echo python version not found
                     esac
-                     ;;
+                    ;;
+                N|n) 
+                    echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
+                    exit 1;;
+                *) 
+                    echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
+                    exit 1;;
+            esac
+        fi 
+    fi
+    
+
+    # Add Python PPA on Ubuntu
+    if [[ "$OS_NAME" == *"Ubuntu"* ]];
+    then     
+        if hash python${PYSETENV_PYTHON_VERSION};
+        then
+            echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
+            echo -e ${YELLOW}"[*] "${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"${RESET}
+        
+        else
+            read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
+            case $y_n in
+                Y|y) 
+                    sudo add-apt-repository ppa:fkrull/deadsnakes -y
+                    sudo apt-get update
+                    sudo apt-get install -y python${PYSETENV_PYTHON_VERSION}
+                    sudo apt-get autoremove -y ;;
                 N|n) 
                     echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
                     exit 1;;
