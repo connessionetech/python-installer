@@ -140,9 +140,19 @@ then
                         "3.9")
                             sudo curl -o python.tgz https://www.python.org/ftp/python/3.9.0/Python-3.9.0.tgz
                             ;;
+
+
                         *) echo python version not found
                     esac
-                    ;;
+                    sudo tar xzf python.tgz
+                    cd Python-3*
+                    sudo ./configure --enable-optimizations
+                    sudo make altinstall
+                    sudo rm /usr/src/python.tgz
+                    sudo rm -rf /usr/src/Python-3*
+                    cd ~
+                    pip${PYSETENV_PYTHON_VERSION} install virtualenv --user
+                        ;;
                 N|n) 
                     echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
                     exit 1;;
