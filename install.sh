@@ -109,10 +109,10 @@ then
             echo -e ${RESET}
             case $y_n in
                 Y|y) 
-                    add-apt-repository ppa:fkrull/deadsnakes
-                    apt-get update
-                    apt-get install python${PYSETENV_PYTHON_VERSION}
-                    apt-get autoremove -y ;;
+                    sudo apt-get install -y make build-essential libssl-dev zlib1g  dev
+                    sudo apt-get install -y libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm
+                    sudo apt-get install -y libncurses5-dev  libncursesw5-dev xz-utils tk-dev
+                    
                 N|n) 
                     echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
                     exit 1;;
@@ -136,10 +136,41 @@ then
             read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
             case $y_n in
                 Y|y) 
-                    add-apt-repository ppa:fkrull/deadsnakes
-                    apt-get update
-                    apt-get install python${PYSETENV_PYTHON_VERSION}
-                    apt-get autoremove -y ;;
+                    sudo add-apt-repository ppa:fkrull/deadsnakes -y
+                    sudo apt-get update
+                    sudo apt-get install -y python${PYSETENV_PYTHON_VERSION}
+                    sudo apt-get autoremove -y
+                    case $PYSETENV_PYTHON_VERSION in
+                        "3.1")
+                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.1.5/Python-3.1.5.tgz
+                            ;;
+                        "3.2")
+                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.2.6/Python-3.2.6.tgz
+                            ;;
+                        "3.3")
+                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.3.7/Python-3.3.7.tgz
+                            ;;
+                        "3.4")
+                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.4.9/Python-3.4.9.tgz
+                            ;;
+                        "3.5")
+                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.5.9/Python-3.5.9.tgz
+                            ;;
+                        "3.6")
+                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.6.9/Python-3.6.9.tgz
+                            ;;
+                        "3.7")
+                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tgz
+                            ;;
+                        "3.8")
+                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.8.6/Python-3.8.6.tgz
+                            ;;
+                        "3.9")
+                            sudo curl -o python.tgz https://www.python.org/ftp/python/3.9.0/Python-3.9.0.tgz
+                            ;;
+                        *) echo python version not found
+                    esac
+                     ;;
                 N|n) 
                     echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
                     exit 1;;
