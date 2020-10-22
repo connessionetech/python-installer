@@ -50,9 +50,9 @@
 
 | OS  | Python Versions  | Comment/note  |   |   |
 |---|---|---|---|---|
-| Ubuntu 18.x  | 3.6,3.7 |   |   |   |
+| Ubuntu 20.x  | |   |   |   |
+| Ubuntu 18.x  | 3.6,3.7, 3.8 |   |   |   |
 | Ubuntu 16.x  | 3.6 |   |   |   |
-| CentOs 6.x | 3.6 |   |   |   |
-| CentOs 6.7 |   |   |   |   |
-| Amazon linux |   |   |   |   |
+| CentOs 6.x | x |   |   |   |
+| CentOs 7.x | x |   |   |   |
 | Red Hat 7.x | 3.6, 3.7, 3.8, 3.9.0 |   |   |   |
