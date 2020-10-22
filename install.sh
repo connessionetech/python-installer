@@ -107,7 +107,19 @@ then
             echo -e ${YELLOW}
             read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
             echo -e ${RESET}
-            echo debian distro
+            case $y_n in
+                Y|y) 
+                    add-apt-repository ppa:fkrull/deadsnakes
+                    apt-get update
+                    apt-get install python${PYSETENV_PYTHON_VERSION}
+                    apt-get autoremove -y ;;
+                N|n) 
+                    echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
+                    exit 1;;
+                *) 
+                    echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
+                    exit 1;;
+            esac
         fi 
     fi
     
