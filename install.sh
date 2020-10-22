@@ -112,6 +112,8 @@ then
                     sudo apt-get install -y make build-essential libssl-dev zlib1g  dev
                     sudo apt-get install -y libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm
                     sudo apt-get install -y libncurses5-dev  libncursesw5-dev xz-utils tk-dev
+                    cd /usr/src
+                                 
                     case $PYSETENV_PYTHON_VERSION in
                         "3.1")
                             sudo curl -o python.tgz https://www.python.org/ftp/python/3.1.5/Python-3.1.5.tgz
