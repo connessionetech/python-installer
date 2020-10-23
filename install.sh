@@ -247,8 +247,8 @@ _install(){
                     sudo apt-get update
                     sudo apt-get install -y python${PYSETENV_PYTHON_VERSION}
                     sudo apt-get autoremove -y
-                    python${PYSETENV_PYTHON_VERSION} -m pip install --upgrade pip
-                    python${PYSETENV_PYTHON_VERSION} -m pip install virtualenv
+                    sudo apt install python${PYSETENV_PYTHON_VERSION}-dev
+                    sudo apt install python${PYSETENV_PYTHON_VERSION}-venv
                     _add_paths ;;
                 N|n) 
                     echo -e ${BOLD_RED}"[!] ${RED}Aborting ! ! !"${RESET}
