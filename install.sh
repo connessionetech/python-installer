@@ -27,41 +27,47 @@ _add_paths(){
         sudo rm -rf ${HOME}/.config.ini
     fi
 
-    echo -e ${YELLOW}"[+] ${CYAN}Creating directory to hold all Python virtual environments"${RESET}
-    mkdir -p $HOME/virtualenvs
-    echo -e ${YELLOW}"[*] ${CYAN}Downloading pysetenv"${PURPLE}
-
-    sudo curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/py_setup.sh -o ${HOME}/.py_setup.sh
-    # curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/config.ini -o ${HOME}/.config.ini
-    sudo cp ./config.ini ${HOME}/.config.ini
-
-    if [ -e "${HOME}/.zshrc" ];
+    if hash python${PYSETENV_PYTHON_VERSION};
     then
-        echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.zshrc"${RESET}
-        echo "source ~/.py_setup.sh" >> ${HOME}/.zshrc
+        echo -e ${YELLOW}"[+] ${CYAN}Creating directory to hold all Python virtual environments"${RESET}
+        mkdir -p $HOME/virtualenvs
+        echo -e ${YELLOW}"[*] ${CYAN}Downloading pysetenv"${PURPLE}
 
-    elif [ -e "${HOME}/.bashrc" ];
-    then
-        echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bashrc"${RESET}
-        echo -e "source ~/.py_setup.sh" >> ${HOME}/.bashrc
+        sudo curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/py_setup.sh -o ${HOME}/.py_setup.sh
+        # curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/config.ini -o ${HOME}/.config.ini
+        sudo cp ./config.ini ${HOME}/.config.ini
 
-    elif [ -e "${HOME}/.bash_profile" ];
-    then
-        echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bash_profile"${RESET}
-        sudo echo -e "source ~/.py_setup.sh" >> ${HOME}/.bash_profile
+        if [ -e "${HOME}/.zshrc" ];
+        then
+            echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.zshrc"${RESET}
+            echo "source ~/.py_setup.sh" >> ${HOME}/.zshrc
 
+        elif [ -e "${HOME}/.bashrc" ];
+        then
+            echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bashrc"${RESET}
+            echo -e "source ~/.py_setup.sh" >> ${HOME}/.bashrc
+
+        elif [ -e "${HOME}/.bash_profile" ];
+        then
+            echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bash_profile"${RESET}
+            sudo echo -e "source ~/.py_setup.sh" >> ${HOME}/.bash_profile
+
+        fi
+
+        # installation complete
+        echo -e ${YELLOW}"[*] ${CYAN}Installation Completed Successfully!"
+
+        # Usage Info
+        echo -e "${GREEN} Type: ${BOLD_GREEN}source ~/.bashrc ${CYAN}to activate pysetenv or open a new terminal and start using pysetenv"
+        echo -e "${GREEN} Usage: ${BOLD_GREEN}pysetenv --new VIRTUAL_ENVIRONMENT_NAME ${CYAN}to create new virtual environment"
+        echo -e "${GREEN} Usage: ${BOLD_GREEN}pysetenv VIRTUAL_ENVIRONMENT_NAME ${CYAN}to activate the new virtual environment"
+        echo -e "${YELLOW}***********************************************************${RESET}"
+        echo ""
+        echo ""
+    else
+        # install python if does not exist
+        _install
     fi
-
-    # installation complete
-    echo -e ${YELLOW}"[*] ${CYAN}Installation Completed Successfully!"
-
-    # Usage Info
-    echo -e "${GREEN} Type: ${BOLD_GREEN}source ~/.bashrc ${CYAN}to activate pysetenv or open a new terminal and start using pysetenv"
-    echo -e "${GREEN} Usage: ${BOLD_GREEN}pysetenv --new VIRTUAL_ENVIRONMENT_NAME ${CYAN}to create new virtual environment"
-    echo -e "${GREEN} Usage: ${BOLD_GREEN}pysetenv VIRTUAL_ENVIRONMENT_NAME ${CYAN}to activate the new virtual environment"
-    echo -e "${YELLOW}***********************************************************${RESET}"
-    echo ""
-    echo ""
 }
 
 
