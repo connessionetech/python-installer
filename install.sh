@@ -46,17 +46,17 @@ _add_paths(){
 
         if [ -e "${HOME}/.zshrc" ];
         then
-            echo -e ${BOLD_GREEN}"[+] ${CYAN}Adding ${GREEN}~/.zshrc"${RESET}
+            echo -e ${BOLD_GREEN}"[+] ${CYAN}Adding py_setup to ${GREEN}~/.zshrc"${RESET}
             echo "source ~/.py_setup.sh" >> ${HOME}/.zshrc
 
         elif [ -e "${HOME}/.bashrc" ];
         then
-            echo -e ${BOLD_GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bashrc"${RESET}
+            echo -e ${BOLD_GREEN}"[+] ${CYAN}Adding py_setup to ${GREEN}~/.bashrc"${RESET}
             echo -e "source ~/.py_setup.sh" >> ${HOME}/.bashrc
 
         elif [ -e "${HOME}/.bash_profile" ];
         then
-            echo -e ${BOLD_GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bash_profile"${RESET}
+            echo -e ${BOLD_GREEN}"[+] ${CYAN}Adding py_setup to ${GREEN}~/.bash_profile"${RESET}
             sudo echo -e "source ~/.py_setup.sh" >> ${HOME}/.bash_profile
 
         fi
