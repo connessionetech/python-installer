@@ -35,7 +35,7 @@ _add_paths(){
 
         sudo curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/py_setup.sh -o ${HOME}/.py_setup.sh
         # curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/config.ini -o ${HOME}/.config.ini
-        sudo cp ./config.ini ${HOME}/.config.ini
+        sudo cp config.ini ${HOME}/.config.ini
 
         if [ -e "${HOME}/.zshrc" ];
         then
@@ -161,9 +161,10 @@ _install(){
             echo -e ${RESET}
             case $y_n in
                 Y|y) 
-                    sudo apt-get install -y make build-essential libssl-dev zlib1g  dev
-                    sudo apt-get install -y libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm
-                    sudo apt-get install -y libncurses5-dev  libncursesw5-dev xz-utils tk-dev
+                # make build-essential libssl-dev zlib1g-dev libbz2-dev libsqlite3-dev
+                    sudo apt-get install -y make build-essential libssl-dev zlib1g-dev
+                    sudo apt-get install -y libbz2-dev libsqlite3-dev curl
+                    # sudo apt-get install -y libncurses5-dev  libncursesw5-dev xz-utils tk-dev
                     cd /usr/src
                                 
                     case $PYSETENV_PYTHON_VERSION in
