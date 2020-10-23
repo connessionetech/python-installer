@@ -242,12 +242,13 @@ _install(){
             echo -e ${RESET}
             case $y_n in
                 Y|y) 
+                    sudo apt-get update
                     sudo add-apt-repository ppa:deadsnakes/ppa -y
                     sudo apt-get update
                     sudo apt-get install -y python${PYSETENV_PYTHON_VERSION}
                     sudo apt-get autoremove -y
                     python${PYSETENV_PYTHON_VERSION} -m pip install --upgrade pip
-                    pip${PYSETENV_PYTHON_VERSION} install virtualenv
+                    python${PYSETENV_PYTHON_VERSION} -m pip install virtualenv
                     _add_paths ;;
                 N|n) 
                     echo -e ${BOLD_RED}"[!] ${RED}Aborting ! ! !"${RESET}
