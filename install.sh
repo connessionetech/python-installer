@@ -348,7 +348,7 @@ _install(){
 
 
 # install python version specified on config.ini
-if hash python${PYSETENV_PYTHON_VERSION};
+if hash python${PYSETENV_PYTHON_VERSION} 2> /dev/null;
     then
         echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
         echo -e ${YELLOW}"[*] "${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"${RESET}
