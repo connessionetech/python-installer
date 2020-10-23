@@ -17,6 +17,7 @@ RESET="\033[0m"
 _pysetenv_help()
 {
     # Echo usage message
+    echo -e "" ${RESET}
     echo -e "${YELLOW}"Usage: pysetenv [OPTIONS] [NAME]
     echo -e "${BOLD_YELLOW}"EXAMPLE:
     echo -e "${BOLD_GREEN}"pysetenv -n foo       "${CYAN}"Create virtual environment with name foo
