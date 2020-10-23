@@ -250,8 +250,8 @@ _install(){
                     sudo apt-get install python${PYSETENV_PYTHON_VERSION}-dev -y
                     # sudo apt-get install python${PYSETENV_PYTHON_VERSION}-venv -y
                     sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-                    sudo python${PYSETENV_PYTHON_VERSION} get-pip.py
-                    sudo pip${PYSETENV_PYTHON_VERSION} install virtualenv
+                    sudo -H python${PYSETENV_PYTHON_VERSION} get-pip.py
+                    sudo -H pip${PYSETENV_PYTHON_VERSION} install virtualenv
                     sudo apt-get autoremove -y
                     sudo rm -v get-pip.py
                     _add_paths ;;
