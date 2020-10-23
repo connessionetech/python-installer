@@ -18,17 +18,6 @@ echo -e ${YELLOW}"***********************************************************"${
 # Load config.ini file
 . ./config.ini
 
-# check whether python version config.ini is available on the system
-if hash python${PYSETENV_PYTHON_VERSION};
-    then
-        echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
-        echo -e ${YELLOW}"[*] "${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"${RESET}
-        _add_paths
-    else
-        # install python if doesnot exist
-        _install
-fi
-
 
 # add virtual venv path function
 _add_paths(){
@@ -322,3 +311,15 @@ _install(){
         exit
     fi
 }
+
+
+# install python version specified on config.ini
+if hash python${PYSETENV_PYTHON_VERSION};
+    then
+        echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
+        echo -e ${YELLOW}"[*] "${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"${RESET}
+        _add_paths
+    else
+        # install python if does not exist
+        _install
+fi
