@@ -93,7 +93,7 @@ _pysetenv_delete()
                     exit ;;
             esac
         else
-            echo "${RED}"[!] ERROR!! No virtual environment exists byt he name: ${1}"${RESET}"
+            echo -e ${BOLD_RED}"[!] ${RED}ERROR!! No virtual environment exists by the name: ${BOLD_RED}${1}"${RESET}
         fi
     fi
 }
