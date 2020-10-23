@@ -246,7 +246,7 @@ _install(){
                     sudo add-apt-repository ppa:deadsnakes/ppa -y
                     sudo apt-get update
                     sudo apt-get install -y python${PYSETENV_PYTHON_VERSION}
-                    sudo apt-get install python3.8-distutils -y
+                    sudo apt-get install python${PYSETENV_PYTHON_VERSION}-distutils -y
                     sudo apt-get install python${PYSETENV_PYTHON_VERSION}-dev -y
                     # sudo apt-get install python${PYSETENV_PYTHON_VERSION}-venv -y
                     sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
