@@ -17,7 +17,7 @@ echo -e ${YELLOW}"***********************************************************"${
 
 # Load config.ini file
 . ./config.ini
-sudo cp ./config.ini ${HOME}/.config.ini
+sudo cp -v ./config.ini ${HOME}/.config.ini -y
 
 
 # add virtual venv path function
