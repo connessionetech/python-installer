@@ -248,7 +248,7 @@ _install(){
                     sudo apt-get install -y python${PYSETENV_PYTHON_VERSION}
                     sudo apt-get install python${PYSETENV_PYTHON_VERSION}-dev -y
                     # sudo apt-get install python${PYSETENV_PYTHON_VERSION}-venv -y
-                    sudo pip${PYSETENV_PYTHON_VERSION} install virtualenv -y
+                    sudo python${PYSETENV_PYTHON_VERSION} -m pip install virtualenv -y
                     sudo apt-get autoremove -y
                     _add_paths ;;
                 N|n) 
