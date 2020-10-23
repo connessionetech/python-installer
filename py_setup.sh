@@ -12,7 +12,7 @@ BOLD_YELLOW='\033[1;33m'
 RESET="\033[0m"
 
 # Load config.ini file
-. ${HOME}/.config.ini
+. ./.config.ini
 
 _pysetenv_help()
 {
@@ -29,8 +29,8 @@ _pysetenv_help()
     echo -d, --delete NAME           Delete existing Python Virtual Environment.
     # echo -e -p, --python PATH        Python binary path.
     # echo -o, --open                  Load project to the activated virtual environment "${RESET}"
-    # echo -e "${BOLD_YELLOW}"Load existing project:
-    # echo -e "${BLUE}""-o, --open /path/to/project -e NAME Load existing project to""${RESET}"
+    echo -e "${BOLD_YELLOW}"Load existing project:
+    echo -e "${BLUE}""-o, --open /path/to/project -e NAME Load existing project to""${RESET}"
 }
 
 # Creates new virtual environment if ran with -n | --new flag
@@ -52,7 +52,7 @@ _pysetenv_create()
             echo -e ${YELLOW}
             case $yes_no in
                 Y|y) 
-                    sudo python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
+                    sudo -H python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
                     echo -e "${BOLD_GREEN}[*] ${GREEN}Activate python virtual environment using this command: ${BOLD_GREEN}pysetenv ${1}${RESET}"
                     ;;
                 N|n) 
@@ -85,7 +85,7 @@ _pysetenv_delete()
             echo -e ${YELLOW}
             read -p "[?] Confirm you want to delete ${1} virtual environment (Y / N)" yes_no
             case $yes_no in
-                Y|y) sudo rm -rvf ${PYSETENV_VIRTUAL_DIR_PATH}${1};;
+                Y|y) rm -rvf ${PYSETENV_VIRTUAL_DIR_PATH}${1};;
                 N|n) echo "${BOLD_GREEN}[-] ${GREEN}Aborting environment deletion";;
                 *) echo -e "${BOLD_GREEN}[?] ${GREEN}Enter either ${BOLD_GREEN}Y/y ${GREEN}for yes or ${BOLD_RED}N/n ${GREEN} for no"${RESET}
                     exit ;;
