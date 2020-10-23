@@ -85,6 +85,7 @@ _pysetenv_delete()
         then
             echo -e ${YELLOW}
             read -p "[?] Confirm you want to delete ${1} virtual environment (Y / N)" yes_no
+            echo -e ${RESET}
             case $yes_no in
                 Y|y) sudo -H rm -rvf ${PYSETENV_VIRTUAL_DIR_PATH}${1};;
                 N|n) echo "${BOLD_GREEN}[-] ${GREEN}Aborting environment deletion";;
