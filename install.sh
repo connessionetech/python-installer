@@ -19,10 +19,10 @@ echo -e ${YELLOW}"***********************************************************"${
 # Copy config.ini to ${HOME} directory
 if [ -f ${HOME}/.config.ini ];
 then
-    sudo rm -rf ${HOME}/.config.ini
-    sudo cp -vp ./config.ini ${HOME}/.config.ini 2> /dev/null
+    sudo rm -rf ${HOME}/.config.ini &> /dev/null
+    sudo cp -vp ./config.ini ${HOME}/.config.ini &> /dev/null
 else
-    sudo cp -vp ./config.ini ${HOME}/.config.ini 2> /dev/null
+    sudo cp -vp ./config.ini ${HOME}/.config.ini &> /dev/null
 fi
 
 # Load config.ini file
@@ -32,7 +32,7 @@ fi
 _add_paths(){
     if [ -f ${HOME}/.py_setup.sh ];
     then
-        sudo rm -rf ${HOME}/.py_setup.sh
+        sudo rm -rf ${HOME}/.py_setup.sh &> /dev/null
     fi
 
     if hash python${PYSETENV_PYTHON_VERSION} 2> /dev/null;
