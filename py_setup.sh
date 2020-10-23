@@ -42,7 +42,7 @@ _pysetenv_create()
         _pysetenv_help
     else
         echo -e "${BOLD_GREEN}[*] ${GREEN}Python version: ${BOLD_GREEN}${PYSETENV_PYTHON_VERSION}"
-        echo -e "${BOLD_GREEN}[*] ${GREEN}Python Path: ${BOLD_GREEN}which python${PYSETENV_PYTHON_VERSION} ${RESET}"
+        echo -e "${BOLD_GREEN}[*] ${GREEN}Python Path: "${BOLD_GREEN}which python${PYSETENV_PYTHON_VERSION} ${RESET}
         echo -e "${BOLD_GREEN}[+] ${GREEN}Adding new virtual environment: $1 ${RESET}"
 
         if [ -d $PYSETENV_VIRTUAL_DIR_PATH/$1 ];
@@ -65,7 +65,7 @@ _pysetenv_create()
             esac
         else
             # create virtual environment if it does not exist
-            python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
+            python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1} --user
             echo -e "${BOLD_GREEN}[*] ${GREEN}Activate python virtual environment using this command: ${BOLD_GREEN}pysetenv ${1}${RESET}"
         fi
         
