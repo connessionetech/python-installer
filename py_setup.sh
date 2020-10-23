@@ -53,7 +53,7 @@ _pysetenv_create()
             echo -e ${YELLOW}
             case $yes_no in
                 Y|y) 
-                    python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
+                    sudo -H python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
                     echo -e "${BOLD_GREEN}[*] ${GREEN}Activate python virtual environment using this command: ${BOLD_GREEN}pysetenv ${1}${RESET}"
                     ;;
                 N|n) 
