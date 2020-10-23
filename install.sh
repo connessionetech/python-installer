@@ -139,7 +139,7 @@ _install(){
                 _add_paths ;;
 
             N|n)
-                echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
+                echo -e ${BOLD_RED}"[!] ${RED}Aborting ! ! !"${RESET}
                 exit ;;
 
             *)
@@ -209,7 +209,7 @@ _install(){
                     _add_paths
                         ;;
                 N|n) 
-                    echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
+                    echo -e ${BOLD_RED}"[!] ${RED}Aborting ! ! !"${RESET}
                     exit ;;
                 *) 
                     echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
@@ -233,7 +233,7 @@ _install(){
                     sudo apt-get autoremove -y
                     _add_paths ;;
                 N|n) 
-                    echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
+                    echo -e ${BOLD_RED}"[!] ${RED}Aborting ! ! !"${RESET}
                     exit ;;
                 *) 
                     echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
@@ -304,7 +304,7 @@ _install(){
                     ;;
 
             N|n)
-                echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
+                echo -e ${BOLD_RED}"[!] ${RED}Aborting ! ! !"${RESET}
                 exit ;;
 
             *)
