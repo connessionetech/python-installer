@@ -15,17 +15,24 @@ echo ""
 echo ""
 echo -e ${YELLOW}"***********************************************************"${RESET}
 
-# Load config.ini file
-sudo cp -vp ./config.ini ${HOME}/.config.ini
-. ./config.ini
 
+# Copy config.ini to ${HOME} directory
+if [ -f ${HOME}/.config.ini ];
+then
+    sudo rm -rf ${HOME}/.config.ini
+    sudo cp -vp ./config.ini ${HOME}/.config.ini
+else
+    sudo cp -vp ./config.ini ${HOME}/.config.ini
+fi
+
+# Load config.ini file
+. ./config.ini
 
 # add virtual venv path function
 _add_paths(){
     if [ -f ${HOME}/.py_setup.sh ];
     then
         sudo rm -rf ${HOME}/.py_setup.sh
-        sudo rm -rf ${HOME}/.config.ini
     fi
 
     if hash python${PYSETENV_PYTHON_VERSION};
