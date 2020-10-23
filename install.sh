@@ -141,7 +141,7 @@ _install(){
                 sudo rm -rf /usr/src/Python-3*
                 cd ~
                 pip${PYSETENV_PYTHON_VERSION} install virtualenv --user
-                _add_paths
+                _add_paths ;;
 
             N|n)
                 echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
@@ -235,8 +235,8 @@ _install(){
                     sudo add-apt-repository ppa:fkrull/deadsnakes -y
                     sudo apt-get update
                     sudo apt-get install -y python${PYSETENV_PYTHON_VERSION}
-                    sudo apt-get autoremove -y ;;
-                    _add_paths
+                    sudo apt-get autoremove -y
+                    _add_paths ;;
                 N|n) 
                     echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
                     exit ;;
