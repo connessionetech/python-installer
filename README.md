@@ -52,15 +52,10 @@
 |---|---|---|---|---|
 | Ubuntu 20.x  | |   |   |   |
 | Ubuntu 18.x  | 3.6,3.7, 3.8 |   |   |   |
-| Ubuntu 16.x  | 3.6 |   |   |   |
+| Ubuntu 16.x  | 3.5, 3.6, 3.7, 3.8, 3.9 |   |   |   |
 | CentOs 6.x | x |   |   |   |
 | CentOs 7.x | x |   |   |   |
 | Red Hat 7.x | 3.6, 3.7, 3.8, 3.9.0 |   |   |   |
 
 
 
-sudo rm -f /usr/local/bin/python3.5 \
-sudo rm -f /usr/local/bin/pip3.5 \
-sudo rm -rf /usr/local/bin/include/python3.5 \
-sudo rm -f /usr/local/lib/libpython3.5.a \
-sudo rm -rf /usr/local/lib/python3.5 
