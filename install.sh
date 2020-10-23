@@ -18,27 +18,85 @@ echo -e ${YELLOW}"***********************************************************"${
 # Load config.ini file
 . ./config.ini
 
-if [ -f /etc/os-release ];
-then
-    # Get Os details
-    OS_NAME=$(cat /etc/os-release | grep -w NAME | cut -d= -f2 | tr -d '"')
-    OS_VERSION=$(cat /etc/os-release | grep -w VERSION_ID | cut -d= -f2 | tr -d '"')
-    DISTRO=$(cat /etc/os-release | grep -w ID_LIKE | cut -d= -f2 | tr -d '=')
-
-    echo -e ${YELLOW}"[*] ${GREEN}Operating System:${BOLD_GREEN}" ${OS_NAME} ${GREEN}"Version: "${BOLD_GREEN}${OS_VERSION}${RESET}
-    echo -e ${YELLOW}"[*] ${GREEN}Path to virtual environment directory:${BOLD_GREEN}" ${PYSETENV_VIRTUAL_DIR_PATH}${RESET}
-    echo -e ${YELLOW}"[*] ${GREEN}Python Version On Config.ini:${BOLD_GREEN}" ${PYSETENV_PYTHON_VERSION}${RESET}
-
-    # Add Python on RedHat 7
-    if [[ "$OS_NAME" == *"Red Hat"* ]];
-    then
-        # check if python is already installed
-    if hash python${PYSETENV_PYTHON_VERSION} ;
+# check whether python version config.ini is available on the system
+if hash python${PYSETENV_PYTHON_VERSION};
     then
         echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
-        echo -e ${YELLOW}"[*] " ${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"
+        echo -e ${YELLOW}"[*] "${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"${RESET}
+        _add_paths
     else
+        # install python if doesnot exist
+        _install
+fi
+
+
+# add virtual venv path function
+_add_paths(){
+    if [ -f ${HOME}/.py_setup.sh ];
+    then
+        sudo rm -rf ${HOME}/.py_setup.sh
+        sudo rm -rf ${HOME}/.config.ini
+    fi
+
+    echo -e ${YELLOW}"[+] ${CYAN}Creating directory to hold all Python virtual environments"${RESET}
+    mkdir -p $HOME/virtualenvs
+    echo -e ${YELLOW}"[*] ${CYAN}Downloading pysetenv"${PURPLE}
+
+    sudo curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/py_setup.sh -o ${HOME}/.py_setup.sh
+    # curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/config.ini -o ${HOME}/.config.ini
+    sudo cp ./config.ini ${HOME}/.config.ini
+
+    if [ -e "${HOME}/.zshrc" ];
+    then
+        echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.zshrc"${RESET}
+        echo "source ~/.py_setup.sh" >> ${HOME}/.zshrc
+
+    elif [ -e "${HOME}/.bashrc" ];
+    then
+        echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bashrc"${RESET}
+        echo -e "source ~/.py_setup.sh" >> ${HOME}/.bashrc
+
+    elif [ -e "${HOME}/.bash_profile" ];
+    then
+        echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bash_profile"${RESET}
+        sudo echo -e "source ~/.py_setup.sh" >> ${HOME}/.bash_profile
+
+    fi
+
+    # installation complete
+    echo -e ${YELLOW}"[*] ${CYAN}Installation Completed Successfully!"
+
+    # Usage Info
+    echo -e "${GREEN} Type: ${BOLD_GREEN}source ~/.bashrc ${CYAN}to activate pysetenv or open a new terminal and start using pysetenv"
+    echo -e "${GREEN} Usage: ${BOLD_GREEN}pysetenv --new VIRTUAL_ENVIRONMENT_NAME ${CYAN}to create new virtual environment"
+    echo -e "${GREEN} Usage: ${BOLD_GREEN}pysetenv VIRTUAL_ENVIRONMENT_NAME ${CYAN}to activate the new virtual environment"
+    echo -e "${YELLOW}***********************************************************${RESET}"
+    echo ""
+    echo ""
+}
+
+
+# Check os and install python function
+_install(){
+    if [ -f /etc/os-release ];
+    then
+        # Get Os details
+        OS_NAME=$(cat /etc/os-release | grep -w NAME | cut -d= -f2 | tr -d '"')
+        OS_VERSION=$(cat /etc/os-release | grep -w VERSION_ID | cut -d= -f2 | tr -d '"')
+        DISTRO=$(cat /etc/os-release | grep -w ID_LIKE | cut -d= -f2 | tr -d '=')
+
+        echo -e ${YELLOW}"[*] ${GREEN}Operating System:${BOLD_GREEN}" ${OS_NAME} ${GREEN}"Version: "${BOLD_GREEN}${OS_VERSION}${RESET}
+        echo -e ${YELLOW}"[*] ${GREEN}Path to virtual environment directory:${BOLD_GREEN}" ${PYSETENV_VIRTUAL_DIR_PATH}${RESET}
+        echo -e ${YELLOW}"[*] ${GREEN}Python Version On Config.ini:${BOLD_GREEN}" ${PYSETENV_PYTHON_VERSION}${RESET}
+
+        # Add Python on RedHat 7
+        if [[ "$OS_NAME" == *"Red Hat"* ]];
+        then
+        
+        # install python from source
+        echo -e ${YELLOW}
         read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
+        echo -e ${RESET}
         case $y_n in
             Y|y)
                 sudo yum install gcc openssl-devel bzip2-devel sqlite-devel -y
@@ -71,7 +129,9 @@ then
                     "3.9")
                         sudo curl -o python.tgz https://www.python.org/ftp/python/3.9.0/Python-3.9.0.tgz
                         ;;
-                    *) echo python version not found
+                    *)
+                        echo python version not found. please change version on config.ini
+                        exit
                 esac
                 sudo tar xzf python.tgz
                 cd Python-3*
@@ -81,6 +141,7 @@ then
                 sudo rm -rf /usr/src/Python-3*
                 cd ~
                 pip${PYSETENV_PYTHON_VERSION} install virtualenv --user
+                _add_paths
                     ;;
 
             N|n)
@@ -89,21 +150,15 @@ then
 
             *)
                 echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
-                exit ;;
+                _install ;;
 
         esac
-    fi
-    fi
+        fi
 
-    # Add Python on Debian
-    if [[ "${OS_NAME}" == *"Debian"* ]] ;
-    then
-        if hash python${PYSETENV_PYTHON_VERSION};
+        # Add Python on Debian
+        if [[ "${OS_NAME}" == *"Debian"* ]] ;
         then
-            echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
-            echo -e ${YELLOW}"[*] "${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"${RESET}
-        
-        else
+            
             echo -e ${YELLOW}
             read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
             echo -e ${RESET}
@@ -113,7 +168,7 @@ then
                     sudo apt-get install -y libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm
                     sudo apt-get install -y libncurses5-dev  libncursesw5-dev xz-utils tk-dev
                     cd /usr/src
-                                 
+                                
                     case $PYSETENV_PYTHON_VERSION in
                         "3.1")
                             sudo curl -o python.tgz https://www.python.org/ftp/python/3.1.5/Python-3.1.5.tgz
@@ -144,7 +199,9 @@ then
                             ;;
 
 
-                        *) echo python version not found
+                        *) 
+                            echo python version not found. please change version on config.ini
+                            exit
                     esac
                     sudo tar xzf python.tgz
                     cd Python-3*
@@ -155,28 +212,25 @@ then
                     cd ~
                     sudo apt install python${PYSETENV_PYTHON_VERSION}-pip
                     sudo pip${PYSETENV_PYTHON_VERSION} install virtualenv
+                    _add_paths
                         ;;
                 N|n) 
                     echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
-                    exit 1;;
+                    exit ;;
                 *) 
                     echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
-                    exit 1;;
+                    _install ;;
             esac
-        fi 
-    fi
-    
-
-    # Add Python PPA on Ubuntu
-    if [[ "$OS_NAME" == *"Ubuntu"* ]];
-    then     
-        if hash python${PYSETENV_PYTHON_VERSION};
-        then
-            echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
-            echo -e ${YELLOW}"[*] "${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"${RESET}
+        fi
         
-        else
+
+        # Add Python PPA on Ubuntu
+        if [[ "$OS_NAME" == *"Ubuntu"* ]];
+        then     
+            
+            echo -e ${YELLOW}
             read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
+            echo -e ${RESET}
             case $y_n in
                 Y|y) 
                     sudo add-apt-repository ppa:fkrull/deadsnakes -y
@@ -185,30 +239,28 @@ then
                     sudo apt-get autoremove -y ;;
                 N|n) 
                     echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
-                    exit 1;;
+                    exit ;;
                 *) 
                     echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
-                    exit 1;;
+                    _install ;;
             esac
         fi
-    fi
-elif [ -f /etc/system-release ];
-    # Add Python on CentOS
-then
-    # Get Os details
-    OS_NAME=$(cat /etc/system-release | cut -d ' ' -f1)
-    OS_VERSION=$(cat /etc/system-release | cut -d ' ' -f3)
 
-    echo -e ${YELLOW}"[*] ${GREEN}Operating System:${BOLD_GREEN}" ${OS_NAME} ${GREEN}"Version: "${BOLD_GREEN}${OS_VERSION}${RESET}
-    echo -e ${YELLOW}"[*] ${GREEN}Path to virtual environment directory:${BOLD_GREEN}" ${PYSETENV_VIRTUAL_DIR_PATH}${RESET}
-    echo -e ${YELLOW}"[*] ${GREEN}Python Version On Config.ini:${BOLD_GREEN}" ${PYSETENV_PYTHON_VERSION}${RESET}
-
-    if hash python${PYSETENV_PYTHON_VERSION} ;
+    elif [ -f /etc/system-release ];
+        # Add Python on CentOS
     then
-        echo -e ${YELLOW}"[*] ${CYAN}Checking python version installed currently on the system..."${RESET}
-        echo -e ${YELLOW}"[*] " ${BOLD_GREEN}"$(python${PYSETENV_PYTHON_VERSION} -V) ${GREEN} already installed on the system"
-    else
+        # Get Os details
+        OS_NAME=$(cat /etc/system-release | cut -d ' ' -f1)
+        OS_VERSION=$(cat /etc/system-release | cut -d ' ' -f3)
+
+        echo -e ${YELLOW}"[*] ${GREEN}Operating System:${BOLD_GREEN}" ${OS_NAME} ${GREEN}"Version: "${BOLD_GREEN}${OS_VERSION}${RESET}
+        echo -e ${YELLOW}"[*] ${GREEN}Path to virtual environment directory:${BOLD_GREEN}" ${PYSETENV_VIRTUAL_DIR_PATH}${RESET}
+        echo -e ${YELLOW}"[*] ${GREEN}Python Version On Config.ini:${BOLD_GREEN}" ${PYSETENV_PYTHON_VERSION}${RESET}
+
+     
+        echo -e ${YELLOW}
         read -p "install python${PYSETENV_PYTHON_VERSION} on the system (Y/N)" y_n
+        echo -e ${RESET}
         case $y_n in
             Y|y)
                 sudo yum install gcc openssl-devel bzip2-devel sqlite-devel -y
@@ -241,7 +293,9 @@ then
                     "3.9")
                         sudo curl -o python.tgz https://www.python.org/ftp/python/3.9.0/Python-3.9.0.tgz
                         ;;
-                    *) echo python version not found
+                    *) 
+                        echo python version not found. please change version on config.ini
+                        exit
                 esac
                 sudo tar xzf python.tgz
                 cd Python-3*
@@ -259,55 +313,11 @@ then
 
             *)
                 echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
-                exit ;;
+                _install ;;
 
         esac
+    else
+        echo -e ${YELLOW}"Exiting ! ! !"${RESET}
+        exit ;;
     fi
-else
-    echo -e ${YELLOW}"Exiting ! ! !"${RESET}
-    exit
-fi
-
-if [ -f ${HOME}/.py_setup.sh ];
-then
-    # echo -e ${YELLOW}"[*] "${BOLD_GREEN}"pysetenv already installed"
-    # echo -e ${YELLOW}"***********************************************************"${RESET}
-    # exit 1
-    sudo rm -rf ${HOME}/.py_setup.sh
-    sudo rm -rf ${HOME}/.config.ini
-fi
-
-echo -e ${YELLOW}"[+] ${CYAN}Creating directory to hold all Python virtual environments"${RESET}
-mkdir -p $HOME/virtualenvs
-echo -e ${YELLOW}"[*] ${CYAN}Downloading pysetenv"${PURPLE}
-
-curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/py_setup.sh -o ${HOME}/.py_setup.sh
-curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/config.ini -o ${HOME}/.config.ini
-
-if [ -e "${HOME}/.zshrc" ];
-then
-    echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.zshrc"${RESET}
-    echo "source ~/.py_setup.sh" >> ${HOME}/.zshrc
-
-elif [ -e "${HOME}/.bashrc" ];
-then
-    echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bashrc"${RESET}
-    echo -e "source ~/.py_setup.sh" >> ${HOME}/.bashrc
-
-elif [ -e "${HOME}/.bash_profile" ];
-then
-    echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bash_profile"${RESET}
-    sudo echo -e "source ~/.py_setup.sh" >> ${HOME}/.bash_profile
-
-fi
-
-# installation complete
-echo -e ${YELLOW}"[*] ${CYAN}Installation Completed Successfully!"
-
-# Usage Info
-echo -e "${GREEN} Type: ${BOLD_GREEN}source ~/.bashrc ${CYAN}to activate pysetenv or open a new terminal and start using pysetenv"
-echo -e "${GREEN} Usage: ${BOLD_GREEN}pysetenv --new VIRTUAL_ENVIRONMENT_NAME ${CYAN}to create new virtual environment"
-echo -e "${GREEN} Usage: ${BOLD_GREEN}pysetenv VIRTUAL_ENVIRONMENT_NAME ${CYAN}to activate the new virtual environment"
-echo -e "${YELLOW}***********************************************************${RESET}"
-echo ""
-echo ""
+}
