@@ -35,7 +35,7 @@ _add_paths(){
         sudo rm -rf ${HOME}/.py_setup.sh
     fi
 
-    if hash python${PYSETENV_PYTHON_VERSION};
+    if hash python${PYSETENV_PYTHON_VERSION} 2> /dev/null;
     then
         echo -e ${YELLOW}"[+] ${CYAN}Creating directory to hold all Python virtual environments"${RESET}
         mkdir -p $HOME/virtualenvs
