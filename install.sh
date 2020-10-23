@@ -249,9 +249,9 @@ _install(){
                     sudo apt-get install python3.8-distutils -y
                     sudo apt-get install python${PYSETENV_PYTHON_VERSION}-dev -y
                     # sudo apt-get install python${PYSETENV_PYTHON_VERSION}-venv -y
-                    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-                    python${PYSETENV_PYTHON_VERSION} get-pip.py
-                    pip${PYSETENV_PYTHON_VERSION} install virtualenv
+                    sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+                    sudo python${PYSETENV_PYTHON_VERSION} get-pip.py
+                    sudo pip${PYSETENV_PYTHON_VERSION} install virtualenv
                     sudo apt-get autoremove -y
                     sudo rm -v get-pip.py
                     _add_paths ;;
