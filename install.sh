@@ -73,6 +73,7 @@ _add_paths(){
         echo ""
     else
         # install python if does not exist
+        echo -e ${BOLD_RED}"[!!] ${RED}Python not installed on your System"
         _install
     fi
 }
