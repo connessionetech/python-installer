@@ -17,6 +17,7 @@ echo -e ${YELLOW}"***********************************************************"${
 
 # Load config.ini file
 . ./config.ini
+sudo cp config.ini ${HOME}/.config.ini
 
 
 # add virtual venv path function
@@ -35,7 +36,6 @@ _add_paths(){
 
         sudo curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/py_setup.sh -o ${HOME}/.py_setup.sh
         # curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/config.ini -o ${HOME}/.config.ini
-        sudo cp config.ini ${HOME}/.config.ini
 
         if [ -e "${HOME}/.zshrc" ];
         then
@@ -209,7 +209,7 @@ _install(){
                     sudo rm -rf /usr/src/Python-3*
                     cd ~
                     # sudo apt install python${PYSETENV_PYTHON_VERSION}-pip
-                    python${PYSETENV_PYTHON_VERSION} -m pip install --user --upgrade pip
+                    python${PYSETENV_PYTHON_VERSION} -m pip install --upgrade pip
                     pip${PYSETENV_PYTHON_VERSION} install virtualenv
                     _add_paths
                         ;;
