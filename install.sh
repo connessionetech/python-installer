@@ -140,10 +140,13 @@ _install(){
 
             N|n)
                 echo -e ${BOLD_RED}"[!] ${RED}Aborting ! ! !"${RESET}
+                echo ""
                 exit ;;
 
             *)
                 echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
+                echo ""${RESET}
+
                 _install ;;
 
         esac
@@ -210,9 +213,11 @@ _install(){
                         ;;
                 N|n) 
                     echo -e ${BOLD_RED}"[!] ${RED}Aborting ! ! !"${RESET}
+                    echo ""
                     exit ;;
                 *) 
                     echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
+                    echo ""${RESET}
                     _install ;;
             esac
         fi
@@ -234,9 +239,11 @@ _install(){
                     _add_paths ;;
                 N|n) 
                     echo -e ${BOLD_RED}"[!] ${RED}Aborting ! ! !"${RESET}
+                    echo ""
                     exit ;;
                 *) 
                     echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
+                    echo ""${RESET}
                     _install ;;
             esac
         fi
@@ -305,10 +312,12 @@ _install(){
 
             N|n)
                 echo -e ${BOLD_RED}"[!] ${RED}Aborting ! ! !"${RESET}
+                echo ""
                 exit ;;
 
             *)
                 echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Enter either Y|y for yes or N|n for no"
+                echo ""${RESET}
                 _install ;;
 
         esac
