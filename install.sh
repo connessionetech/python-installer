@@ -318,6 +318,6 @@ _install(){
         esac
     else
         echo -e ${YELLOW}"Exiting ! ! !"${RESET}
-        exit ;;
+        exit
     fi
 }
