@@ -16,8 +16,8 @@ echo ""
 echo -e ${YELLOW}"***********************************************************"${RESET}
 
 # Load config.ini file
-. ./config.ini
 sudo cp -v ./config.ini ${HOME}/.config.ini -y
+. ./config.ini
 
 
 # add virtual venv path function
