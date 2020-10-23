@@ -16,7 +16,7 @@ echo ""
 echo -e ${YELLOW}"***********************************************************"${RESET}
 
 # Load config.ini file
-sudo cp -v ./config.ini ${HOME}/.config.ini
+sudo cp -vp ./config.ini ${HOME}/.config.ini
 . ./config.ini
 
 
