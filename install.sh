@@ -37,32 +37,32 @@ _add_paths(){
 
     if hash python${PYSETENV_PYTHON_VERSION} 2> /dev/null;
     then
-        echo -e ${YELLOW}"[+] ${CYAN}Creating directory to hold all Python virtual environments"${RESET}
+        echo -e ${BOLD_YELLOW}"[+] ${CYAN}Creating directory to hold all Python virtual environments"${RESET}
         mkdir -p $HOME/virtualenvs
-        echo -e ${YELLOW}"[*] ${CYAN}Downloading pysetenv"${PURPLE}
+        echo -e ${BOLD_YELLOW}"[*] ${CYAN}Downloading pysetenv"${PURPLE}
 
         sudo curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/py_setup.sh -o ${HOME}/.py_setup.sh
         # curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/config.ini -o ${HOME}/.config.ini
 
         if [ -e "${HOME}/.zshrc" ];
         then
-            echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.zshrc"${RESET}
+            echo -e ${BOLD_GREEN}"[+] ${CYAN}Adding ${GREEN}~/.zshrc"${RESET}
             echo "source ~/.py_setup.sh" >> ${HOME}/.zshrc
 
         elif [ -e "${HOME}/.bashrc" ];
         then
-            echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bashrc"${RESET}
+            echo -e ${BOLD_GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bashrc"${RESET}
             echo -e "source ~/.py_setup.sh" >> ${HOME}/.bashrc
 
         elif [ -e "${HOME}/.bash_profile" ];
         then
-            echo -e ${GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bash_profile"${RESET}
+            echo -e ${BOLD_GREEN}"[+] ${CYAN}Adding ${GREEN}~/.bash_profile"${RESET}
             sudo echo -e "source ~/.py_setup.sh" >> ${HOME}/.bash_profile
 
         fi
 
         # installation complete
-        echo -e ${YELLOW}"[*] ${CYAN}Installation Completed Successfully!"
+        echo -e ${BOLD_YELLOW}"[*] ${CYAN}Installation Completed Successfully!"
 
         # Usage Info
         echo -e "${GREEN} Type: ${BOLD_GREEN}source ~/.bashrc ${CYAN}to activate pysetenv or open a new terminal and start using pysetenv"
