@@ -242,7 +242,7 @@ _install(){
             echo -e ${RESET}
             case $y_n in
                 Y|y) 
-                    sudo add-apt-repository ppa:fkrull/deadsnakes -y
+                    sudo add-apt-repository ppa:deadsnakes/ppa -y
                     sudo apt-get update
                     sudo apt-get install -y python${PYSETENV_PYTHON_VERSION}
                     sudo apt-get autoremove -y
