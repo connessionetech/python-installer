@@ -20,9 +20,9 @@ echo -e ${YELLOW}"***********************************************************"${
 if [ -f ${HOME}/.config.ini ];
 then
     sudo rm -rf ${HOME}/.config.ini
-    sudo cp -vp ./config.ini ${HOME}/.config.ini
+    sudo cp -vp ./config.ini ${HOME}/.config.ini 2> /dev/null
 else
-    sudo cp -vp ./config.ini ${HOME}/.config.ini
+    sudo cp -vp ./config.ini ${HOME}/.config.ini 2> /dev/null
 fi
 
 # Load config.ini file
