@@ -143,6 +143,7 @@ _install(){
                 sudo rm /usr/src/python.tgz
                 sudo rm -rf /usr/src/Python-3*
                 cd ~
+                sudo -H python${PYSETENV_PYTHON_VERSION} -m pip install --upgrade pip
                 sudo -H pip${PYSETENV_PYTHON_VERSION} install virtualenv
                 _add_paths ;;
 
@@ -212,6 +213,7 @@ _install(){
                 sudo rm /usr/src/python.tgz
                 sudo rm -rf /usr/src/Python-3*
                 cd ~
+                sudo -H python${PYSETENV_PYTHON_VERSION} -m pip install --upgrade pip
                 sudo -H pip${PYSETENV_PYTHON_VERSION} install virtualenv
                 _add_paths ;;
 
