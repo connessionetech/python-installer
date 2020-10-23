@@ -142,7 +142,6 @@ _install(){
                 cd ~
                 pip${PYSETENV_PYTHON_VERSION} install virtualenv --user
                 _add_paths
-                    ;;
 
             N|n)
                 echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
@@ -201,7 +200,7 @@ _install(){
 
                         *) 
                             echo python version not found. please change version on config.ini
-                            exit
+                            exit ;;
                     esac
                     sudo tar xzf python.tgz
                     cd Python-3*
@@ -237,6 +236,7 @@ _install(){
                     sudo apt-get update
                     sudo apt-get install -y python${PYSETENV_PYTHON_VERSION}
                     sudo apt-get autoremove -y ;;
+                    _add_paths
                 N|n) 
                     echo -e ${YELLOW}"[!] ${RED}Aborting"${RESET}
                     exit ;;
@@ -247,7 +247,6 @@ _install(){
         fi
 
     elif [ -f /etc/system-release ];
-        # Add Python on CentOS
     then
         # Get Os details
         OS_NAME=$(cat /etc/system-release | cut -d ' ' -f1)
@@ -263,6 +262,7 @@ _install(){
         echo -e ${RESET}
         case $y_n in
             Y|y)
+                # add python on CentOs
                 sudo yum install gcc openssl-devel bzip2-devel sqlite-devel -y
                 cd /usr/src
                 case $PYSETENV_PYTHON_VERSION in
@@ -295,7 +295,7 @@ _install(){
                         ;;
                     *) 
                         echo python version not found. please change version on config.ini
-                        exit
+                        exit ;;
                 esac
                 sudo tar xzf python.tgz
                 cd Python-3*
@@ -305,6 +305,7 @@ _install(){
                 sudo rm -rf /usr/src/Python-3*
                 cd ~
                 pip${PYSETENV_PYTHON_VERSION} install virtualenv --user
+                _add_paths
                     ;;
 
             N|n)
