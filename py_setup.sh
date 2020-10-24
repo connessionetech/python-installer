@@ -80,7 +80,18 @@ _pysetenv_create()
             esac
         else
             # create virtual environment if it does not exist
-            sudo -H python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
+            if [ -f /etc/os-release ];
+            then
+                OS_NAME=$(cat /etc/os-release | grep -w NAME | cut -d= -f2 | tr -d '"')
+                if [[ "${OS_NAME}" == *"Debian"* ]] || [[ "${OS_NAME}" == *"Ubuntu"* ]] ;
+                then
+                    sudo -H python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
+                else
+                    python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
+                fi
+            else
+                python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
+            fi
             echo -e "${BOLD_GREEN}[*] ${GREEN}Activate python virtual environment using this command: ${BOLD_GREEN}pysetenv ${1}${RESET}"
         fi
         
