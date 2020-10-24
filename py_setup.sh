@@ -28,6 +28,8 @@ _pysetenv_help()
     echo -l, --list                  List all virtual environments.
     echo -n, --new NAME              Create a new Python Virtual Environment.
     echo -d, --delete NAME           Delete existing Python Virtual Environment.
+    echo -e "${BOLD_YELLOW}":
+    echo -e "${BOLD_YELLOW}" $OS_NAME:
     echo -e "" ${RESET}
     # echo -e -p, --python PATH        Python binary path.
     # echo -o, --open                  Load project to the activated virtual environment "${RESET}"
