@@ -51,7 +51,7 @@
 | OS  | Python Versions  | Comment/note  |   |   |
 |---|---|---|---|---|
 | Ubuntu 20.x  | |   |   |   |
-| Ubuntu 18.x  | 3.6,3.7, 3.8 |   |   |   |
+| Ubuntu 18.x  | 3.6, 3.7, 3.8 |   |   |   |
 | Ubuntu 16.x  | 3.5, 3.6, 3.7, 3.8, 3.9 |   |   |   |
 | Debian 10 | 3.5, 3.6, 3.7, 3.8, 3.9 |   |   |   |
 | CentOs 6.x | x |   |   |   |
