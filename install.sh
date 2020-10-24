@@ -206,12 +206,13 @@ _install(){
                         echo python version not found. please change version on config.ini
                         exit
                 esac
-                tar xzf python.tgz --user
+                sudo yum install tar -y
+                sudo tar xzf python.tgz
                 cd Python-3*
-                ./configure --enable-optimizations --user
-                make altinstall --user
-                rm /usr/src/python.tgz --user
-                rm -rf /usr/src/Python-3* --user
+                sudo ./configure --enable-optimizations
+                sudo make altinstall
+                sudo rm /usr/src/python.tgz
+                sudo rm -rf /usr/src/Python-3*
                 cd ~
                 python${PYSETENV_PYTHON_VERSION} -m pip install --upgrade pip --user
                 python${PYSETENV_PYTHON_VERSION} -m pip install virtualenv --user
