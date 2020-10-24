@@ -63,6 +63,8 @@ _pysetenv_create()
                         if [[ "${OS_NAME}" == *"Debian"* ]] || [[ "${OS_NAME}" == *"Ubuntu"* ]] ;
                         then
                             sudo -H python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
+                        else
+                            python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
                         fi
                     else
                         python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
