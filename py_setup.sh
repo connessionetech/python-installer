@@ -28,8 +28,6 @@ _pysetenv_help()
     echo -l, --list                  List all virtual environments.
     echo -n, --new NAME              Create a new Python Virtual Environment.
     echo -d, --delete NAME           Delete existing Python Virtual Environment.
-    echo -e "${BOLD_YELLOW}":
-    echo -e "${BOLD_YELLOW}" $OS_NAME:
     echo -e "" ${RESET}
     # echo -e -p, --python PATH        Python binary path.
     # echo -o, --open                  Load project to the activated virtual environment "${RESET}"
@@ -57,7 +55,18 @@ _pysetenv_create()
             echo -e ${YELLOW}
             case $yes_no in
                 Y|y) 
-                    sudo -H python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
+                    
+                    # check if os is debian or ubuntu we run python with sudo else run without
+                    if [ -f /etc/os-release ];
+                    then
+                        OS_NAME=$(cat /etc/os-release | grep -w NAME | cut -d= -f2 | tr -d '"')
+                        if [[ "${OS_NAME}" == *"Debian"* ]] || [[ "${OS_NAME}" == *"Ubuntu"* ]] ;
+                        then
+                            sudo -H python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
+                        fi
+                    else
+                        python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
+                    fi
                     echo -e "${BOLD_GREEN}[*] ${GREEN}Activate python virtual environment using this command: ${BOLD_GREEN}pysetenv ${1}${RESET}"
                     ;;
                 N|n) 
