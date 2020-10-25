@@ -136,6 +136,8 @@ _install(){
                         echo python version not found. please change version on config.ini
                         exit
                 esac
+                sudo yum install tar -y #install for RedHat 8
+                sudo yum install make -y #install for RedHat 8
                 sudo tar xzf python.tgz
                 cd Python-3*
                 sudo ./configure --enable-optimizations
