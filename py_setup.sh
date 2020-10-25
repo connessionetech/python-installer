@@ -92,7 +92,9 @@ _pysetenv_create()
             else
                 python${PYSETENV_PYTHON_VERSION} -m virtualenv ${PYSETENV_VIRTUAL_DIR_PATH}${1}
             fi
-            echo -e "${BOLD_GREEN}[*] ${GREEN}Activate python virtual environment using this command: ${BOLD_GREEN}pysetenv ${1}${RESET}"
+            echo -e "${BOLD_GREEN}[*] ${GREEN}Python virtual environment with name: ${BOLD_GREEN}${1} ${GREEN}has been created${RESET}"
+            echo -e "${BOLD_GREEN}[*] ${GREEN}Python virtual environment path: ${BOLD_GREEN}${1}${RESET}"
+            echo -e "${BOLD_GREEN}[*] ${GREEN}Activate python virtual environment using this command: ${BOLD_GREEN}${PYSETENV_VIRTUAL_DIR_PATH}${1}${RESET}"
         fi
         
     fi
