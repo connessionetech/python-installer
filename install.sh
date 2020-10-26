@@ -208,18 +208,18 @@ _install(){
                         echo python version not found. please change version on config.ini
                         exit
                 esac
-                sudo yum install tar -y #install for CentOS 8
-                sudo yum install make -y #install for CentOS 8
+                yum install tar -y #install for CentOS 8
+                yum install make -y #install for CentOS 8
 
-                sudo tar xzf python.tgz
+                tar xzf python.tgz
                 cd Python-3*
-                sudo ./configure --enable-optimizations
-                sudo make altinstall
-                sudo rm /usr/src/python.tgz
-                sudo rm -rf /usr/src/Python-3*
+                ./configure --enable-optimizations
+                make altinstall
+                rm /usr/src/python.tgz
+                rm -rf /usr/src/Python-3*
                 cd ~
-                python${PYSETENV_PYTHON_VERSION} -m pip install --upgrade pip --user
-                python${PYSETENV_PYTHON_VERSION} -m pip install virtualenv --user
+                python${PYSETENV_PYTHON_VERSION} -m pip install --upgrade pip
+                python${PYSETENV_PYTHON_VERSION} -m pip install virtualenv
                 _add_paths ;;
 
             N|n)
