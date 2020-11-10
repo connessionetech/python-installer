@@ -146,7 +146,7 @@ _pysetenv_run(){
     if [ -d ${1} ];
     then
         echo ${1} is a folder
-    elif [ -e ${1} ];
+    elif [ -f ${1} ];
     then
         echo ${1} is a file
     fi
