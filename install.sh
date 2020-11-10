@@ -41,7 +41,7 @@ _add_paths(){
         mkdir -p $HOME/virtualenvs
         echo -e ${BOLD_YELLOW}"[*] ${CYAN}Downloading pysetenv"${PURPLE}
 
-        sudo curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/py_setup.sh -o ${HOME}/.py_setup.sh
+        sudo cp -vp ./py_setup.sh ${HOME}/.py_setup.sh
         # curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/config.ini -o ${HOME}/.config.ini
 
         if [ -e "${HOME}/.zshrc" ];
