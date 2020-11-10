@@ -143,7 +143,8 @@ _pysetenv_list()
 _pysetenv_run(){
 
     # echo -e ${BOLD_YELLOW}"[*] "${CYAN}"List of virtual environments you have under"${PYSETENV_VIRTUAL_DIR_PATH}${BLUE}
-    echo $*
+    echo ${2}
+    echo ${3}
 }
 
 # Main function
@@ -152,7 +153,7 @@ pysetenv()
     if [ $# -eq 0 ]; # If no argument show help
     then
         _pysetenv_help
-    elif [ $# -le 3 ];
+    elif [ $# -l 3 ];
     then
         case "${1}" in
             -n|--new) _pysetenv_create ${2};;
@@ -169,7 +170,7 @@ pysetenv()
         esac
     elif [ $# -le 5 ];
     then
-        case "${2}" in
+        case "${1}" in
             -r|--run) _pysetenv_run ${2} ${3};;
             *) _pysetenv_help;;
         esac
