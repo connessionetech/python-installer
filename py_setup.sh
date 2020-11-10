@@ -143,8 +143,8 @@ _pysetenv_list()
 _pysetenv_run(){
 
     # echo -e ${BOLD_YELLOW}"[*] "${CYAN}"List of virtual environments you have under"${PYSETENV_VIRTUAL_DIR_PATH}${BLUE}
+    echo ${1}
     echo ${2}
-    echo ${3}
 }
 
 # Main function
