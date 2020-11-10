@@ -27,6 +27,7 @@ _pysetenv_help()
     echo -e "${BOLD_YELLOW}"Optional Arguments:"${BLUE}"
     echo -l, --list                  List all virtual environments.
     echo -n, --new NAME              Create a new Python Virtual Environment.
+    echo -r, --run NAME              Run existing project with pysetenv.
     echo -d, --delete NAME           Delete existing Python Virtual Environment.
     echo -e "" ${RESET}
     # echo -e -p, --python PATH        Python binary path.
@@ -137,6 +138,13 @@ _pysetenv_list()
     done
 }
 
+
+# Run python script with virtual environment
+_pysetenv_run(){
+    echo -e ${BOLD_YELLOW}"[*] "${CYAN}"List of virtual environments you have under"${PYSETENV_VIRTUAL_DIR_PATH}${BLUE}
+    
+}
+
 # Main function
 pysetenv()
 {
@@ -149,6 +157,7 @@ pysetenv()
             -n|--new) _pysetenv_create ${2};;
             -d|--delete) _pysetenv_delete ${2};;
             -l|--list) _pysetenv_list;;
+            -r|--run) _pysetenv_run ${2} ${3};;
             *) if [ -d ${PYSETENV_VIRTUAL_DIR_PATH}${1} ];
                then
                    source ${PYSETENV_VIRTUAL_DIR_PATH}${1}/bin/activate
