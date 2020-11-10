@@ -143,12 +143,18 @@ _pysetenv_list()
 _pysetenv_run(){
 
     # echo -e ${BOLD_YELLOW}"[*] "${CYAN}"List of virtual environments you have under"${PYSETENV_VIRTUAL_DIR_PATH}${BLUE}
+    
+    # check if ${1} is afile or a folder
     if [ -d ${1} ];
     then
-        echo ${1} is a folder
+        echo -e ${BOLD_YELLOW}"[*] "${CYAN}"${1} is a folder"
+        echo -e ${BOLD_YELLOW}"[*] "${CYAN}"Looking for requirements.txt in the folder"
     elif [ -f ${1} ];
     then
-        echo ${1} is a file
+        if [ -x ${1} ];
+        then
+            echo -e ${BOLD_YELLOW}"[*] "${CYAN}"${1} is a executable file"
+        fi
     fi
     echo ${2}
     return 0
