@@ -153,7 +153,7 @@ pysetenv()
     if [ $# -eq 0 ]; # If no argument show help
     then
         _pysetenv_help
-    elif [ $# -l 3 ];
+    elif [ $# -le 3 ];
     then
         case "${1}" in
             -n|--new) _pysetenv_create ${2};;
