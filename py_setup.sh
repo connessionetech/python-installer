@@ -141,8 +141,10 @@ _pysetenv_list()
 
 # Run python script with virtual environment
 _pysetenv_run(){
-    echo -e ${BOLD_YELLOW}"[*] "${CYAN}"List of virtual environments you have under"${PYSETENV_VIRTUAL_DIR_PATH}${BLUE}
-    
+
+    # echo -e ${BOLD_YELLOW}"[*] "${CYAN}"List of virtual environments you have under"${PYSETENV_VIRTUAL_DIR_PATH}${BLUE}
+    echo ${2}
+    echo ${3}
 }
 
 # Main function
