@@ -143,7 +143,10 @@ _pysetenv_list()
 _pysetenv_run(){
 
     # echo -e ${BOLD_YELLOW}"[*] "${CYAN}"List of virtual environments you have under"${PYSETENV_VIRTUAL_DIR_PATH}${BLUE}
-    echo ${1}
+    if [ -d ${1} ];
+    then
+        echo ${1} is a folder
+    fi
     echo ${2}
     return 0
 }
