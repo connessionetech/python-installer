@@ -158,7 +158,6 @@ pysetenv()
             -n|--new) _pysetenv_create ${2};;
             -d|--delete) _pysetenv_delete ${2};;
             -l|--list) _pysetenv_list;;
-            -r|--run) _pysetenv_run ${2} ${3};;
             *) if [ -d ${PYSETENV_VIRTUAL_DIR_PATH}${1} ];
                then
                    source ${PYSETENV_VIRTUAL_DIR_PATH}${1}/bin/activate
@@ -171,7 +170,7 @@ pysetenv()
     elif [ $# -le 5 ];
     then
         case "${2}" in
-            -p|--python) _pysetenv_custom_path ${3} ${4};;
+            -r|--run) _pysetenv_run ${2} ${3};;
             *) _pysetenv_help;;
         esac
     fi
