@@ -143,8 +143,8 @@ _pysetenv_list()
 _pysetenv_run(){
 
     # echo -e ${BOLD_YELLOW}"[*] "${CYAN}"List of virtual environments you have under"${PYSETENV_VIRTUAL_DIR_PATH}${BLUE}
-    echo ${1}
     echo ${2}
+    echo ${3}
 }
 
 # Main function
@@ -159,7 +159,7 @@ pysetenv()
             -n|--new) _pysetenv_create ${2};;
             -d|--delete) _pysetenv_delete ${2};;
             -l|--list) _pysetenv_list;;
-            -r|--run) _pysetenv_run ${1} ${2};;
+            -r|--run) _pysetenv_run ${2} ${3};;
             *) if [ -d ${PYSETENV_VIRTUAL_DIR_PATH}${1} ];
                then
                    source ${PYSETENV_VIRTUAL_DIR_PATH}${1}/bin/activate
