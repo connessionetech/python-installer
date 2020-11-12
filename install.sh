@@ -39,9 +39,10 @@ _add_paths(){
     then
         echo -e ${BOLD_YELLOW}"[+] ${CYAN}Creating directory to hold all Python virtual environments"${RESET}
         mkdir -p $HOME/virtualenvs
-        echo -e ${BOLD_YELLOW}"[*] ${CYAN}Downloading pysetenv"${PURPLE}
+        echo -e ${BOLD_YELLOW}"[*] ${CYAN}Configuring pysetenv"${PURPLE}
 
         sudo cp -vp ./py_setup.sh ${HOME}/.py_setup.sh
+        sudo chmod +x ${HOME}/.py_setup.sh
         # curl -# https://raw.githubusercontent.com/connessionetech/python-installer/master/config.ini -o ${HOME}/.config.ini
 
         if [ -e "${HOME}/.zshrc" ];
