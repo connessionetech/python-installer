@@ -142,19 +142,27 @@ _pysetenv_list()
 # Run python script with virtual environment
 _pysetenv_run(){
 
-    # echo -e ${BOLD_YELLOW}"[*] "${CYAN}"List of virtual environments you have under"${PYSETENV_VIRTUAL_DIR_PATH}${BLUE}
+    _select_env(){
+        c=1
+        echo -e ${BOLD_YELLOW}"[*] "${CYAN}"List of virtual environments you have under"${PYSETENV_VIRTUAL_DIR_PATH}${BLUE}
+        for v in $(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )"${RESET}"
+        do
+            echo -e ${BOLD_YELLOW}"-"${c}"." ${YELLOW}${v} ${RESET}
+            c++
+        done
+    }
     
     # check if ${1} is afile or a folder
     if [ -d ${1} ];
     then
-        echo -e ${BOLD_YELLOW}"[*] "${CYAN}"${1} is a folder"
-        echo -e ${BOLD_YELLOW}"[*] "${CYAN}"Looking for requirements.txt in the folder"
+        echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"${1} is a folder"
+        echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Looking for requirements.txt in the folder"
         
         # scan this dir for file reuirements.txt
         if [ -f "${1}/requirements.txt" ];
         then
-            echo -e ${BOLD_YELLOW}"[+] "${CYAN}"found ${1}/requirements.txt"
-            echo -e ${BOLD_YELLOW}"[+] "${CYAN}"Installing dependancies from ${1}/requirements.txt"
+            echo -e ${BOLD_YELLOW}"[+] "${YELLOW}"found ${1}/requirements.txt"
+            echo -e ${BOLD_YELLOW}"[+] "${YELLOW}"Installing dependancies from ${1}/requirements.txt"
             python${PYSETENV_PYTHON_VERSION} -m pip install -r requirements.txt
         fi
 
@@ -162,7 +170,8 @@ _pysetenv_run(){
     then
         if [ -x ${1} ];
         then
-            echo -e ${BOLD_YELLOW}"[*] "${CYAN}"${1} is a executable file"
+            echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"${1} is a executable file"
+            echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Searching for requirements.txt in this folder"
             
             # scan root folder as python file for file reuirements.txt
             if [ -f ./requirements.txt ];
