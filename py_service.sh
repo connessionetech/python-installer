@@ -1,12 +1,17 @@
+#!/bin/bash
 # chkconfig: 345 85 15
 
-[Unit]
-Description=pysetenv Service
-After=multi-user.target
+# source function lib
+. /etc/init.d/functions 
 
-[Service]
-Type=simple
-ExecStart=/usr/local/bin/pysetenv
+start(){
+    echo -n "Starting pysetenv"
+    nohup /usr/local/bin/pysetenv
+    touch /var/lock/subsys/pysetenv
+    return 0
+}
 
-[Install]
-WantedBy=multi-user.target
+# stop(){
+#     echo -n "Shutting down pysetenv"
+#     nohup 
+# }

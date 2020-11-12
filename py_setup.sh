@@ -149,10 +149,20 @@ _pysetenv_run(){
     then
         echo -e ${BOLD_YELLOW}"[*] "${CYAN}"${1} is a folder"
         echo -e ${BOLD_YELLOW}"[*] "${CYAN}"Looking for requirements.txt in the folder"
+        
+        # scan this dir for file reuirements.txt
+        if [ -f "${1}/requirements.txt" ];
+        then
+            echo -e ${BOLD_YELLOW}"[+] "${CYAN}"found ${1}/requirements.txt"
+            echo -e ${BOLD_YELLOW}"[+] "${CYAN}"Installing dependancies from ${1}/requirements.txt"
+            python${PYSETENV_PYTHON_VERSION} -m pip install -r requirements.txt
+        fi
+
     elif [ -f ${1} ];
     then
         if [ -x ${1} ];
         then
+
             echo -e ${BOLD_YELLOW}"[*] "${CYAN}"${1} is a executable file"
         fi
     fi
