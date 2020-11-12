@@ -162,8 +162,15 @@ _pysetenv_run(){
     then
         if [ -x ${1} ];
         then
-
             echo -e ${BOLD_YELLOW}"[*] "${CYAN}"${1} is a executable file"
+            
+            # scan root folder as python file for file reuirements.txt
+            if [ -f ./requirements.txt ];
+            then
+                echo -e ${BOLD_YELLOW}"[+] "${CYAN}"found requirements.txt"
+                echo -e ${BOLD_YELLOW}"[+] "${CYAN}"Installing dependancies"
+                python${PYSETENV_PYTHON_VERSION} -m pip install -r requirements.txt
+            fi
         fi
     fi
     echo ${2}
