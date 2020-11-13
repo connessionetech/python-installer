@@ -149,7 +149,7 @@ _pysetenv_run(){
         do
             echo -e ${BOLD_YELLOW}${c}". " ${YELLOW}${v} ${RESET}
             count=count+1
-            env_selected=${v}
+            env_selected=$v
 
         done
 
