@@ -157,7 +157,7 @@ _pysetenv_run(){
     then
         echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"${1} is a folder"
         echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Looking for requirements.txt in the folder"
-        
+        _select_env
         # scan this dir for file reuirements.txt
         if [ -f "${1}/requirements.txt" ];
         then
@@ -172,6 +172,7 @@ _pysetenv_run(){
         then
             echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"${1} is a executable file"
             echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Searching for requirements.txt in this folder"
+            _select_env
             
             # scan root folder as python file for file reuirements.txt
             if [ -f ./requirements.txt ];
