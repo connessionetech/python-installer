@@ -143,12 +143,12 @@ _pysetenv_list()
 _pysetenv_run(){
 
     _select_env(){
-        c=1
+        count=1
         echo -e ${BOLD_YELLOW}"[*] "${CYAN}"List of virtual environments you have under"${PYSETENV_VIRTUAL_DIR_PATH}${BLUE}
         for v in $(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )"${RESET}"
         do
             echo -e ${BOLD_YELLOW}"-"${c}"." ${YELLOW}${v} ${RESET}
-            c=c+1
+            count=count+1
         done
     }
     
