@@ -163,6 +163,7 @@ _pysetenv_run(){
                  echo ""${RESET}
                 _select_env
                  ;;
+        esac
     }
     
     # check if ${1} is afile or a folder
