@@ -178,7 +178,7 @@ _pysetenv_run(){
             echo -e ${BOLD_YELLOW}"[+] "${YELLOW}"found ${1}/requirements.txt"
             echo -e ${BOLD_YELLOW}"[+] "${YELLOW}"Installing dependancies from ${1}/requirements.txt"
             python${PYSETENV_PYTHON_VERSION} -m pip install -r requirements.txt
-        elif
+        else
             echo -e ${BOLD_YELLOW}"[+] "${YELLOW}""
 
         fi
