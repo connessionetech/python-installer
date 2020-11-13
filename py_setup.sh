@@ -154,16 +154,16 @@ _pysetenv_run(){
         done
 
         read -p "Please select environment by number" selected_env
-        case $selected_env in
-            $env_selected)
-                echo "selected environment is: "${env_selected}
+        if [ $selected_env == $env_selected ];
+        then
+            echo "selected environment is: "$env_selected
                  ;;
             *) 
                 echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Choose environment by number"
                  echo ""${RESET}
                 _select_env
                  ;;
-        esac
+        fi
     }
     
     # check if ${1} is afile or a folder
