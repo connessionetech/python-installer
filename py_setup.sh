@@ -148,7 +148,7 @@ _pysetenv_run(){
         for v in $(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )"${RESET}"
         do
             echo -e ${BOLD_YELLOW}"-"${c}"." ${YELLOW}${v} ${RESET}
-            c++
+            c=c+1
         done
     }
     
