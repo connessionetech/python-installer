@@ -155,7 +155,7 @@ _pysetenv_run(){
 
         read -p "Please select environment by number" selected_env
         case $selected_env in
-            "${env_selected}")
+            ${env_selected})
                 echo "selected environment is: "${env_selected}
                  ;;
             *) 
