@@ -157,7 +157,11 @@ _pysetenv_run(){
         case $selected_env in
             "${env_selected}")
                 echo "selected environment is: "${env_selected}
-
+                 ;;
+            *) 
+                echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Choose environment by number"
+                 echo ""${RESET}
+                _select_env
     }
     
     # check if ${1} is afile or a folder
