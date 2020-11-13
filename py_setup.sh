@@ -147,9 +147,17 @@ _pysetenv_run(){
         echo -e ${BOLD_YELLOW}"[*] "${CYAN}"List of virtual environments you have under"${PYSETENV_VIRTUAL_DIR_PATH}${BLUE}
         for v in $(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )"${RESET}"
         do
-            echo -e ${BOLD_YELLOW}"  "${c}"." ${YELLOW}${v} ${RESET}
+            echo -e ${BOLD_YELLOW}${c}". " ${YELLOW}${v} ${RESET}
             count=count+1
+            env_selected=${v}
+
         done
+
+        read -p "Please select environment by number" selected_env
+        case $selected_env in
+            "${env_selected}")
+                echo "selected environment is: "${env_selected}
+
     }
     
     # check if ${1} is afile or a folder
@@ -159,11 +167,14 @@ _pysetenv_run(){
         echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Looking for requirements.txt in the folder"
         _select_env
         # scan this dir for file reuirements.txt
-        if [ -f "${1}/requirements.txt" ];
+        if [ -f ${1}/requirements.txt ];
         then
             echo -e ${BOLD_YELLOW}"[+] "${YELLOW}"found ${1}/requirements.txt"
             echo -e ${BOLD_YELLOW}"[+] "${YELLOW}"Installing dependancies from ${1}/requirements.txt"
             python${PYSETENV_PYTHON_VERSION} -m pip install -r requirements.txt
+        elif
+            echo -e ${BOLD_YELLOW}"[+] "${YELLOW}""
+
         fi
 
     elif [ -f ${1} ];
