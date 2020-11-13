@@ -157,12 +157,12 @@ _pysetenv_run(){
         if [ $selected_env == $env_selected ];
         then
             echo "selected environment is: "$env_selected
-                 ;;
-            *) 
-                echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Choose environment by number"
-                 echo ""${RESET}
-                _select_env
-                 ;;
+
+        else
+            echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Choose environment by number"
+                echo ""${RESET}
+            _select_env
+            
         fi
     }
     
