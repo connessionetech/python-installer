@@ -162,6 +162,7 @@ _pysetenv_run(){
                 echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Choose environment by number"
                  echo ""${RESET}
                 _select_env
+                 ;;
     }
     
     # check if ${1} is afile or a folder
