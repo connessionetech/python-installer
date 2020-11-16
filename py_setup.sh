@@ -145,25 +145,22 @@ _pysetenv_run(){
     _select_env(){
         count=1
         echo -e ${BOLD_YELLOW}"[*] "${CYAN}"List of virtual environments you have under"${PYSETENV_VIRTUAL_DIR_PATH}${BLUE}
-        for v in $(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )"${RESET}"
+        select v in $(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )"${RESET}"
         do
-            echo -e ${BOLD_YELLOW}${c}". " ${YELLOW}${v} ${RESET}
-            count=count+1
-            env_selected=$v
-
+            echo "You have selected: "$v
         done
 
-        read -p "Please select environment by number" selected_env
-        if [ $selected_env == $env_selected ];
-        then
-            echo "selected environment is: "$env_selected
+        # read -p "Please select environment by number" selected_env
+        # if [ $selected_env == $env_selected ];
+        # then
+        #     echo "selected environment is: "$env_selected
 
-        else
-            echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Choose environment by number"
-                echo ""${RESET}
-            _select_env
+        # else
+        #     echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Choose environment by number"
+        #         echo ""${RESET}
+        #     _select_env
             
-        fi
+        # fi
     }
     
     # check if ${1} is afile or a folder
