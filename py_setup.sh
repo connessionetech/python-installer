@@ -145,10 +145,10 @@ _pysetenv_run(){
     _select_env(){
         echo -e ""
         echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"Select environment you want to run your script with"${GREEN}
-        echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"Select environment by "${BOLD_GREEN}"Number"${RESET}
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Use number to select"${RESET}
         echo -e ""
 
-        select v in $(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )"${RESET}"
+        select v in $(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )
         do
             echo -e ${BOLD_GREEN}"[+] "${GREEN}"You have Selected: "${BOLD_GREEN}${REPLY}${RESET}
             echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Running with python environment: "${v}${RESET}
