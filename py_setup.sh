@@ -143,25 +143,18 @@ _pysetenv_list()
 _pysetenv_run(){
 
     _select_env(){
-        count=1
-        echo -e ${BOLD_YELLOW}"[?] "${YELLOW}"Select environment you want to run your script with"${GREEN}
+        echo -e ""
+        echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"Select environment you want to run your script with"${GREEN}
+        echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"Select environment by "${BOLD_GREEN}"Number"${RESET}
+        echo -e ""
+
         select v in $(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )"${RESET}"
         do
-            echo -e "You have selected: "$v
-            ;;
+            echo -e ${BOLD_GREEN}"[+] "${GREEN}"You have Selected: "${BOLD_GREEN}${REPLY}${RESET}
+            echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Running with python environment: "${v}${RESET}
+
         done
 
-        # read -p "Please select environment by number" selected_env
-        # if [ $selected_env == $env_selected ];
-        # then
-        #     echo "selected environment is: "$env_selected
-
-        # else
-        #     echo -e ${YELLOW}"[*] ${BOLD_YELLOW}Choose environment by number"
-        #         echo ""${RESET}
-        #     _select_env
-            
-        # fi
     }
     
     # check if ${1} is afile or a folder
