@@ -166,11 +166,13 @@ _pysetenv_run(){
         # scan this dir for file reuirements.txt
         if [ -f ${1}/requirements.txt ];
         then
-            echo -e ${BOLD_YELLOW}"[+] "${YELLOW}"found ${1}/requirements.txt"
-            echo -e ${BOLD_YELLOW}"[+] "${YELLOW}"Installing dependancies from ${1}/requirements.txt"
+            echo -e ${BOLD_GREEN}"[+] "${GREEN}"found "${BOLD_GREEN}"${1}/requirements.txt"
+            echo -e ${BOLD_GREEN}"[+] "${GREEN}"Installing dependancies from ${1}/requirements.txt"
             python${PYSETENV_PYTHON_VERSION} -m pip install -r requirements.txt
         else
-            echo -e ${BOLD_YELLOW}"[+] "${YELLOW}""
+            echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"no requirements.txt found"${GREEN}
+            read -p "Specify requirements.txt path (Y/N)" y_n
+
 
         fi
 
