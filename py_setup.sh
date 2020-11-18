@@ -151,7 +151,7 @@ _pysetenv_run(){
         select v in $(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )
         do
             echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Running with python environment: "${v}${RESET}
-            ret_val=$v
+            local ret_val=$v
             break
         done
 
@@ -159,22 +159,20 @@ _pysetenv_run(){
 
     # Run script 
     _run_script(){
-        local ret_val="no script"
-        _select_env
-        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script using: "${BOLD_GREEN}${ret_val}${GREEN}" Virtual environment"${RESET}
-
+        v_env=$(_select_env)
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script using: "${BOLD_GREEN}${v_env}${GREEN}" Virtual environment"${RESET}
     }
 
     # Run script as a service
     _run_service(){
-        local ret_val="no Script"
-        _select_env
-        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script as a service using:"${BOLD_GREEN}${ret_val} ${GREEN}" Virtual environment"${RESET}
+        v_env=$(_select_env)
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script as a service using:"${BOLD_GREEN}${v_env} ${GREEN}" Virtual environment"${RESET}
         echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies"${RESET}
     }
 
     _select_run_mode(){
         echo -e ""${RESET}
+        echo -e ${BOLD_YELLOW}"[?] "${YELLOW}"Select how you want to run your script: "${RESET}
         select m in Script Service
         do
             case $m in
