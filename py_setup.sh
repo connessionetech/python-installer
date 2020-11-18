@@ -157,6 +157,19 @@ _pysetenv_run(){
 
     }
 
+    # Run script 
+    _run_script(){
+        _select_env
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script directly"${RESET}
+
+    }
+
+    # Run script as a service
+    _run_service(){
+        _select_env
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script as a service"${RESET}
+    }
+
     _select_run_mode(){
         select m in Script Service
         do
