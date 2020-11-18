@@ -151,22 +151,24 @@ _pysetenv_run(){
         select v in $(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )
         do
             echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Running with python environment: "${v}${RESET}
-
+            return $v
+            break
         done
 
     }
 
     # Run script 
     _run_script(){
-        _select_env
-        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script directly"${RESET}
+        v_env = $(_select_env)
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script using:"${BOLD_GREEN}${v_env} ${GREEN}" Virtual environment"${RESET}
 
     }
 
     # Run script as a service
     _run_service(){
-        _select_env
-        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script as a service"${RESET}
+        v_env = $(_select_env)
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script as a service using:"${BOLD_GREEN}${v_env} ${GREEN}" Virtual environment"${RESET}
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies"${RESET}
     }
 
     _select_run_mode(){
