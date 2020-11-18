@@ -160,19 +160,21 @@ _pysetenv_run(){
     # Run script 
     _run_script(){
         local ret_val="no script"
-        # v_env = $(_select_env)
-        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script using:"${BOLD_GREEN}${ret_val} ${GREEN}" Virtual environment"${RESET}
+        _select_env
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script using: "${BOLD_GREEN}${ret_val}${GREEN}" Virtual environment"${RESET}
 
     }
 
     # Run script as a service
     _run_service(){
-        v_env = $(_select_env)
-        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script as a service using:"${BOLD_GREEN}${v_env} ${GREEN}" Virtual environment"${RESET}
+        local ret_val="no Script"
+        _select_env
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script as a service using:"${BOLD_GREEN}${ret_val} ${GREEN}" Virtual environment"${RESET}
         echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies"${RESET}
     }
 
     _select_run_mode(){
+        echo -e ""${RESET}
         select m in Script Service
         do
             case $m in
@@ -209,8 +211,7 @@ _pysetenv_run(){
     then
         if [ -x ${1} ]; # check if ${1} is executable python script
         then
-            echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"${1} is a python executable file"
-            echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Searching for requirements.txt in this folder"${GREEN}
+            echo -e ${BOLD_GREEN}"[*] "${GREEN}"${1} is a python executable file"
             _select_run_mode
             
             # scan root folder as python file for file reuirements.txt
@@ -220,12 +221,12 @@ _pysetenv_run(){
                 echo -e ${BOLD_YELLOW}"[+] "${CYAN}"Installing dependancies"
                 python${PYSETENV_PYTHON_VERSION} -m pip install -r requirements.txt
             else
-                echo -e ${BOLD_YELLOW}"[*] "${CYAN}"requirements.txt not found"
-                read -p "[?] Add requirements.txt path (Y / N)" yes_no
+                echo -e ${BOLD_YELLOW}"[*] "${CYAN}"requirements.txt not found"${GREEN}
+                read -p "[?] Add requirements.txt path (Y / N) " yes_no
 
                 case $yes_no in
                     y|Y)
-                        read -p "[?] Enter absolute path to requirements.txt" req_txt
+                        read -p "[?] Enter absolute path to requirements.txt:  " req_txt
                         ;;
                     n|N)
                         echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Running script without requirements.txt"
