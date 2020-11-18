@@ -151,7 +151,7 @@ _pysetenv_run(){
         select v in $(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )
         do
             echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Running with python environment: "${v}${RESET}
-            local ret_val=$v
+            retval=$v
             break
         done
 
