@@ -158,25 +158,7 @@ _pysetenv_run(){
     }
     
     # check if ${1} is afile or a folder
-    if [ -d ${1} ];
-    then
-        echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"${1} is a folder"
-        echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Looking for requirements.txt in the folder"
-        _select_env
-        # scan this dir for file reuirements.txt
-        if [ -f ${1}/requirements.txt ];
-        then
-            echo -e ${BOLD_GREEN}"[+] "${GREEN}"found "${BOLD_GREEN}"${1}/requirements.txt"
-            echo -e ${BOLD_GREEN}"[+] "${GREEN}"Installing dependancies from ${1}/requirements.txt"
-            python${PYSETENV_PYTHON_VERSION} -m pip install -r requirements.txt
-        else
-            echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"no requirements.txt found"${GREEN}
-            read -p "Specify requirements.txt path (Y/N)" y_n
-
-
-        fi
-
-    elif [ -f ${1} ];
+    if [ -f ${1} ];
     then
         if [ -x ${1} ];
         then
@@ -192,6 +174,9 @@ _pysetenv_run(){
                 python${PYSETENV_PYTHON_VERSION} -m pip install -r requirements.txt
             fi
         fi
+    else
+        echo -e ${BOLD_RED}"[!] "${RED}"You have not specified file or folder"
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"USAGE: pysetenv -r <absolute/path/to/python/script>"
     fi
     echo ${2}
     return 0
