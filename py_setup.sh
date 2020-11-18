@@ -156,6 +156,15 @@ _pysetenv_run(){
         done
 
     }
+
+    _select_run_mode(){
+        select m in Script Service
+        do
+            echo -e ${BOLD_GREEN}"[+] "${GREEN}"You have Selected: "${BOLD_GREEN}${REPLY}${RESET}
+            echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running the script as "${BOLD_GREEN}${m}${RESET}
+
+        done
+    }
     
     # check if ${1} is a file
     if [ $# -eq 0 ]; # If no argument show help
