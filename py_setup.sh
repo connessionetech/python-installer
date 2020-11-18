@@ -150,7 +150,7 @@ _pysetenv_run(){
         do
             echo -e ""
             echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running with python environment: "${BOLD_GREEN}${v}${RESET}
-            retval=$v
+            v_venv=$v
             break
         done
 
@@ -189,7 +189,7 @@ _pysetenv_run(){
 
     # Run script 
     _run_script(){
-        _select_env
+        # _select_run_mode
         echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script using: "${BOLD_GREEN}${retval}${GREEN}" Virtual environment"${RESET}
         _scan_for_requirements
         echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${ret_val}${RESET}
@@ -198,7 +198,7 @@ _pysetenv_run(){
 
     # Run script as a service
     _run_service(){
-        _select_env
+        # _select_run_mode
         echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script as a service using: "${BOLD_GREEN}${retval} ${GREEN}" Virtual environment"${RESET}
         _scan_for_requirements
         echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${ret_val}${RESET}
@@ -211,18 +211,12 @@ _pysetenv_run(){
         do
             case $m in
                 Script)
-                    echo -e ""
-                    echo -e ${BOLD_GREEN}"[+] "${GREEN}"You have Selected: "${BOLD_GREEN}${REPLY}${RESET}
-                    echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running the script as "${BOLD_GREEN}${m}${RESET}
-                    _run_script
+                    run_mode=$m
                     break
                     ;;
 
                 Service)
-                    echo -e ""
-                    echo -e ${BOLD_GREEN}"[+] "${GREEN}"You have Selected: "${BOLD_GREEN}${REPLY}${RESET}
-                    echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running the script as "${BOLD_GREEN}${m}${RESET}
-                    _run_service
+                    run_mode=$m
                     break
                     ;;
                 *)
@@ -246,9 +240,32 @@ _pysetenv_run(){
         if [ -x ${1} ]; # check if ${1} is executable python script
         then
             echo -e ${BOLD_GREEN}"[*] "${GREEN}"${1} is a python executable file"
-            _select_run_mode
-            
-            
+            _select_env
+            if [ $retval ];
+            then
+                _select_run_mode
+
+                if [ $run_mode == "Script" ];
+                then
+                    echo -e ""
+                    echo -e ${BOLD_GREEN}"[+] "${GREEN}"You have Selected: "${BOLD_GREEN}${REPLY}${RESET}
+                    echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running the script as "${BOLD_GREEN}${m}${RESET}
+                    _run_script $v_venv
+
+                elif [ $run_mode == "Service" ];
+                then
+                    echo -e ""
+                    echo -e ${BOLD_GREEN}"[+] "${GREEN}"You have Selected: "${BOLD_GREEN}${REPLY}${RESET}
+                    echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running the script as "${BOLD_GREEN}${m}${RESET}
+                    _run_service $v_venv
+              
+                else
+                    _select_run_mode
+                fi
+            else
+                echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"Invalid selection..!"${RESET}
+                _select_env
+            fi
         fi
     fi
     return 0
