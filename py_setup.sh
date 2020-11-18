@@ -145,7 +145,6 @@ _pysetenv_run(){
     _select_env(){
         echo -e ""
         echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"Select environment you want to run your script with"${GREEN}
-        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Use number to select"${RESET}
         echo -e ""
 
         select v in $(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )
@@ -159,14 +158,14 @@ _pysetenv_run(){
 
     # Run script 
     _run_script(){
-        v_env=$(_select_env)
-        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script using: "${BOLD_GREEN}${v_env}${GREEN}" Virtual environment"${RESET}
+        _select_env
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script using: "${BOLD_GREEN}${retval}${GREEN}" Virtual environment"${RESET}
     }
 
     # Run script as a service
     _run_service(){
-        v_env=$(_select_env)
-        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script as a service using:"${BOLD_GREEN}${v_env} ${GREEN}" Virtual environment"${RESET}
+        _select_env
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script as a service using:"${BOLD_GREEN}${retval} ${GREEN}" Virtual environment"${RESET}
         echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies"${RESET}
     }
 
