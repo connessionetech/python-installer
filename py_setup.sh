@@ -150,7 +150,7 @@ _pysetenv_run(){
         do
             echo -e ""
             echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running with python environment: "${BOLD_GREEN}${v}${RESET}
-            local retval=$v
+            retval=$v
             break
         done
 
@@ -158,7 +158,7 @@ _pysetenv_run(){
 
     # scan root folder as python file for file reuirements.txt
     _scan_for_requirements(){
-        if [ -f $SCRIPT_ROOT_PATH/requirements.txt || -f ./requirements.txt || -f ./requirements/requirements.txt ];
+        if [ -f $SCRIPT_ROOT_PATH/requirements.txt ] || [ -f ./requirements.txt ] || [ -f ./requirements/requirements.txt ];
         then
             echo -e ${BOLD_YELLOW}"[+] "${CYAN}"found requirements.txt"
             # echo -e ${BOLD_YELLOW}"[+] "${CYAN}"Installing dependancies"
