@@ -170,6 +170,7 @@ _pysetenv_run(){
                     echo -e ${BOLD_GREEN}"[+] "${GREEN}"You have Selected: "${BOLD_GREEN}${REPLY}${RESET}
                     echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running the script as "${BOLD_GREEN}${m}${RESET}
                     ;;
+            esac
 
         done
     }
