@@ -190,7 +190,7 @@ _pysetenv_run(){
     # Run script 
     _run_script(){
         # _select_run_mode
-        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script using: "${BOLD_GREEN}${retval}${GREEN}" Virtual environment"${RESET}
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script using: "${BOLD_GREEN}${v_venv}${GREEN}" Virtual environment"${RESET}
         _scan_for_requirements
         echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${ret_val}${RESET}
 
@@ -199,7 +199,7 @@ _pysetenv_run(){
     # Run script as a service
     _run_service(){
         # _select_run_mode
-        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script as a service using: "${BOLD_GREEN}${retval} ${GREEN}" Virtual environment"${RESET}
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script as a service using: "${BOLD_GREEN}${v_venv} ${GREEN}" Virtual environment"${RESET}
         _scan_for_requirements
         echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${ret_val}${RESET}
     }
@@ -233,7 +233,6 @@ _pysetenv_run(){
         echo -e ${BOLD_RED}"[!] "${RED}"You have not specified file or folder"
         echo -e ${BOLD_YELLOW}"[*] "${GREEN}"USAGE: pysetenv -r ${BOLD_GREEN}<absolute/path/to/python/script>"${RESET} 
         echo -e ""
-        _pysetenv_help
         return 0
     elif [ -f ${1} ]; # check if ${1} is a file
     then
@@ -248,15 +247,13 @@ _pysetenv_run(){
                 if [ $run_mode == "Script" ];
                 then
                     echo -e ""
-                    echo -e ${BOLD_GREEN}"[+] "${GREEN}"You have Selected: "${BOLD_GREEN}${REPLY}${RESET}
-                    echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running the script as "${BOLD_GREEN}${m}${RESET}
+                    echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running the script as "${BOLD_GREEN}${run_mode}${RESET}
                     _run_script $v_venv
 
                 elif [ $run_mode == "Service" ];
                 then
                     echo -e ""
-                    echo -e ${BOLD_GREEN}"[+] "${GREEN}"You have Selected: "${BOLD_GREEN}${REPLY}${RESET}
-                    echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running the script as "${BOLD_GREEN}${m}${RESET}
+                    echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running the script as "${BOLD_GREEN}${run_mode}${RESET}
                     _run_service $v_venv
               
                 else
@@ -267,6 +264,11 @@ _pysetenv_run(){
                 _select_env
             fi
         fi
+    else
+        echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"Invalid python script specified"
+        echo -e ${BOLD_YELLOW}"[*] "${GREEN}"USAGE: pysetenv -r ${BOLD_GREEN}<absolute/path/to/python/script>"${RESET} 
+        echo -e ""
+        return 0
     fi
     return 0
 }
