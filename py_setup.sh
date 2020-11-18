@@ -265,7 +265,7 @@ _pysetenv_run(){
             fi
         fi
     else
-        echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"Invalid python script specified"
+        echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"Invalid python script path specified"
         echo -e ${BOLD_YELLOW}"[*] "${GREEN}"USAGE: pysetenv -r ${BOLD_GREEN}<absolute/path/to/python/script>"${RESET} 
         echo -e ""
         return 0
