@@ -158,12 +158,12 @@ _pysetenv_run(){
 
     # scan root folder as python file for file reuirements.txt
     _scan_for_requirements(){
-        if [ -f $SCRIPT_ROOT_PATH/requirements.txt || ./requirements.txt || ./requirements/requirements.txt ];
+        if [ -f $SCRIPT_ROOT_PATH/requirements.txt || -f ./requirements.txt || -f ./requirements/requirements.txt ];
         then
             echo -e ${BOLD_YELLOW}"[+] "${CYAN}"found requirements.txt"
             # echo -e ${BOLD_YELLOW}"[+] "${CYAN}"Installing dependancies"
             # python${PYSETENV_PYTHON_VERSION} -m pip install -r requirements.txt
-            local retval="requirements.txt"
+            ret_val="requirements.txt"
         else
             echo -e ${BOLD_YELLOW}"[*] "${CYAN}"requirements.txt not found"${GREEN}
             read -p "[?] Add requirements.txt path (Y / N) " yes_no
@@ -174,7 +174,7 @@ _pysetenv_run(){
                     read -p "" req_txt
                     # To do check if it exist
 
-                    local retval=$req_txt
+                    ret_val=$req_txt
                     ;;
                 n|N)
                     echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Running script without requirements.txt"
@@ -184,8 +184,6 @@ _pysetenv_run(){
                     ;;
             esac
 
-            echo -e ${BOLD_YELLOW}"[+] "${CYAN}"found requirements.txt"
-            
         fi
     }
 
@@ -194,7 +192,7 @@ _pysetenv_run(){
         _select_env
         echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script using: "${BOLD_GREEN}${retval}${GREEN}" Virtual environment"${RESET}
         _scan_for_requirements
-        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${retval}${RESET}
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${ret_val}${RESET}
 
     }
 
@@ -203,7 +201,7 @@ _pysetenv_run(){
         _select_env
         echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script as a service using: "${BOLD_GREEN}${retval} ${GREEN}" Virtual environment"${RESET}
         _scan_for_requirements
-        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${retval}${RESET}
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${ret_val}${RESET}
     }
 
     _select_run_mode(){
