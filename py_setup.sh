@@ -242,7 +242,7 @@ _pysetenv_run(){
         then
             echo -e ${BOLD_GREEN}"[*] "${GREEN}"${1} is a python executable file"
             _select_env
-            if [ $retval ];
+            if [ $v_venv ];
             then
                 _select_run_mode
 
