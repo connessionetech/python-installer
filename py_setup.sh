@@ -160,21 +160,21 @@ _pysetenv_run(){
     _scan_for_requirements(){
         if [ -f $SCRIPT_ROOT_PATH/requirements.txt ] || [ -f ./requirements.txt ] || [ -f ./requirements/requirements.txt ];
         then
-            echo -e ${BOLD_YELLOW}"[+] "${CYAN}"found requirements.txt"
+            echo -e ${BOLD_GREEN}"[+] "${GREEN}"found requirements.txt"
             # echo -e ${BOLD_YELLOW}"[+] "${CYAN}"Installing dependancies"
             # python${PYSETENV_PYTHON_VERSION} -m pip install -r requirements.txt
-            ret_val="requirements.txt"
+            req_txt="requirements.txt"
         else
-            echo -e ${BOLD_YELLOW}"[*] "${CYAN}"requirements.txt not found"${GREEN}
+            echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"requirements.txt not found"${GREEN}
             read -p "[?] Add requirements.txt path (Y / N) " yes_no
 
             case $yes_no in
                 y|Y)
                     echo -e ${BOLD_YELLOW}"[?] "${YELLOW}"Enter absolute path to requirements.txt: "
-                    read -p "" req_txt
+                    read -p "" r_txt
                     # To do check if it exist
 
-                    ret_val=$req_txt
+                    req_txt=$r_txt
                     ;;
                 n|N)
                     echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Running script without requirements.txt"
@@ -191,8 +191,9 @@ _pysetenv_run(){
     _run_script(){
         # _select_run_mode
         echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script using: "${BOLD_GREEN}${v_venv}${GREEN}" Virtual environment"${RESET}
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"path to virtual environment: "${BOLD_GREEN}${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}${RESET}
         _scan_for_requirements
-        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${ret_val}${RESET}
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${req_txt}${RESET}
 
     }
 
@@ -200,8 +201,9 @@ _pysetenv_run(){
     _run_service(){
         # _select_run_mode
         echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script as a service using: "${BOLD_GREEN}${v_venv} ${GREEN}" Virtual environment"${RESET}
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"path to virtual environment: "${BOLD_GREEN}${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}${RESET}
         _scan_for_requirements
-        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${ret_val}${RESET}
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${req_txt}${RESET}
     }
 
     _select_run_mode(){
