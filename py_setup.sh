@@ -157,8 +157,12 @@ _pysetenv_run(){
 
     }
     
-    # check if ${1} is afile or a folder
-    if [ -f ${1} ];
+    # check if ${1} is a file
+    if [ $# -eq 0 ]; # If no argument show help
+    then
+        echo -e ${BOLD_RED}"[!] "${RED}"You have not specified file or folder"
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"USAGE: pysetenv -r ${BOLD_GREEN}<absolute/path/to/python/script>"${RESET} 
+    elif [ -f ${1} ];
     then
         if [ -x ${1} ];
         then
@@ -175,8 +179,7 @@ _pysetenv_run(){
             fi
         fi
     else
-        echo -e ${BOLD_RED}"[!] "${RED}"You have not specified file or folder"
-        echo -e ${BOLD_GREEN}"[*] "${GREEN}"USAGE: pysetenv -r <absolute/path/to/python/script>"
+
     fi
     echo ${2}
     return 0
