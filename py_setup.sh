@@ -150,7 +150,6 @@ _pysetenv_run(){
 
         select v in $(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )
         do
-            echo -e ${BOLD_GREEN}"[+] "${GREEN}"You have Selected: "${BOLD_GREEN}${REPLY}${RESET}
             echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Running with python environment: "${v}${RESET}
 
         done
@@ -177,12 +176,19 @@ _pysetenv_run(){
                 Script)
                     echo -e ${BOLD_GREEN}"[+] "${GREEN}"You have Selected: "${BOLD_GREEN}${REPLY}${RESET}
                     echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running the script as "${BOLD_GREEN}${m}${RESET}
+                    _run_script
+                    break
                     ;;
 
                 Service)
                     echo -e ${BOLD_GREEN}"[+] "${GREEN}"You have Selected: "${BOLD_GREEN}${REPLY}${RESET}
                     echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running the script as "${BOLD_GREEN}${m}${RESET}
+                    _run_service
+                    break
                     ;;
+                *)
+                    echo -e ${BOLD_GREEN}"[+] "${GREEN}"Invalid selection. Use number to select"${RESET}
+                    _select_run_mode
             esac
 
         done
@@ -192,14 +198,16 @@ _pysetenv_run(){
     if [ $# -eq 0 ]; # If no argument show help
     then
         echo -e ${BOLD_RED}"[!] "${RED}"You have not specified file or folder"
-        echo -e ${BOLD_GREEN}"[*] "${GREEN}"USAGE: pysetenv -r ${BOLD_GREEN}<absolute/path/to/python/script>"${RESET} 
+        echo -e ${BOLD_YELLOW}"[*] "${GREEN}"USAGE: pysetenv -r ${BOLD_GREEN}<absolute/path/to/python/script>"${RESET} 
+        echo -e ""
+        _pysetenv_help
         return 0
     elif [ -f ${1} ]; # check if ${1} is a file
     then
         if [ -x ${1} ]; # check if ${1} is executable python script
         then
             echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"${1} is a python executable file"
-            echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Searching for requirements.txt in this folder"
+            echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Searching for requirements.txt in this folder"${GREEN}
             _select_run_mode
             
             # scan root folder as python file for file reuirements.txt
