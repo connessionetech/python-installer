@@ -160,25 +160,33 @@ _pysetenv_run(){
     _select_run_mode(){
         select m in Script Service
         do
-            echo -e ${BOLD_GREEN}"[+] "${GREEN}"You have Selected: "${BOLD_GREEN}${REPLY}${RESET}
-            echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running the script as "${BOLD_GREEN}${m}${RESET}
+            case $m in
+                Script)
+                    echo -e ${BOLD_GREEN}"[+] "${GREEN}"You have Selected: "${BOLD_GREEN}${REPLY}${RESET}
+                    echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running the script as "${BOLD_GREEN}${m}${RESET}
+                    ;;
+
+                Service)
+                    echo -e ${BOLD_GREEN}"[+] "${GREEN}"You have Selected: "${BOLD_GREEN}${REPLY}${RESET}
+                    echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running the script as "${BOLD_GREEN}${m}${RESET}
+                    ;;
 
         done
     }
     
-    # check if ${1} is a file
+    
     if [ $# -eq 0 ]; # If no argument show help
     then
         echo -e ${BOLD_RED}"[!] "${RED}"You have not specified file or folder"
         echo -e ${BOLD_GREEN}"[*] "${GREEN}"USAGE: pysetenv -r ${BOLD_GREEN}<absolute/path/to/python/script>"${RESET} 
         return 0
-    elif [ -f ${1} ];
+    elif [ -f ${1} ]; # check if ${1} is a file
     then
-        if [ -x ${1} ];
+        if [ -x ${1} ]; # check if ${1} is executable python script
         then
             echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"${1} is a python executable file"
             echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Searching for requirements.txt in this folder"
-            _select_env
+            _select_run_mode
             
             # scan root folder as python file for file reuirements.txt
             if [ -f ./requirements.txt ];
