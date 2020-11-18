@@ -151,7 +151,7 @@ _pysetenv_run(){
         select v in $(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )
         do
             echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Running with python environment: "${v}${RESET}
-            return $v
+            ret_val=$v
             break
         done
 
@@ -159,8 +159,9 @@ _pysetenv_run(){
 
     # Run script 
     _run_script(){
-        v_env = $(_select_env)
-        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script using:"${BOLD_GREEN}${v_env} ${GREEN}" Virtual environment"${RESET}
+        local ret_val="no script"
+        # v_env = $(_select_env)
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script using:"${BOLD_GREEN}${ret_val} ${GREEN}" Virtual environment"${RESET}
 
     }
 
