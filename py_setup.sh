@@ -162,11 +162,12 @@ _pysetenv_run(){
     then
         echo -e ${BOLD_RED}"[!] "${RED}"You have not specified file or folder"
         echo -e ${BOLD_GREEN}"[*] "${GREEN}"USAGE: pysetenv -r ${BOLD_GREEN}<absolute/path/to/python/script>"${RESET} 
+        return 0
     elif [ -f ${1} ];
     then
         if [ -x ${1} ];
         then
-            echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"${1} is a executable file"
+            echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"${1} is a python executable file"
             echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Searching for requirements.txt in this folder"
             _select_env
             
@@ -176,12 +177,27 @@ _pysetenv_run(){
                 echo -e ${BOLD_YELLOW}"[+] "${CYAN}"found requirements.txt"
                 echo -e ${BOLD_YELLOW}"[+] "${CYAN}"Installing dependancies"
                 python${PYSETENV_PYTHON_VERSION} -m pip install -r requirements.txt
+            else
+                echo -e ${BOLD_YELLOW}"[*] "${CYAN}"requirements.txt not found"
+                read -p "[?] Add requirements.txt path (Y / N)" yes_no
+
+                case $yes_no in
+                    y|Y)
+                        read -p "[?] Enter absolute path to requirements.txt" req_txt
+                        ;;
+                    n|N)
+                        echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Running script without requirements.txt"
+                        ;;
+                    *)
+                        echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Running script without requirements.txt"
+                        ;;
+                esac
+
+                echo -e ${BOLD_YELLOW}"[+] "${CYAN}"found requirements.txt"
+                
             fi
         fi
-    else
-
     fi
-    echo ${2}
     return 0
 }
 
