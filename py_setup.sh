@@ -144,29 +144,66 @@ _pysetenv_run(){
 
     _select_env(){
         echo -e ""
-        echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"Select environment you want to run your script with"${GREEN}
-        echo -e ""
+        echo -e ${BOLD_YELLOW}"[?] "${YELLOW}"Select virtual environment to run your script with: "${RESET}
 
         select v in $(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )
         do
-            echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Running with python environment: "${v}${RESET}
-            retval=$v
+            echo -e ""
+            echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running with python environment: "${BOLD_GREEN}${v}${RESET}
+            local retval=$v
             break
         done
 
+    }
+
+    # scan root folder as python file for file reuirements.txt
+    _scan_for_requirements(){
+        if [ -f $SCRIPT_ROOT_PATH/requirements.txt || ./requirements.txt || ./requirements/requirements.txt ];
+        then
+            echo -e ${BOLD_YELLOW}"[+] "${CYAN}"found requirements.txt"
+            # echo -e ${BOLD_YELLOW}"[+] "${CYAN}"Installing dependancies"
+            # python${PYSETENV_PYTHON_VERSION} -m pip install -r requirements.txt
+            local retval="requirements.txt"
+        else
+            echo -e ${BOLD_YELLOW}"[*] "${CYAN}"requirements.txt not found"${GREEN}
+            read -p "[?] Add requirements.txt path (Y / N) " yes_no
+
+            case $yes_no in
+                y|Y)
+                    echo -e ${BOLD_YELLOW}"[?] "${YELLOW}"Enter absolute path to requirements.txt: "
+                    read -p "" req_txt
+                    # To do check if it exist
+
+                    local retval=$req_txt
+                    ;;
+                n|N)
+                    echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Running script without requirements.txt"
+                    ;;
+                *)
+                    echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Running script without requirements.txt"
+                    ;;
+            esac
+
+            echo -e ${BOLD_YELLOW}"[+] "${CYAN}"found requirements.txt"
+            
+        fi
     }
 
     # Run script 
     _run_script(){
         _select_env
         echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script using: "${BOLD_GREEN}${retval}${GREEN}" Virtual environment"${RESET}
+        _scan_for_requirements
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${retval}${RESET}
+
     }
 
     # Run script as a service
     _run_service(){
         _select_env
-        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script as a service using:"${BOLD_GREEN}${retval} ${GREEN}" Virtual environment"${RESET}
-        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies"${RESET}
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script as a service using: "${BOLD_GREEN}${retval} ${GREEN}" Virtual environment"${RESET}
+        _scan_for_requirements
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${retval}${RESET}
     }
 
     _select_run_mode(){
@@ -176,6 +213,7 @@ _pysetenv_run(){
         do
             case $m in
                 Script)
+                    echo -e ""
                     echo -e ${BOLD_GREEN}"[+] "${GREEN}"You have Selected: "${BOLD_GREEN}${REPLY}${RESET}
                     echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running the script as "${BOLD_GREEN}${m}${RESET}
                     _run_script
@@ -183,6 +221,7 @@ _pysetenv_run(){
                     ;;
 
                 Service)
+                    echo -e ""
                     echo -e ${BOLD_GREEN}"[+] "${GREEN}"You have Selected: "${BOLD_GREEN}${REPLY}${RESET}
                     echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running the script as "${BOLD_GREEN}${m}${RESET}
                     _run_service
@@ -211,31 +250,7 @@ _pysetenv_run(){
             echo -e ${BOLD_GREEN}"[*] "${GREEN}"${1} is a python executable file"
             _select_run_mode
             
-            # scan root folder as python file for file reuirements.txt
-            if [ -f ./requirements.txt ];
-            then
-                echo -e ${BOLD_YELLOW}"[+] "${CYAN}"found requirements.txt"
-                echo -e ${BOLD_YELLOW}"[+] "${CYAN}"Installing dependancies"
-                python${PYSETENV_PYTHON_VERSION} -m pip install -r requirements.txt
-            else
-                echo -e ${BOLD_YELLOW}"[*] "${CYAN}"requirements.txt not found"${GREEN}
-                read -p "[?] Add requirements.txt path (Y / N) " yes_no
-
-                case $yes_no in
-                    y|Y)
-                        read -p "[?] Enter absolute path to requirements.txt:  " req_txt
-                        ;;
-                    n|N)
-                        echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Running script without requirements.txt"
-                        ;;
-                    *)
-                        echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Running script without requirements.txt"
-                        ;;
-                esac
-
-                echo -e ${BOLD_YELLOW}"[+] "${CYAN}"found requirements.txt"
-                
-            fi
+            
         fi
     fi
     return 0
