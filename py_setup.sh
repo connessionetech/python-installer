@@ -182,7 +182,6 @@ _pysetenv_run(){
                     echo -e ${BOLD_YELLOW}"[?] "${YELLOW}"Enter absolute path to requirements.txt: "${CYAN}
                     read -p "Absolute path: " r_txt
                     # To do check if it exist
-                    echo -e "PATH ENTERED: "${r_txt}
                     if [ -f "${r_txt}" ];
                     then
                         req_txt=${r_txt}
@@ -256,6 +255,7 @@ _pysetenv_run(){
         echo -e ${BOLD_GREEN}"[*] "${GREEN}"path to virtual environment: "${BOLD_GREEN}${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}${RESET}
         _scan_for_requirements
 
+        source ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/activate
         re='[a-zA-Z]'
         if [[ "$req_txt" =~ $re ]];
         then
@@ -267,7 +267,7 @@ _pysetenv_run(){
                 case $no_yes in 
                     y|Y)
                         echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${req_txt}${RESET}
-                        sudo ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} -m pip install -r $req_txt
+                        sudo pip${PYSETENV_PYTHON_VERSION} install -r $req_txt
                         ;;
                     n|N)
                         echo -e ${BOLD_RED}"[-] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
@@ -391,11 +391,5 @@ pysetenv()
                 fi
                 ;;
         esac
-    # elif [ $# -le 5 ];
-    # then
-    #     case "${1}" in
-    #         -r|--run) _pysetenv_run ${2} ${3};;
-    #         *) _pysetenv_help;;
-    #     esac
     fi
 }
