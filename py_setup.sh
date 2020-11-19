@@ -158,12 +158,19 @@ _pysetenv_run(){
 
     # scan root folder as python file for file reuirements.txt
     _scan_for_requirements(){
-        if [ -f $SCRIPT_ROOT_PATH/requirements.txt ] || [ -f ./requirements.txt ] || [ -f ./requirements/requirements.txt ];
+        if [ -f $SCRIPT_ROOT_PATH/requirements.txt ];
         then
             echo -e ${BOLD_GREEN}"[+] "${GREEN}"found requirements.txt"
-            # echo -e ${BOLD_YELLOW}"[+] "${CYAN}"Installing dependancies"
-            # python${PYSETENV_PYTHON_VERSION} -m pip install -r requirements.txt
-            req_txt="requirements.txt"
+            req_txt="${SCRIPT_ROOT_PATH}requirements.txt"
+
+        elif [ -f $script_dir/requirements.txt ];
+            echo -e ${BOLD_GREEN}"[+] "${GREEN}"found requirements.txt"
+            req_txt=${script_dir}requirements.txt
+
+        elif [ -f ${script_dir}requirements/requirements.txt ];
+            echo -e ${BOLD_GREEN}"[+] "${GREEN}"found requirements.txt"
+            req_txt=${script_dir}requirements/requirements.txt            
+
         else
             echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"requirements.txt not found"${GREEN}
             read -p "[?] Add requirements.txt path (Y / N) " yes_no
@@ -210,7 +217,7 @@ _pysetenv_run(){
                 case $no_yes in 
                     y|Y)
                         echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${req_txt}${RESET}
-                        ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} -m pip install -r $req_txt
+                        sudo ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} -m pip install -r $req_txt
                         ;;
                     n|N)
                         echo -e ${BOLD_RED}"[!] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
@@ -226,7 +233,7 @@ _pysetenv_run(){
         read -p " ( Y | N ) " no_yes
         case $no_yes in 
             y|Y)
-                ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} ${my_script}
+                sudo ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} ${my_script}
                 ;;
             n|N)
                 echo -e ${BOLD_RED}"[!] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
@@ -254,7 +261,7 @@ _pysetenv_run(){
                 case $no_yes in 
                     y|Y)
                         echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${req_txt}${RESET}
-                        ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} -m pip install -r $req_txt
+                        sudo ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} -m pip install -r $req_txt
                         ;;
                     n|N)
                         echo -e ${BOLD_RED}"[-] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
@@ -272,7 +279,7 @@ _pysetenv_run(){
         read -p "" no_yes
         case $no_yes in 
             y|Y)
-                ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} ${my_script}
+                sudo ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} ${my_script}
                 ;;
             n|N)
                 echo -e ${BOLD_RED}"[-] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
@@ -315,6 +322,7 @@ _pysetenv_run(){
     then
         if [ -x ${1} ]; # check if ${1} is executable python script
         then
+            script_dir=$(dirname "$1")
             my_script=$1
             echo -e ${BOLD_GREEN}"[*] "${GREEN}"${my_script} is a python executable file"
             _select_env
