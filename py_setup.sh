@@ -170,8 +170,8 @@ _pysetenv_run(){
 
             case $yes_no in
                 y|Y)
-                    echo -e ${BOLD_YELLOW}"[?] "${YELLOW}"Enter absolute path to requirements.txt: "
-                    read -p "" r_txt
+                    echo -e ${BOLD_YELLOW}"[?] "${YELLOW}"Enter absolute path to requirements.txt: "${CYAN}
+                    read -p "Absolute path: " r_txt
                     # To do check if it exist
                     if [ -f r_txt ];
                     then
