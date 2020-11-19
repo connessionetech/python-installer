@@ -196,18 +196,16 @@ _pysetenv_run(){
 
         re='[a-zA-Z]'
         if [[ "$req_txt" =~ $re ]];
-        then
-            echo -e ${BOLD_GREEN}"[*] "${GREEN}"dependancies: "${req_txt}
-            echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${req_txt}${RESET}
-            
-            if hash ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python 2> /dev/null;
+        then            
+            if hash ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} 2> /dev/null;
             then
+                echo -e ${BOLD_GREEN}"[*] "${GREEN}"requirements.txt path: "${BOLD_GREEN}${req_txt}${RESET}
                 echo -e ${BOLD_GREEN}"[*] "${GREEN}"Install dependancies from: "${BOLD_GREEN}${req_txt}"?"${RESET}
-                read -p "" no_yes
+                read -p " (Y | N) " no_yes
                 case $no_yes in 
                     y|Y)
                         echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${req_txt}${RESET}
-                        ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/${PYSETENV_PYTHON_VERSION} -m pip install -r $req_txt
+                        ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} -m pip install -r $req_txt
                         ;;
                     n|N)
                         echo -e ${BOLD_RED}"[!] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
@@ -224,7 +222,7 @@ _pysetenv_run(){
             read -p "" no_yes
             case $no_yes in 
                 y|Y)
-                    ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/${PYSETENV_PYTHON_VERSION} ${my_script}
+                    ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} ${my_script}
                     ;;
                 n|N)
                     echo -e ${BOLD_RED}"[!] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
@@ -246,12 +244,11 @@ _pysetenv_run(){
         re='[a-zA-Z]'
         if [[ "$req_txt" =~ $re ]];
         then
-            echo -e ${BOLD_GREEN}"[*] "${GREEN}"dependancies: "${req_txt}
-            
-            if hash ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python 2> /dev/null;
+            if hash ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} 2> /dev/null;
             then
+                echo -e ${BOLD_GREEN}"[*] "${GREEN}"requirements.txt path: "${BOLD_GREEN}${req_txt}${RESET}
                 echo -e ${BOLD_GREEN}"[*] "${GREEN}"Install dependancies from: "${BOLD_GREEN}${req_txt}"?"${RESET}
-                read -p "" no_yes
+                read -p " (Y | N ) " no_yes
                 case $no_yes in 
                     y|Y)
                         echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${req_txt}${RESET}
@@ -273,7 +270,7 @@ _pysetenv_run(){
         read -p "" no_yes
         case $no_yes in 
             y|Y)
-                ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/${PYSETENV_PYTHON_VERSION} ${my_script}
+                ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} ${my_script}
                 ;;
             n|N)
                 echo -e ${BOLD_RED}"[!] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
