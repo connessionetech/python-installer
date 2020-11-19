@@ -188,6 +188,7 @@ _pysetenv_run(){
                         req_txt=${r_txt}
                     else
                         echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"File not found "${BOLD_YELLOW}"!!!"${RESET}
+                        req_txt=""
                         _scan_for_requirements
                     fi
                     ;;
@@ -231,7 +232,7 @@ _pysetenv_run(){
             fi
         fi
         echo -e ${BOLD_GREEN}"[?] "${GREEN}"Run: "${BOLD_GREEN}${my_script}${GREEN}" with: "${BOLD_GREEN}${v_venv}${GREEN}" Virtual environment"${RESET}
-        echo -e "     "${GREEN}"Using: "${BOLD_GREEN}${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION}${GREEN}
+        echo -e "    "${GREEN}"Using: "${BOLD_GREEN}${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION}${GREEN}
 
         read -p " ( Y | N ) " no_yes
         case $no_yes in 
@@ -261,7 +262,7 @@ _pysetenv_run(){
             if hash ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} 2> /dev/null;
             then
                 echo -e ${BOLD_GREEN}"[*] "${GREEN}"requirements.txt path: "${BOLD_GREEN}${req_txt}${RESET}
-                echo -e ${BOLD_GREEN}"[*] "${GREEN}"Install dependancies from: "${BOLD_GREEN}${req_txt}"?"${RESET}
+                echo -e ${BOLD_GREEN}"[*] "${GREEN}"Install dependancies from: "${BOLD_GREEN}${req_txt}" ?"${RESET}
                 read -p " (Y | N ) " no_yes
                 case $no_yes in 
                     y|Y)
@@ -270,6 +271,7 @@ _pysetenv_run(){
                         ;;
                     n|N)
                         echo -e ${BOLD_RED}"[-] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
+                        req_txt=""
                         return 0
                         ;;
                     *)
@@ -279,7 +281,7 @@ _pysetenv_run(){
         
         fi
         echo -e ${BOLD_GREEN}"[?] "${GREEN}"Run: "${BOLD_GREEN}${my_script}${GREEN}" with: "${BOLD_GREEN}${v_venv}
-        echo -e "     "${GREEN}"Using: "${BOLD_GREEN}${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION}"?"${BOLD_YELLOW}
+        echo -e "    "${GREEN}"Using: "${BOLD_GREEN}${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION}"?"${BOLD_YELLOW}
 
         read -p "" no_yes
         case $no_yes in 
@@ -332,6 +334,7 @@ _pysetenv_run(){
             script_dir=$(dirname "$1")
             my_script=$1
             echo -e ${BOLD_GREEN}"[*] "${GREEN}"${my_script} is a python executable file"
+            echo -e ${BOLD_GREEN}"[*] "${GREEN}"Root dir: "${BOLD_GREEN}${script_dir}${RESET}
             _select_env
             if [ $v_venv ];
             then
