@@ -164,12 +164,14 @@ _pysetenv_run(){
             req_txt="${SCRIPT_ROOT_PATH}requirements.txt"
 
         elif [ -f $script_dir/requirements.txt ];
-            echo -e ${BOLD_GREEN}"[+] "${GREEN}"found requirements.txt"
-            req_txt=${script_dir}requirements.txt
+            then
+                echo -e ${BOLD_GREEN}"[+] "${GREEN}"found requirements.txt"
+                req_txt=${script_dir}requirements.txt
 
         elif [ -f ${script_dir}requirements/requirements.txt ];
-            echo -e ${BOLD_GREEN}"[+] "${GREEN}"found requirements.txt"
-            req_txt=${script_dir}requirements/requirements.txt            
+            then
+                echo -e ${BOLD_GREEN}"[+] "${GREEN}"found requirements.txt"
+                req_txt=${script_dir}requirements/requirements.txt            
 
         else
             echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"requirements.txt not found"${GREEN}
