@@ -173,8 +173,13 @@ _pysetenv_run(){
                     echo -e ${BOLD_YELLOW}"[?] "${YELLOW}"Enter absolute path to requirements.txt: "
                     read -p "" r_txt
                     # To do check if it exist
-
-                    req_txt=$r_txt
+                    if [ -f r_txt ];
+                    then
+                        req_txt=$r_txt
+                    else
+                        echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"File not found "${BOLD_YELLOW}"!!!"${RESET}
+                        _scan_for_requirements
+                    fi
                     ;;
                 n|N)
                     # echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Running script without requirements.txt"
@@ -215,8 +220,8 @@ _pysetenv_run(){
                 esac
             fi
         fi
-        echo -e ${BOLD_GREEN}"[?] "${GREEN}"Run: "${BOLD_GREEN}${my_script}${GREEN}" with: "${BOLD_GREEN}${v_venv}" Virtual environment"${RESET}
-        echo -e "  "${GREEN}"Using: "${BOLD_GREEN}${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION}
+        echo -e ${BOLD_GREEN}"[?] "${GREEN}"Run: "${BOLD_GREEN}${my_script}${GREEN}" with: "${BOLD_GREEN}${v_venv}${GREEN}" Virtual environment"${RESET}
+        echo -e "     "${GREEN}"Using: "${BOLD_GREEN}${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION}${GREEN}
 
         read -p " ( Y | N ) " no_yes
         case $no_yes in 
@@ -234,7 +239,7 @@ _pysetenv_run(){
     # Run script as a service
     _run_service(){
         # _select_run_mode
-        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script as a service using: "${BOLD_GREEN}${v_venv} ${GREEN}" Virtual environment"${RESET}
+        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running script as a service using: "${BOLD_GREEN}${v_venv}${GREEN}" Virtual environment"${RESET}
         echo -e ${BOLD_GREEN}"[*] "${GREEN}"path to virtual environment: "${BOLD_GREEN}${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}${RESET}
         _scan_for_requirements
 
@@ -252,7 +257,7 @@ _pysetenv_run(){
                         ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} -m pip install -r $req_txt
                         ;;
                     n|N)
-                        echo -e ${BOLD_RED}"[!] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
+                        echo -e ${BOLD_RED}"[-] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
                         return 0
                         ;;
                     *)
@@ -262,7 +267,7 @@ _pysetenv_run(){
         
         fi
         echo -e ${BOLD_GREEN}"[?] "${GREEN}"Run: "${BOLD_GREEN}${my_script}${GREEN}" with: "${BOLD_GREEN}${v_venv}
-        echo -e "  "${GREEN}"Using: "${BOLD_GREEN}${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION}"?"${BOLD_YELLOW}
+        echo -e "     "${GREEN}"Using: "${BOLD_GREEN}${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION}"?"${BOLD_YELLOW}
 
         read -p "" no_yes
         case $no_yes in 
@@ -270,7 +275,7 @@ _pysetenv_run(){
                 ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} ${my_script}
                 ;;
             n|N)
-                echo -e ${BOLD_RED}"[!] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
+                echo -e ${BOLD_RED}"[-] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
                 ;;
             *)
                 _run_service
