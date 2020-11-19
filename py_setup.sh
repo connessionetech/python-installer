@@ -182,7 +182,7 @@ _pysetenv_run(){
                     echo -e ${BOLD_YELLOW}"[?] "${YELLOW}"Enter absolute path to requirements.txt: "${CYAN}
                     read -p "Absolute path: " r_txt
                     # To do check if it exist
-                    if [ -f r_txt ];
+                    if [ -f $r_txt ];
                     then
                         req_txt=$r_txt
                     else
