@@ -182,7 +182,8 @@ _pysetenv_run(){
                     echo -e ${BOLD_YELLOW}"[?] "${YELLOW}"Enter absolute path to requirements.txt: "${CYAN}
                     read -p "Absolute path: " r_txt
                     # To do check if it exist
-                    if [ -f ${r_txt} ];
+                    echo -e "PATH ENTERED: "${r_txt}
+                    if [ -f "${r_txt}" ];
                     then
                         req_txt=${r_txt}
                     else
@@ -219,7 +220,7 @@ _pysetenv_run(){
                 case $no_yes in 
                     y|Y)
                         echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${req_txt}${RESET}
-                        ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} -m pip install -r $req_txt --user
+                        sudo ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} -m pip install -r $req_txt
                         ;;
                     n|N)
                         echo -e ${BOLD_RED}"[!] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
@@ -236,7 +237,7 @@ _pysetenv_run(){
         case $no_yes in 
             y|Y)
                 echo -e ${RESET}""
-                ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} ${my_script} --user
+                ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} ${my_script}
                 echo -e ${RESET}""
                 ;;
             n|N)
@@ -265,7 +266,7 @@ _pysetenv_run(){
                 case $no_yes in 
                     y|Y)
                         echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${req_txt}${RESET}
-                        ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} -m pip install -r $req_txt --user
+                        sudo ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} -m pip install -r $req_txt
                         ;;
                     n|N)
                         echo -e ${BOLD_RED}"[-] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
@@ -284,7 +285,7 @@ _pysetenv_run(){
         case $no_yes in 
             y|Y)
                 echo -e ${RESET}""
-                ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} ${my_script} --user
+                ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} ${my_script}
                 echo -e ${RESET}""
                 ;;
             n|N)
