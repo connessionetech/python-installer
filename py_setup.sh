@@ -193,10 +193,10 @@ _pysetenv_run(){
                     fi
                     ;;
                 n|N)
-                    # echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Running script without requirements.txt"
+                    req_txt=""
                     ;;
                 *)
-                    # echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Running script without requirements.txt"
+                    req_txt=""
                     ;;
             esac
 
