@@ -148,8 +148,10 @@ _pysetenv_run(){
         echo -e ""
         echo -e ${BOLD_YELLOW}"[?] "${YELLOW}"Select virtual environment to run your script with: "${RESET}
 
+        # list of available virtualenv
         venvs=$(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )
         
+        # check if virtualenv exists
         if [[ "$venvs" =~ $re ]];
         then
             select v in $venvs
@@ -162,6 +164,7 @@ _pysetenv_run(){
         else
             echo -e ${BOLD_YELLOW}"[!] No virtual environment existing !!!"${RESET}
             echo -e ${BOLD_GREEN}"[*] "${GREEN}"Use: "${BOLD_GREEN}"pysetenv --new <venv name>"${GREEN}" to create new environment"${RESET}
+            # v_venv=""
             return 0
         fi
     }
@@ -392,11 +395,13 @@ _pysetenv_run(){
             my_script=$1
             echo -e ${BOLD_GREEN}"[*] "${my_script}${GREEN}"is a python executable file"
             echo -e ${BOLD_GREEN}"[*] "${GREEN}"Root dir: "${BOLD_GREEN}${script_dir}${RESET}
+            
             _select_env
-            if [ "$v_venv" =~ $re ];
+            if [[ "$v_venv" =~ $re ]];
             then
                 _select_run_mode
 
+                # check runmode selected
                 if [ $run_mode == "Script" ];
                 then
                     echo -e ""
@@ -416,6 +421,7 @@ _pysetenv_run(){
                 echo -e ""
                 echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"Invalid selection..!"${RESET}
                 echo -e ${BOLD_GREEN}"[*] Select environment by list number..!"${RESET}
+                _select_env
                 echo -e ""
             fi
         fi
