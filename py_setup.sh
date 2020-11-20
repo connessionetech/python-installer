@@ -162,7 +162,6 @@ _pysetenv_run(){
         else
             echo -e ${BOLD_YELLOW}"[!] No virtual environment existing !!!"${RESET}
             echo -e ${BOLD_GREEN}"[*] "${GREEN}"Use: "${BOLD_GREEN}"pysetenv --new <venv name>"${GREEN}" to create new environment"${RESET} 
-            exit 0
         fi
     }
 
@@ -392,7 +391,7 @@ _pysetenv_run(){
             echo -e ${BOLD_GREEN}"[*] "${my_script}${GREEN}"is a python executable file"
             echo -e ${BOLD_GREEN}"[*] "${GREEN}"Root dir: "${BOLD_GREEN}${script_dir}${RESET}
             _select_env
-            if [ $v_venv ];
+            if [ "$v_venv" =~ $re ];
             then
                 _select_run_mode
 
@@ -400,19 +399,20 @@ _pysetenv_run(){
                 then
                     echo -e ""
                     echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running the script as "${BOLD_GREEN}${run_mode}${RESET}
-                    _run_script $v_venv
+                    _run_script
 
                 elif [ $run_mode == "Service" ];
                 then
                     echo -e ""
                     echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running the script as "${BOLD_GREEN}${run_mode}${RESET}
-                    _run_service $v_venv
+                    _run_service
               
                 else
                     _select_run_mode
                 fi
             else
                 echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"Invalid selection..!"${RESET}
+                echo -e ${BOLD_GREEN}"[*] Select environment by list number..!"${RESET}
                 _select_env
             fi
         fi
