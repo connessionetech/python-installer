@@ -161,7 +161,8 @@ _pysetenv_run(){
             done
         else
             echo -e ${BOLD_YELLOW}"[!] No virtual environment existing !!!"${RESET}
-            echo -e ${BOLD_GREEN}"[*] "${GREEN}"Use: "${BOLD_GREEN}"pysetenv --new <venv name>"${GREEN}" to create new environment"${RESET} 
+            echo -e ${BOLD_GREEN}"[*] "${GREEN}"Use: "${BOLD_GREEN}"pysetenv --new <venv name>"${GREEN}" to create new environment"${RESET}
+            return 0
         fi
     }
 
@@ -378,6 +379,7 @@ _pysetenv_run(){
     
     if [ $# -eq 0 ]; # If no argument show help
     then
+        echo -e ""
         echo -e ${BOLD_RED}"[!] "${RED}"You have not specified file or folder"
         echo -e ${BOLD_YELLOW}"[*] "${GREEN}"USAGE: ${BOLD_GREEN}pysetenv -r <absolute/path/to/python/script>"${RESET} 
         echo -e ""
@@ -411,11 +413,14 @@ _pysetenv_run(){
                     _select_run_mode
                 fi
             else
+                echo -e ""
                 echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"Invalid selection..!"${RESET}
                 echo -e ${BOLD_GREEN}"[*] Select environment by list number..!"${RESET}
+                echo -e ""
             fi
         fi
     else
+        echo -e ""
         echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"Invalid python script path specified"
         echo -e ${BOLD_YELLOW}"[*] "${GREEN}"USAGE: pysetenv -r ${BOLD_GREEN}<absolute/path/to/python/script>"${RESET} 
         echo -e ""
