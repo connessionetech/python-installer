@@ -146,9 +146,7 @@ _pysetenv_run(){
         echo -e ""
         echo -e ${BOLD_YELLOW}"[?] "${YELLOW}"Select virtual environment to run your script with: "${RESET}
 
-        venvs=$(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )
-        echo -e $venvs
-        select v in venvs
+        select v in $(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )
         do
             echo -e ""
             echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running with python environment: "${BOLD_GREEN}${v}${RESET}
