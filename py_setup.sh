@@ -161,7 +161,8 @@ _pysetenv_run(){
             done
         else
             echo -e ${BOLD_YELLOW}"[!] No virtual environment existing !!!"${RESET}
-            echo -e ${BOLD_GREEN}"[*] "${GREEN}"Use: "${BOLD_GREEN}"pysetenv -n|--new <venv name>"${GREEN}" to create new environment"${RESET} 
+            echo -e ${BOLD_GREEN}"[*] "${GREEN}"Use: "${BOLD_GREEN}"pysetenv --new <venv name>"${GREEN}" to create new environment"${RESET} 
+            return 0
         fi
     }
 
