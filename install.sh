@@ -400,7 +400,7 @@ _install(){
                 sudo rm /usr/src/python.tgz
                 sudo rm -rf /usr/src/Python-3*
                 cd ~
-                 python${PYSETENV_PYTHON_VERSION} -m pip install --upgrade pip --user
+                python${PYSETENV_PYTHON_VERSION} -m pip install --upgrade pip --user
                 python${PYSETENV_PYTHON_VERSION} -m pip install virtualenv --user
                 _add_paths
                     ;;
@@ -418,7 +418,7 @@ _install(){
         esac
     else
         echo -e ${YELLOW}"Exiting ! ! !"${RESET}
-        exit
+        return 0
     fi
 }
 

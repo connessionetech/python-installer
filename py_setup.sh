@@ -221,6 +221,20 @@ _pysetenv_run(){
                     y|Y)
                         echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${req_txt}${RESET}
                         sudo ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/pip${PYSETENV_PYTHON_VERSION} install -r $req_txt
+                        
+                        # check if os is debian or ubuntu we run python with sudo else run without
+                        if [ -f /etc/os-release ];
+                        then
+                            OS_NAME=$(cat /etc/os-release | grep -w NAME | cut -d= -f2 | tr -d '"')
+                            if [[ "${OS_NAME}" == *"Debian"* ]] || [[ "${OS_NAME}" == *"Ubuntu"* ]] ;
+                            then
+                                sudo -H ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/pip${PYSETENV_PYTHON_VERSION} install -r $req_txt
+                            else
+                                ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/pip${PYSETENV_PYTHON_VERSION} install -r $req_txt
+                            fi
+                        else
+                            ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/pip${PYSETENV_PYTHON_VERSION} install -r $req_txt --user
+                        fi
                         ;;
                     n|N)
                         echo -e ${BOLD_RED}"[!] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
@@ -256,17 +270,31 @@ _pysetenv_run(){
         _scan_for_requirements
 
         re='[a-zA-Z]'
+        # check if there's requirements.txt
         if [[ "$req_txt" =~ $re ]];
         then
             if hash ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} 2> /dev/null;
             then
-                echo -e ${BOLD_GREEN}"[*] "${GREEN}"requirements.txt path: "${BOLD_GREEN}${req_txt}${RESET}
+                echo -e ${BOLD_GREEN}"[*] "${GREEN}"Requirements.txt path: "${BOLD_GREEN}${req_txt}${RESET}
                 echo -e ${BOLD_GREEN}"[*] "${GREEN}"Install dependancies from: "${BOLD_GREEN}${req_txt}" ?"${RESET}
                 read -p " (Y | N ) " no_yes
                 case $no_yes in 
                     y|Y)
-                        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies from: "${BOLD_GREEN}${req_txt}${RESET}
-                        sudo ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/pip${PYSETENV_PYTHON_VERSION} install -r $req_txt
+                        echo -e ${BOLD_GREEN}"[*] "${GREEN}"Installing dependancies "${BOLD_GREEN}"..."${RESET}
+                        
+                        # check if os is debian or ubuntu we run python with sudo else run without
+                        if [ -f /etc/os-release ];
+                        then
+                            OS_NAME=$(cat /etc/os-release | grep -w NAME | cut -d= -f2 | tr -d '"')
+                            if [[ "${OS_NAME}" == *"Debian"* ]] || [[ "${OS_NAME}" == *"Ubuntu"* ]] ;
+                            then
+                                sudo -H ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/pip${PYSETENV_PYTHON_VERSION} install -r $req_txt
+                            else
+                                ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/pip${PYSETENV_PYTHON_VERSION} install -r $req_txt
+                            fi
+                        else
+                            ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/pip${PYSETENV_PYTHON_VERSION} install -r $req_txt --user
+                        fi
                         ;;
                     n|N)
                         echo -e ${BOLD_RED}"[-] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
@@ -276,9 +304,13 @@ _pysetenv_run(){
                     *)
                         _run_service
                 esac
+            else
+                echo -e ${BOLD_YELLOW}"[!] Specified virtual environment python does not exist !!!"${RESET}
+                echo -e ${BOLD_GREEN}"[*] "${GREEN}"Use: "${BOLD_GREEN}"psetenv --new <venv name>"${GREEN}" to create new environment"${RESET}
             fi
-        
         fi
+
+
         echo -e ${BOLD_GREEN}"[?] "${GREEN}"Run: "${BOLD_GREEN}${my_script}${GREEN}" with: "${BOLD_GREEN}${v_venv}
         echo -e "    "${GREEN}"Using: "${BOLD_GREEN}${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION}"?"${BOLD_YELLOW}
 
@@ -286,8 +318,20 @@ _pysetenv_run(){
         case $no_yes in 
             y|Y)
                 echo -e ${RESET}""
-                sudo ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} ${my_script}
-                echo -e ${RESET}""
+                
+                # check if os is debian or ubuntu we run python with sudo else run without
+                if [ -f /etc/os-release ];
+                then
+                    OS_NAME=$(cat /etc/os-release | grep -w NAME | cut -d= -f2 | tr -d '"')
+                    if [[ "${OS_NAME}" == *"Debian"* ]] || [[ "${OS_NAME}" == *"Ubuntu"* ]] ;
+                    then
+                        sudo -H ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} ${my_script}
+                    else
+                        ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} ${my_script}
+                    fi
+                else
+                    ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} ${my_script} --user
+                fi
                 ;;
             n|N)
                 echo -e ${BOLD_RED}"[-] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
