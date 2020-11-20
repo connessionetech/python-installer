@@ -162,7 +162,7 @@ _pysetenv_run(){
         else
             echo -e ${BOLD_YELLOW}"[!] No virtual environment existing !!!"${RESET}
             echo -e ${BOLD_GREEN}"[*] "${GREEN}"Use: "${BOLD_GREEN}"pysetenv --new <venv name>"${GREEN}" to create new environment"${RESET} 
-            return 0
+            exit 0
         fi
     }
 
@@ -248,7 +248,7 @@ _pysetenv_run(){
                         ;;
                     n|N)
                         echo -e ${BOLD_RED}"[!] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
-                        return 0
+                        exit
                         ;;
                     *)
                 esac
@@ -311,7 +311,7 @@ _pysetenv_run(){
                     n|N)
                         echo -e ${BOLD_RED}"[-] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
                         req_txt=""
-                        return 0
+                        exit
                         ;;
                     *)
                         _run_service
@@ -346,7 +346,8 @@ _pysetenv_run(){
                 ;;
             n|N)
                 echo -e ${BOLD_RED}"[-] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
-                return 0
+                echo -e ""
+                exit
                 ;;
             *)
                 _run_service
@@ -381,7 +382,7 @@ _pysetenv_run(){
         echo -e ${BOLD_RED}"[!] "${RED}"You have not specified file or folder"
         echo -e ${BOLD_YELLOW}"[*] "${GREEN}"USAGE: ${BOLD_GREEN}pysetenv -r <absolute/path/to/python/script>"${RESET} 
         echo -e ""
-        return 0
+        exit
     elif [ -f ${1} ]; # check if ${1} is a file
     then
         if [ -x ${1} ]; # check if ${1} is executable python script
@@ -419,9 +420,8 @@ _pysetenv_run(){
         echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"Invalid python script path specified"
         echo -e ${BOLD_YELLOW}"[*] "${GREEN}"USAGE: pysetenv -r ${BOLD_GREEN}<absolute/path/to/python/script>"${RESET} 
         echo -e ""
-        return 0
+        exit
     fi
-    return 0
 }
 
 # Main function
