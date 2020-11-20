@@ -146,7 +146,9 @@ _pysetenv_run(){
         echo -e ""
         echo -e ${BOLD_YELLOW}"[?] "${YELLOW}"Select virtual environment to run your script with: "${RESET}
 
-        select v in $(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )
+        venvs=$(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )
+        echo -e $venvs
+        select v in venvs
         do
             echo -e ""
             echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running with python environment: "${BOLD_GREEN}${v}${RESET}
@@ -242,6 +244,9 @@ _pysetenv_run(){
                         ;;
                     *)
                 esac
+            else
+                echo -e ${BOLD_YELLOW}"[!] Specified virtual environment python does not exist !!!"${RESET}
+                echo -e ${BOLD_GREEN}"[*] "${GREEN}"Use: "${BOLD_GREEN}"psetenv --new <venv name>"${GREEN}" to create new environment"${RESET}
             fi
         fi
         echo -e ${BOLD_GREEN}"[?] "${GREEN}"Run: "${BOLD_GREEN}${my_script}${GREEN}" with: "${BOLD_GREEN}${v_venv}${GREEN}" Virtual environment"${RESET}
@@ -270,7 +275,7 @@ _pysetenv_run(){
         _scan_for_requirements
 
         re='[a-zA-Z]'
-        # check if there's requirements.txt
+        # check if there's requirements.txt and install using $v_venv python
         if [[ "$req_txt" =~ $re ]];
         then
             if hash ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} 2> /dev/null;
@@ -310,10 +315,9 @@ _pysetenv_run(){
             fi
         fi
 
-
         echo -e ${BOLD_GREEN}"[?] "${GREEN}"Run: "${BOLD_GREEN}${my_script}${GREEN}" with: "${BOLD_GREEN}${v_venv}
         echo -e "    "${GREEN}"Using: "${BOLD_GREEN}${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION}"?"${BOLD_YELLOW}
-
+        # Prompt whether to run the script as a service
         read -p "" no_yes
         case $no_yes in 
             y|Y)
@@ -335,6 +339,7 @@ _pysetenv_run(){
                 ;;
             n|N)
                 echo -e ${BOLD_RED}"[-] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
+                return 0
                 ;;
             *)
                 _run_service
@@ -367,7 +372,7 @@ _pysetenv_run(){
     if [ $# -eq 0 ]; # If no argument show help
     then
         echo -e ${BOLD_RED}"[!] "${RED}"You have not specified file or folder"
-        echo -e ${BOLD_YELLOW}"[*] "${GREEN}"USAGE: pysetenv -r ${BOLD_GREEN}<absolute/path/to/python/script>"${RESET} 
+        echo -e ${BOLD_YELLOW}"[*] "${GREEN}"USAGE: ${BOLD_GREEN}pysetenv -r <absolute/path/to/python/script>"${RESET} 
         echo -e ""
         return 0
     elif [ -f ${1} ]; # check if ${1} is a file
@@ -376,7 +381,7 @@ _pysetenv_run(){
         then
             script_dir=$(dirname "$1")
             my_script=$1
-            echo -e ${BOLD_GREEN}"[*] "${GREEN}"${my_script} is a python executable file"
+            echo -e ${BOLD_GREEN}"[*] "${my_script}${GREEN}"is a python executable file"
             echo -e ${BOLD_GREEN}"[*] "${GREEN}"Root dir: "${BOLD_GREEN}${script_dir}${RESET}
             _select_env
             if [ $v_venv ];
