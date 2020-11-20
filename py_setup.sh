@@ -141,19 +141,28 @@ _pysetenv_list()
 
 # Run python script with virtual environment
 _pysetenv_run(){
+    # global regex for Uppercase and Lowercase
+    re='[a-zA-Z]'
 
     _select_env(){
         echo -e ""
         echo -e ${BOLD_YELLOW}"[?] "${YELLOW}"Select virtual environment to run your script with: "${RESET}
 
-        select v in $(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )
-        do
-            echo -e ""
-            echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running with python environment: "${BOLD_GREEN}${v}${RESET}
-            v_venv=$v
-            break
-        done
-
+        venvs=$(ls -l ${PYSETENV_VIRTUAL_DIR_PATH} | egrep '^d' | awk -F " " '{print $NF}' )
+        
+        if [[ "$venvs" =~ $re ]];
+        then
+            select v in $venvs
+            do
+                echo -e ""
+                v_venv=$v
+                echo -e ${BOLD_GREEN}"[*] "${GREEN}"Running with python environment: "${BOLD_GREEN}${v_venv}${RESET}
+                break
+            done
+        else
+            echo -e ${BOLD_YELLOW}"[!] No virtual environment existing !!!"${RESET}
+            echo -e ${BOLD_GREEN}"[*] "${GREEN}"Use: "${BOLD_GREEN}"pysetenv -n|--new <venv name>"${GREEN}" to create new environment"${RESET} 
+        fi
     }
 
     # scan root folder as python file for file reuirements.txt
@@ -174,7 +183,7 @@ _pysetenv_run(){
                 req_txt=${script_dir}requirements/requirements.txt            
 
         else
-            echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"requirements.txt not found"${GREEN}
+            echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"requirements.txt not found"${BOLD_GREEN}
             read -p "[?] Add requirements.txt path (Y / N) " yes_no
 
             case $yes_no in
@@ -186,7 +195,7 @@ _pysetenv_run(){
                     then
                         req_txt=${r_txt}
                     else
-                        echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"File not found "${BOLD_YELLOW}"!!!"${RESET}
+                        echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"Specified File not found "${BOLD_YELLOW}"!!!"${RESET}
                         req_txt=""
                         _scan_for_requirements
                     fi
@@ -196,6 +205,7 @@ _pysetenv_run(){
                     ;;
                 *)
                     req_txt=""
+                    _scan_for_requirements
                     ;;
             esac
 
@@ -209,7 +219,6 @@ _pysetenv_run(){
         echo -e ${BOLD_GREEN}"[*] "${GREEN}"path to virtual environment: "${BOLD_GREEN}${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}${RESET}
         _scan_for_requirements
 
-        re='[a-zA-Z]'
         if [[ "$req_txt" =~ $re ]];
         then            
             if hash ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} 2> /dev/null;
@@ -272,7 +281,6 @@ _pysetenv_run(){
         echo -e ${BOLD_GREEN}"[*] "${GREEN}"path to virtual environment: "${BOLD_GREEN}${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}${RESET}
         _scan_for_requirements
 
-        re='[a-zA-Z]'
         # check if there's requirements.txt and install using $v_venv python
         if [[ "$req_txt" =~ $re ]];
         then
