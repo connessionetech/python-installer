@@ -164,8 +164,7 @@ _pysetenv_run(){
         else
             echo -e ${BOLD_YELLOW}"[!] No virtual environment existing !!!"${RESET}
             echo -e ${BOLD_GREEN}"[*] "${GREEN}"Use: "${BOLD_GREEN}"pysetenv --new <venv name>"${GREEN}" to create new environment"${RESET}
-            # v_venv=""
-            exit 0
+            return 1
         fi
     }
 
@@ -418,12 +417,9 @@ _pysetenv_run(){
                     _select_run_mode
                 fi
             else
-                echo -e ""
-                echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"Invalid selection..!"${RESET}
-                echo -e ${BOLD_GREEN}"[*] Select environment by list number..!"${RESET}
-                _select_env
-                echo -e ""
+                return 1
             fi
+
         fi
     else
         echo -e ""
