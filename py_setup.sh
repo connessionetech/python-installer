@@ -74,10 +74,10 @@ _pysetenv_create()
                     ;;
                 N|n) 
                     echo -e "${BOLD_GREEN}[-] ${GREEN}Aborting environment creation!!"
-                    exit 0;;
+                    return 0;;
                 *) 
                     echo -e "${BOLD_GREEN}[?] ${GREEN}Enter either ${BOLD_GREEN}Y/y ${GREEN}for yes or ${BOLD_RED}N/n ${GREEN} for no"${RESET}
-                    exit 0;;
+                    return 0;;
             esac
         else
             # create virtual environment if it does not exist
@@ -119,7 +119,7 @@ _pysetenv_delete()
                 Y|y) sudo -H rm -rvf ${PYSETENV_VIRTUAL_DIR_PATH}${1};;
                 N|n) echo "${BOLD_GREEN}[-] ${GREEN}Aborting environment deletion";;
                 *) echo -e "${BOLD_GREEN}[?] ${GREEN}Enter either ${BOLD_GREEN}Y/y ${GREEN}for yes or ${BOLD_RED}N/n ${GREEN} for no"${RESET}
-                    exit 0;;
+                    return 0;;
             esac
         else
             echo -e ${BOLD_RED}"[!] ${RED}ERROR!! No virtual environment exists by the name: ${BOLD_RED}${1}"${RESET}
@@ -247,7 +247,7 @@ _pysetenv_run(){
                         ;;
                     n|N)
                         echo -e ${BOLD_RED}"[!] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
-                        exit 0
+                        return 0
                         ;;
                     *)
                 esac
@@ -310,7 +310,7 @@ _pysetenv_run(){
                     n|N)
                         echo -e ${BOLD_RED}"[-] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
                         req_txt=""
-                        exit 0
+                        return 0
                         ;;
                     *)
                         _run_service
@@ -346,7 +346,7 @@ _pysetenv_run(){
             n|N)
                 echo -e ${BOLD_RED}"[-] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
                 echo -e ""
-                exit 0
+                return 0
                 ;;
             *)
                 _run_service
@@ -381,7 +381,7 @@ _pysetenv_run(){
         echo -e ${BOLD_RED}"[!] "${RED}"You have not specified file or folder"
         echo -e ${BOLD_YELLOW}"[*] "${GREEN}"USAGE: ${BOLD_GREEN}pysetenv -r <absolute/path/to/python/script>"${RESET} 
         echo -e ""
-        exit 0
+        return 1
     elif [ -f ${1} ]; # check if ${1} is a file
     then
         if [ -x ${1} ]; # check if ${1} is executable python script
@@ -413,14 +413,13 @@ _pysetenv_run(){
             else
                 echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"Invalid selection..!"${RESET}
                 echo -e ${BOLD_GREEN}"[*] Select environment by list number..!"${RESET}
-                exit 0
             fi
         fi
     else
         echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"Invalid python script path specified"
         echo -e ${BOLD_YELLOW}"[*] "${GREEN}"USAGE: pysetenv -r ${BOLD_GREEN}<absolute/path/to/python/script>"${RESET} 
         echo -e ""
-        exit 0
+        return 0
     fi
 }
 
