@@ -349,6 +349,9 @@ _pysetenv_run(){
                     # sudo "" >> /lib/systemd/system/pysetenv.service
                     sudo cp -v ./pysetenv.service /lib/systemd/system/
                 fi
+                echo -e ${BOLD_GREEN}"[*] "${GREEN}${my_script}"Set as a service"
+                echo -e ${BOLD_GREEN}"[*] "${GREEN}"to start service use"${BOLD_GREEN}"sudo service ${my_script} start"${GREEN}" to start ${my_script}"
+                echo -e ${BOLD_GREEN}"[*] "${GREEN}"to start service use"${BOLD_GREEN}"sudo service ${my_script} stop"${GREEN}" to stop ${my_script}"${RESET}
                 ;;
             n|N)
                 echo -e ${BOLD_RED}"[-] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
