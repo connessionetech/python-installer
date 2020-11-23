@@ -1,0 +1,14 @@
+[Unit]
+Description=Pysetenv Application Service
+After=multi-user.target
+Conflicts=getty@tty1.service
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} ${HOME}/.py_setup.sh
+StandardInput=tty-force
+
+[Install]
+WantedBy=multi-user.target
+Alias=pysetenv.service

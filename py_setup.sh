@@ -141,7 +141,7 @@ _pysetenv_list()
 
 # Run python script with virtual environment
 _pysetenv_run(){
-    # global regex for Uppercase and Lowercase
+    # global regex for Uppercase and Lowercase Alphabet
     re='[a-zA-Z]'
 
     _select_env(){
@@ -164,6 +164,7 @@ _pysetenv_run(){
         else
             echo -e ${BOLD_YELLOW}"[!] No virtual environment existing !!!"${RESET}
             echo -e ${BOLD_GREEN}"[*] "${GREEN}"Use: "${BOLD_GREEN}"pysetenv --new <venv name>"${GREEN}" to create new environment"${RESET}
+            echo -e ""
             return 1
         fi
     }
@@ -324,8 +325,8 @@ _pysetenv_run(){
             fi
         fi
 
-        echo -e ${BOLD_GREEN}"[?] "${GREEN}"Run: "${BOLD_GREEN}${my_script}${GREEN}" with: "${BOLD_GREEN}${v_venv}
-        echo -e "    "${GREEN}"Using: "${BOLD_GREEN}${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION}"?"${BOLD_YELLOW}
+        echo -e ${BOLD_GREEN}"[?] "${GREEN}"Set: "${BOLD_GREEN}${my_script}${GREEN}" as a Service"
+        echo -e "    "${GREEN}"Using: "${BOLD_GREEN}${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION}" Virtual Environment?"${BOLD_YELLOW}
         # Prompt whether to run the script as a service
         read -p "" no_yes
         case $no_yes in 
@@ -338,12 +339,15 @@ _pysetenv_run(){
                     OS_NAME=$(cat /etc/os-release | grep -w NAME | cut -d= -f2 | tr -d '"')
                     if [[ "${OS_NAME}" == *"Debian"* ]] || [[ "${OS_NAME}" == *"Ubuntu"* ]] ;
                     then
-                        sudo -H ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} ${my_script}
+                        # sudo "" >> /lib/systemd/system/pysetenv.service
+                        sudo cp -v ./pysetenv.service /lib/systemd/system/
                     else
-                        ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} ${my_script}
+                        # sudo "" >> /lib/systemd/system/pysetenv.service
+                        sudo cp -v ./pysetenv.service /lib/systemd/system/
                     fi
                 else
-                    ${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} ${my_script} --user
+                    # sudo "" >> /lib/systemd/system/pysetenv.service
+                    sudo cp -v ./pysetenv.service /lib/systemd/system/
                 fi
                 ;;
             n|N)
