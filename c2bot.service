@@ -6,9 +6,9 @@ Conflicts=getty@tty1.service
 [Service]
 Type=simple
 Restart=always
-ExecStart=${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION} ${HOME}/.py_setup.sh
+ExecStart=/usr/bin/python3 ${HOME}/.c2bot/c2.py
 StandardInput=tty-force
 
 [Install]
 WantedBy=multi-user.target
-Alias=pysetenv.service
+Alias=c2bot.service

@@ -339,15 +339,15 @@ _pysetenv_run(){
                     OS_NAME=$(cat /etc/os-release | grep -w NAME | cut -d= -f2 | tr -d '"')
                     if [[ "${OS_NAME}" == *"Debian"* ]] || [[ "${OS_NAME}" == *"Ubuntu"* ]] ;
                     then
-                        # sudo "" >> /lib/systemd/system/pysetenv.service
-                        sudo cp -v ./pysetenv.service /lib/systemd/system/
+                        # sudo "" >> /lib/systemd/system/${my_script}.service
+                        sudo cp -v ./c2bot.service /lib/systemd/system/
                     else
-                        # sudo "" >> /lib/systemd/system/pysetenv.service
-                        sudo cp -v ./pysetenv.service /lib/systemd/system/
+                        # sudo "" >> /lib/systemd/system/${my_script}.service
+                        sudo cp -v ./c2bot.service /lib/systemd/system/
                     fi
                 else
-                    # sudo "" >> /lib/systemd/system/pysetenv.service
-                    sudo cp -v ./pysetenv.service /lib/systemd/system/
+                    # sudo "" >> /lib/systemd/system/${my_script}.service
+                    sudo cp -v ./c2bot.service /lib/systemd/system/
                 fi
                 echo -e ${BOLD_GREEN}"[*] "${GREEN}${my_script}"Set as a service"
                 echo -e ${BOLD_GREEN}"[*] "${GREEN}"to start service use"${BOLD_GREEN}"sudo service ${my_script} start"${GREEN}" to start ${my_script}"
