@@ -399,7 +399,7 @@ _pysetenv_run(){
         then
             script_dir=$(dirname "$1")
             my_script=$1
-            echo -e ${BOLD_GREEN}"[*] "${my_script}${GREEN}"is a python executable file"
+            echo -e ${BOLD_GREEN}"[*] "${1}${GREEN}"is a python executable file"
             echo -e ${BOLD_GREEN}"[*] "${GREEN}"Root dir: "${BOLD_GREEN}${script_dir}${RESET}
             
             _select_env
@@ -427,8 +427,8 @@ _pysetenv_run(){
                 return 1
             fi
         else
-            echo -e ${BOLD_GREEN}"[*] "${my_script}${GREEN}"is not an executable file"
-            echo -e ${BOLD_GREEN}"[*] "${GREEN}"Run "${BOLD_GREEN}"sudo chmod+x" ${my_script}${GREEN}"to make it executable file"
+            echo -e ${BOLD_YELLOW}"[*] "${1}${YELLOW}"is not an executable file"
+            echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Run "${BOLD_GREEN}"sudo chmod+x" ${1}${YELLOW}"to make it executable file"
             
         fi
 
