@@ -426,8 +426,12 @@ _pysetenv_run(){
             else
                 return 1
             fi
-
+        else
+            echo -e ${BOLD_GREEN}"[*] "${my_script}${GREEN}"is not an executable file"
+            echo -e ${BOLD_GREEN}"[*] "${GREEN}"Run "${BOLD_GREEN}"sudo chmod+x" ${my_script}${GREEN}"to make it executable file"
+            
         fi
+
     else
         echo -e ""
         echo -e ${BOLD_YELLOW}"[!] "${YELLOW}"Invalid python script path specified"
