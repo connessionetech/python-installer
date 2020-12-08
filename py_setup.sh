@@ -174,12 +174,12 @@ _pysetenv_run(){
         if [ -f $SCRIPT_ROOT_PATH/requirements.txt ];
         then
             echo -e ${BOLD_GREEN}"[+] "${GREEN}"found requirements.txt"
-            req_txt="${SCRIPT_ROOT_PATH}requirements.txt"
+            req_txt="${SCRIPT_ROOT_PATH}/requirements.txt"
 
         elif [ -f $script_dir/requirements.txt ];
             then
                 echo -e ${BOLD_GREEN}"[+] "${GREEN}"found requirements.txt"
-                req_txt=${script_dir}requirements.txt
+                req_txt=${script_dir}/requirements.txt
 
         elif [ -f ${script_dir}requirements/requirements.txt ];
             then
@@ -427,8 +427,8 @@ _pysetenv_run(){
                 return 1
             fi
         else
-            echo -e ${BOLD_YELLOW}"[*] "${1}${YELLOW}"is not an executable file"
-            echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Run "${BOLD_GREEN}"sudo chmod+x" ${1}${YELLOW}"to make it executable file"${RESET}
+            echo -e ${BOLD_YELLOW}"[*] "${1}${YELLOW}" is not an executable file"
+            echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Run "${BOLD_GREEN}"sudo chmod +x" ${1}${YELLOW}" to make it executable file"${RESET}
             
         fi
 
