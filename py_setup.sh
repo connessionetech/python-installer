@@ -428,7 +428,7 @@ _pysetenv_run(){
             fi
         else
             echo -e ${BOLD_YELLOW}"[*] "${1}${YELLOW}"is not an executable file"
-            echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Run "${BOLD_GREEN}"sudo chmod+x" ${1}${YELLOW}"to make it executable file"
+            echo -e ${BOLD_YELLOW}"[*] "${YELLOW}"Run "${BOLD_GREEN}"sudo chmod+x" ${1}${YELLOW}"to make it executable file"${RESET}
             
         fi
 
