@@ -340,7 +340,7 @@ _pysetenv_run(){
                     OS_NAME=$(cat /etc/os-release | grep -w NAME | cut -d= -f2 | tr -d '"')
                     if [[ "${OS_NAME}" == *"Debian"* ]] || [[ "${OS_NAME}" == *"Ubuntu"* ]] ;
                     then
-                        sudo touch /lib/systemd/system/$script_name}.service
+                        sudo touch /lib/systemd/system/$script_name.service
                         echo -e "[Unit]\nDescription=Pysetenv Service\nAfter=multi-user.target\nConflicts=getty@tty1.service\n\n[Service]\nType=simple\nExecStart=${PYSETENV_PYTHON_PATH} ${my_script}\nStandardInput=tty-force\n\n[Install]\nWantedBy=multi-user.target" >> /lib/systemd/system/${script_name}.service
                         sudo systemctl daemon-reload
                     else
@@ -349,13 +349,13 @@ _pysetenv_run(){
                         sudo systemctl daemon-reload
                     fi
                 else
-                    sudo touch /lib/systemd/system/${script_name}.service
+                    sudo touch /lib/systemd/system/$script_name.service
                     echo "[Unit]\nDescription=Pysetenv Service\nAfter=multi-user.target\nConflicts=getty@tty1.service\n\n[Service]\nType=simple\nExecStart=${PYSETENV_PYTHON_PATH} ${my_script}\nStandardInput=tty-force\n\n[Install]\nWantedBy=multi-user.target" >> /lib/systemd/system/${script_name}.service
                     
                 fi
                 echo -e ${BOLD_GREEN}"[*] "${GREEN}${my_script}" Set as a service"
-                echo -e ${BOLD_GREEN}"[*] "${GREEN}" to start service use"${BOLD_GREEN}"sudo service ${script_name} start"${GREEN}" to start ${script_name}"
-                echo -e ${BOLD_GREEN}"[*] "${GREEN}" to start service use"${BOLD_GREEN}"sudo service ${script_name} stop"${GREEN}" to stop ${script_name}"${RESET}
+                echo -e ${BOLD_GREEN}"[*] "${GREEN}" to start service use"${BOLD_GREEN}" sudo service ${script_name} start"${GREEN}" to start ${script_name}"
+                echo -e ${BOLD_GREEN}"[*] "${GREEN}" to start service use"${BOLD_GREEN}" sudo service ${script_name} stop"${GREEN}" to stop ${script_name}"${RESET}
                 ;;
             n|N)
                 echo -e ${BOLD_RED}"[-] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
