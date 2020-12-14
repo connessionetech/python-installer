@@ -346,19 +346,21 @@ _pysetenv_run(){
                         fi
                         sudo touch /lib/systemd/system/$script_name.service
                         sudo cat >> /lib/systemd/system/$script_name.service <<EOF
-                            [Unit]
-                            Description=Pysetenv Service
-                            After=multi-user.target
-                            Conflicts=getty@tty1.service
-                            
-                            [Service]
-                            Type=simple
-                            ExecStart=${PYSETENV_PYTHON_PATH} ${my_script}
-                            StandardInput=tty-force
-                            
-                            [Install]
-                            WantedBy=multi-user.target
+                        [Unit]
+                        Description=Pysetenv Service
+                        After=multi-user.target
+                        Conflicts=getty@tty1.service
+                        
+                        [Service]
+                        Type=simple
+                        ExecStart=${PYSETENV_PYTHON_PATH} ${my_script}
+                        StandardInput=tty-force
+                        
+                        [Install]
+                        WantedBy=multi-user.target
+
                         EOF
+
                         # printf -- "[Unit]\nDescription=Pysetenv Service\nAfter=multi-user.target\nConflicts=getty@tty1.service\n\n[Service]\nType=simple\nExecStart=${PYSETENV_PYTHON_PATH} ${my_script}\nStandardInput=tty-force\n\n[Install]\nWantedBy=multi-user.target" >> /lib/systemd/system/${script_name}.service
                         # echo [Unit]\nDescription=Pysetenv Service\nAfter=multi-user.target\nConflicts=getty@tty1.service\n\n[Service]\nType=simple\nExecStart=${PYSETENV_PYTHON_PATH} ${my_script}\nStandardInput=tty-force\n\n[Install]\nWantedBy=multi-user.target | sudo tee -a /lib/systemd/system/${script_name}.service
                         sudo systemctl daemon-reload
@@ -370,19 +372,21 @@ _pysetenv_run(){
                 else
                     sudo touch /lib/systemd/system/$script_name.service
                     sudo cat >> /lib/systemd/system/$script_name.service <<EOF
-                            [Unit]
-                            Description=Pysetenv Service
-                            After=multi-user.target
-                            Conflicts=getty@tty1.service
-                            
-                            [Service]
-                            Type=simple
-                            ExecStart=${PYSETENV_PYTHON_PATH} ${my_script}
-                            StandardInput=tty-force
-                            
-                            [Install]
-                            WantedBy=multi-user.target
-                        EOF
+                    [Unit]
+                    Description=Pysetenv Service
+                    After=multi-user.target
+                    Conflicts=getty@tty1.service
+                    
+                    [Service]
+                    Type=simple
+                    ExecStart=${PYSETENV_PYTHON_PATH} ${my_script}
+                    StandardInput=tty-force
+                    
+                    [Install]
+                    WantedBy=multi-user.target
+                    
+                    EOF
+
                     # printf -- "[Unit]\nDescription=Pysetenv Service\nAfter=multi-user.target\nConflicts=getty@tty1.service\n\n[Service]\nType=simple\nExecStart=${PYSETENV_PYTHON_PATH} ${my_script}\nStandardInput=tty-force\n\n[Install]\nWantedBy=multi-user.target" >> /lib/systemd/system/${script_name}.service
                     # echo "[Unit]\nDescription=Pysetenv Service\nAfter=multi-user.target\nConflicts=getty@tty1.service\n\n[Service]\nType=simple\nExecStart=${PYSETENV_PYTHON_PATH} ${my_script}\nStandardInput=tty-force\n\n[Install]\nWantedBy=multi-user.target" >> /lib/systemd/system/${script_name}.service
                     
