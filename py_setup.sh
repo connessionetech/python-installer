@@ -354,8 +354,8 @@ _pysetenv_run(){
                     
                 fi
                 echo -e ${BOLD_GREEN}"[*] "${GREEN}${my_script}"Set as a service"
-                echo -e ${BOLD_GREEN}"[*] "${GREEN}"to start service use"${BOLD_GREEN}"sudo service ${my_script} start"${GREEN}" to start ${my_script}"
-                echo -e ${BOLD_GREEN}"[*] "${GREEN}"to start service use"${BOLD_GREEN}"sudo service ${my_script} stop"${GREEN}" to stop ${my_script}"${RESET}
+                echo -e ${BOLD_GREEN}"[*] "${GREEN}"to start service use"${BOLD_GREEN}"sudo service ${script_name} start"${GREEN}" to start ${script_name}"
+                echo -e ${BOLD_GREEN}"[*] "${GREEN}"to start service use"${BOLD_GREEN}"sudo service ${script_name} stop"${GREEN}" to stop ${script_name}"${RESET}
                 ;;
             n|N)
                 echo -e ${BOLD_RED}"[-] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
@@ -402,6 +402,7 @@ _pysetenv_run(){
         if [ -x ${1} ]; # check if ${1} is executable python script
         then
             script_dir=$(dirname "$1")
+            script_name=$(basename "$script_dir")
             my_script=$1
             echo -e ${BOLD_GREEN}"[*] "${1}${GREEN}"is a python executable file"
             echo -e ${BOLD_GREEN}"[*] "${GREEN}"Root dir: "${BOLD_GREEN}${script_dir}${RESET}
