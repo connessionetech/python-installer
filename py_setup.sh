@@ -403,7 +403,7 @@ _pysetenv_run(){
         then
             script_dir=$(dirname "$1")
             script_basename=$(basename "$script_dir")
-            script_name=`echo "$script_name" | cut -d'.' -f1`
+            script_name=`echo "$script_basename" | cut -d'.' -f1`
             my_script=$1
             echo -e ${BOLD_GREEN}"[*] "${1}${GREEN}"is a python executable file"
             echo -e ${BOLD_GREEN}"[*] "${GREEN}"Root dir: "${BOLD_GREEN}${script_dir}${RESET}
