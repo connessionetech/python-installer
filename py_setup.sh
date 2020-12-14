@@ -341,7 +341,7 @@ _pysetenv_run(){
                     if [[ "${OS_NAME}" == *"Debian"* ]] || [[ "${OS_NAME}" == *"Ubuntu"* ]] ;
                     then
                         sudo touch /lib/systemd/system/$script_name.service
-                        echo "[Unit]\nDescription=Pysetenv Service\nAfter=multi-user.target\nConflicts=getty@tty1.service\n\n[Service]\nType=simple\nExecStart=${PYSETENV_PYTHON_PATH} ${my_script}\nStandardInput=tty-force\n\n[Install]\nWantedBy=multi-user.target" | sudo tee -a /lib/systemd/system/${script_name}.service
+                        echo [Unit]\nDescription=Pysetenv Service\nAfter=multi-user.target\nConflicts=getty@tty1.service\n\n[Service]\nType=simple\nExecStart=${PYSETENV_PYTHON_PATH} ${my_script}\nStandardInput=tty-force\n\n[Install]\nWantedBy=multi-user.target | sudo tee -a /lib/systemd/system/${script_name}.service
                         sudo systemctl daemon-reload
                     else
                         sudo mkdir -p /etc/systemd/system/${my_script}.service.d
@@ -350,7 +350,7 @@ _pysetenv_run(){
                     fi
                 else
                     sudo touch /lib/systemd/system/$script_name.service
-                    echo "[Unit]\nDescription=Pysetenv Service\nAfter=multi-user.target\nConflicts=getty@tty1.service\n\n[Service]\nType=simple\nExecStart=${PYSETENV_PYTHON_PATH} ${my_script}\nStandardInput=tty-force\n\n[Install]\nWantedBy=multi-user.target" | sudo tee -a /lib/systemd/system/${script_name}.service
+                    echo [Unit]\nDescription=Pysetenv Service\nAfter=multi-user.target\nConflicts=getty@tty1.service\n\n[Service]\nType=simple\nExecStart=${PYSETENV_PYTHON_PATH} ${my_script}\nStandardInput=tty-force\n\n[Install]\nWantedBy=multi-user.target | sudo tee -a /lib/systemd/system/${script_name}.service
                     
                 fi
                 echo -e ${BOLD_GREEN}"[*] "${GREEN}${my_script}" Set as a service"
