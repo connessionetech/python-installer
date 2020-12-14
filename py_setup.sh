@@ -353,8 +353,7 @@ _pysetenv_run(){
                             echo "StandardInput=tty-force"
                             echo ""
                             echo "[Install]"
-                            echo "WantedBy=multi-user.target"
-                        } >> /lib/systemd/system/${my_script}.service
+                            echo "WantedBy=multi-user.target" >> /lib/systemd/system/${my_script}.service
                         sudo systemctl daemon-reload
                     else
                         sudo mkdir -p /etc/systemd/system/${my_script}.service.d
