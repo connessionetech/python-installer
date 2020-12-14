@@ -341,19 +341,8 @@ _pysetenv_run(){
                     if [[ "${OS_NAME}" == *"Debian"* ]] || [[ "${OS_NAME}" == *"Ubuntu"* ]] ;
                     then
                         sudo touch /lib/systemd/system/${my_script}.service
-                        sudo {
-                            echo "[Unit]"
-                            echo "Description=Pysetenv Service"
-                            echo "After=multi-user.target"
-                            echo "Conflicts=getty@tty1.service"
-                            echo ""
-                            echo "[Service]"
-                            echo "Type=simple"
-                            echo "ExecStart=${PYSETENV_PYTHON_PATH} ${script_dir}${my_script}"
-                            echo "StandardInput=tty-force"
-                            echo ""
-                            echo "[Install]"
-                            echo "WantedBy=multi-user.target" >> /lib/systemd/system/${my_script}.service
+
+                        echo "[Unit]\nDescription=Pysetenv Service\nAfter=multi-user.target\nConflicts=getty@tty1.service\n\n[Service]\nType=simple\nExecStart=${PYSETENV_PYTHON_PATH} ${script_dir}${my_script}\nStandardInput=tty-force\n\n[Install]\nWantedBy=multi-user.target" >> /lib/systemd/system/${my_script}.service
                         sudo systemctl daemon-reload
                     else
                         sudo mkdir -p /etc/systemd/system/${my_script}.service.d
@@ -362,6 +351,7 @@ _pysetenv_run(){
                     fi
                 else
                     # sudo "" >> /lib/systemd/system/${my_script}.service
+                    echo "[Unit]\nDescription=Pysetenv Service\nAfter=multi-user.target\nConflicts=getty@tty1.service\n\n[Service]\nType=simple\nExecStart=${PYSETENV_PYTHON_PATH} ${script_dir}${my_script}\nStandardInput=tty-force\n\n[Install]\nWantedBy=multi-user.target" >> /lib/systemd/system/${my_script}.service
                     
                 fi
                 echo -e ${BOLD_GREEN}"[*] "${GREEN}${my_script}"Set as a service"
