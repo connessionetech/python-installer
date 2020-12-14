@@ -353,9 +353,9 @@ _pysetenv_run(){
                     echo "[Unit]\nDescription=Pysetenv Service\nAfter=multi-user.target\nConflicts=getty@tty1.service\n\n[Service]\nType=simple\nExecStart=${PYSETENV_PYTHON_PATH} ${my_script}\nStandardInput=tty-force\n\n[Install]\nWantedBy=multi-user.target" >> /lib/systemd/system/${script_name}.service
                     
                 fi
-                echo -e ${BOLD_GREEN}"[*] "${GREEN}${my_script}"Set as a service"
-                echo -e ${BOLD_GREEN}"[*] "${GREEN}"to start service use"${BOLD_GREEN}"sudo service ${script_name} start"${GREEN}" to start ${script_name}"
-                echo -e ${BOLD_GREEN}"[*] "${GREEN}"to start service use"${BOLD_GREEN}"sudo service ${script_name} stop"${GREEN}" to stop ${script_name}"${RESET}
+                echo -e ${BOLD_GREEN}"[*] "${GREEN}${my_script}" Set as a service"
+                echo -e ${BOLD_GREEN}"[*] "${GREEN}" to start service use"${BOLD_GREEN}"sudo service ${script_name} start"${GREEN}" to start ${script_name}"
+                echo -e ${BOLD_GREEN}"[*] "${GREEN}" to start service use"${BOLD_GREEN}"sudo service ${script_name} stop"${GREEN}" to stop ${script_name}"${RESET}
                 ;;
             n|N)
                 echo -e ${BOLD_RED}"[-] "${RED}"ABORTED"${BOLD_RED}"!!!"${RESET}
@@ -401,10 +401,11 @@ _pysetenv_run(){
     then
         if [ -x ${1} ]; # check if ${1} is executable python script
         then
-            script_dir=$(dirname "$1")
-            script_basename=$(basename "$script_dir")
-            script_name=`echo "$script_basename" | cut -d'.' -f1`
             my_script=$1
+            script_dir=$(dirname "$1")
+            script_basename=$(basename "$my_script")
+            script_name=`echo "$script_basename" | cut -d'.' -f1`
+            
             echo -e ${BOLD_GREEN}"[*] "${1}${GREEN}"is a python executable file"
             echo -e ${BOLD_GREEN}"[*] "${GREEN}"Root dir: "${BOLD_GREEN}${script_dir}${RESET}
             
