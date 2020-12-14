@@ -262,6 +262,7 @@ _pysetenv_run(){
         fi
         echo -e ${BOLD_GREEN}"[?] "${GREEN}"Run: "${BOLD_GREEN}${my_script}${GREEN}" with: "${BOLD_GREEN}${v_venv}${GREEN}" Virtual environment"${RESET}
         echo -e "    "${GREEN}"Using: "${BOLD_GREEN}${PYSETENV_VIRTUAL_DIR_PATH}${v_venv}/bin/python${PYSETENV_PYTHON_VERSION}${GREEN}
+        echo -e ${RESET}""
 
         read -p " ( Y | N ) " no_yes
         case $no_yes in 
@@ -339,15 +340,30 @@ _pysetenv_run(){
                     OS_NAME=$(cat /etc/os-release | grep -w NAME | cut -d= -f2 | tr -d '"')
                     if [[ "${OS_NAME}" == *"Debian"* ]] || [[ "${OS_NAME}" == *"Ubuntu"* ]] ;
                     then
-                        # sudo "" >> /lib/systemd/system/${my_script}.service
-                        sudo cp -v ./c2bot.service /lib/systemd/system/
+                        sudo touch /lib/systemd/system/${my_script}.service
+                        sudo {
+                            echo "[Unit]"
+                            echo "Description=Pysetenv Service"
+                            echo "After=multi-user.target"
+                            echo "Conflicts=getty@tty1.service"
+                            echo ""
+                            echo "[Service]"
+                            echo "Type=simple"
+                            echo "ExecStart=${PYSETENV_PYTHON_PATH} ${script_dir}${my_script}"
+                            echo "StandardInput=tty-force"
+                            echo ""
+                            echo "[Install]"
+                            echo "WantedBy=multi-user.target"
+                        } >> /lib/systemd/system/${my_script}.service
+                        sudo systemctl daemon-reload
                     else
-                        # sudo "" >> /lib/systemd/system/${my_script}.service
-                        sudo cp -v ./c2bot.service /lib/systemd/system/
+                        sudo mkdir -p /etc/systemd/system/${my_script}.service.d
+                        sudo "" >> /lib/systemd/system/${my_script}.service.d
+                        sudo systemctl daemon-reload
                     fi
                 else
                     # sudo "" >> /lib/systemd/system/${my_script}.service
-                    sudo cp -v ./c2bot.service /lib/systemd/system/
+                    
                 fi
                 echo -e ${BOLD_GREEN}"[*] "${GREEN}${my_script}"Set as a service"
                 echo -e ${BOLD_GREEN}"[*] "${GREEN}"to start service use"${BOLD_GREEN}"sudo service ${my_script} start"${GREEN}" to start ${my_script}"
