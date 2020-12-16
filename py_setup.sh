@@ -345,16 +345,16 @@ _pysetenv_run(){
                             sudo rm -rf /lib/systemd/system/$script_name.service &> /dev/null
                         fi
                         sudo touch /lib/systemd/system/$script_name.service
-                        sudo echo -e "[Unit]" | tee -a /lib/systemd/system/${script_name}.service
-                        sudo echo -e "Description=Pysetenv Service" | tee -a /lib/systemd/system/${script_name}.service
-                        sudo echo -e "After=multi-user.target" | tee -a /lib/systemd/system/${script_name}.service
-                        sudo echo -e "Conflicts=getty@tty1.service" | tee -a /lib/systemd/system/${script_name}.service
-                        sudo echo -e "[Service]" | tee -a /lib/systemd/system/${script_name}.service
-                        sudo echo -e "Type=simple" | tee -a /lib/systemd/system/${script_name}.service
-                        sudo echo -e "ExecStart=${PYSETENV_PYTHON_PATH} ${my_script}" | tee -a /lib/systemd/system/${script_name}.service
-                        sudo echo -e "StandardInput=tty-force" | tee -a /lib/systemd/system/${script_name}.service
-                        sudo echo -e "[Install]" | tee -a /lib/systemd/system/${script_name}.service
-                        sudo echo -e "WantedBy=multi-user.target" | tee -a /lib/systemd/system/${script_name}.service
+                        echo -e "[Unit]" | tee -a /lib/systemd/system/${script_name}.service
+                        echo -e "Description=Pysetenv Service" | tee -a /lib/systemd/system/${script_name}.service
+                        echo -e "After=multi-user.target" | tee -a /lib/systemd/system/${script_name}.service
+                        echo -e "Conflicts=getty@tty1.service" | tee -a /lib/systemd/system/${script_name}.service
+                        echo -e "[Service]" | tee -a /lib/systemd/system/${script_name}.service
+                        echo -e "Type=simple" | tee -a /lib/systemd/system/${script_name}.service
+                        echo -e "ExecStart=${PYSETENV_PYTHON_PATH} ${my_script}" | tee -a /lib/systemd/system/${script_name}.service
+                        echo -e "StandardInput=tty-force" | tee -a /lib/systemd/system/${script_name}.service
+                        echo -e "[Install]" | tee -a /lib/systemd/system/${script_name}.service
+                        echo -e "WantedBy=multi-user.target" | tee -a /lib/systemd/system/${script_name}.service
                         sudo systemctl daemon-reload
                     else
                         sudo mkdir -p /etc/systemd/system/${my_script}.service.d
@@ -363,17 +363,19 @@ _pysetenv_run(){
                     fi
                 else
                     sudo touch /lib/systemd/system/$script_name.service
-                    sudo echo -e "[Unit]" | tee -a /lib/systemd/system/${script_name}.service
-                    sudo echo -e "Description=Pysetenv Service" | tee -a /lib/systemd/system/${script_name}.service
-                    sudo echo -e "After=multi-user.target" | tee -a /lib/systemd/system/${script_name}.service
-                    sudo echo -e "Conflicts=getty@tty1.service" | tee -a /lib/systemd/system/${script_name}.service
-                    sudo echo -e "[Service]" | tee -a /lib/systemd/system/${script_name}.service
-                    sudo echo -e "Type=simple" | tee -a /lib/systemd/system/${script_name}.service
-                    sudo echo -e "ExecStart=${PYSETENV_PYTHON_PATH} ${my_script}" | tee -a /lib/systemd/system/${script_name}.service
-                    sudo echo -e "StandardInput=tty-force" | tee -a /lib/systemd/system/${script_name}.service
-                    sudo echo -e "[Install]" | tee -a /lib/systemd/system/${script_name}.service
-                    sudo echo -e "WantedBy=multi-user.target" | tee -a /lib/systemd/system/${script_name}.service
+                    echo -e "[Unit]" | tee -a /lib/systemd/system/${script_name}.service
+                    echo -e "Description=Pysetenv Service" | tee -a /lib/systemd/system/${script_name}.service
+                    echo -e "After=multi-user.target" | tee -a /lib/systemd/system/${script_name}.service
+                    echo -e "Conflicts=getty@tty1.service" | tee -a /lib/systemd/system/${script_name}.service
+                    echo -e "[Service]" | tee -a /lib/systemd/system/${script_name}.service
+                    echo -e "Type=simple" | tee -a /lib/systemd/system/${script_name}.service
+                    echo -e "ExecStart=${PYSETENV_PYTHON_PATH} ${my_script}" | tee -a /lib/systemd/system/${script_name}.service
+                    echo -e "StandardInput=tty-force" | tee -a /lib/systemd/system/${script_name}.service
+                    echo -e "[Install]" | tee -a /lib/systemd/system/${script_name}.service
+                    echo -e "WantedBy=multi-user.target" | tee -a /lib/systemd/system/${script_name}.service
+                    sudo systemctl daemon-reload
                 fi
+                
                 echo -e ${BOLD_GREEN}"[*] "${GREEN}${my_script}" Set as a service"
                 echo -e ${BOLD_GREEN}"[*] "${GREEN}" to start service use"${BOLD_GREEN}" sudo service ${script_name} start"${GREEN}" to start ${script_name}"
                 echo -e ${BOLD_GREEN}"[*] "${GREEN}" to start service use"${BOLD_GREEN}" sudo service ${script_name} stop"${GREEN}" to stop ${script_name}"${RESET}
