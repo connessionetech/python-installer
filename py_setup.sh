@@ -376,7 +376,7 @@ _pysetenv_run(){
                     sudo systemctl daemon-reload
                 fi
 
-                echo -e ${BOLD_GREEN}"[*] "${GREEN}${my_script}" Set as a service"
+                echo -e ${BOLD_GREEN}"[*] "${GREEN}${my_script}" set as a service"
                 echo -e ${BOLD_GREEN}"[*] "${GREEN}" to start service use"${BOLD_GREEN}" sudo service ${script_name} start"${GREEN}" to start ${script_name}"
                 echo -e ${BOLD_GREEN}"[*] "${GREEN}" to start service use"${BOLD_GREEN}" sudo service ${script_name} stop"${GREEN}" to stop ${script_name}"${RESET}
                 ;;
